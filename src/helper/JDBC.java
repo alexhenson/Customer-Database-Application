@@ -1,6 +1,7 @@
 package helper;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 
 public abstract class JDBC {
     private static final String protocol = "jdbc";
@@ -16,8 +17,19 @@ public abstract class JDBC {
     public static void openConnection() {
         try {
             Class.forName(driver); // Locate Driver
-            connection.DriverManager.getConnection(jdbcUrl, userName, password); // Reference connection object
+            connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference connection object
             System.out.println("Connection successful!");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void closeConnection() {
+        try {
+            connection.close();
+            System.out.println("Connection closed!");
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
         }
     }
 }
