@@ -1,12 +1,23 @@
 package helper;
 
-public abstract class JDBC {
+import java.sql.Connection;
 
+public abstract class JDBC {
+    private static final String protocol = "jdbc";
+    private static final String vendor = ":mysql:";
+    private static final String location = "//localhost/";
+    private static final String databaseName = "client_schedule";
+    private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; //LOCAL
+    private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
+    private static final String userName = "sqlUser"; // Username
+    private static String password = "Passw0rd!";
+    public static Connection connection; // Connection Interface
+
+    public static void openConnection() {
+        try {
+            Class.forName(driver); // Locate Driver
+            connection.DriverManager.getConnection(jdbcUrl, userName, password); // Reference connection object
+            System.out.println("Connection successful!");
+        }
+    }
 }
-echo "# C195_Project" >> README.md
-        git init
-        git add README.md
-        git commit -m "first commit"
-        git branch -M main
-        git remote add origin https://github.com/alexhenson/C195_Project.git
-        git push -u origin main
