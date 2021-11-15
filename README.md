@@ -1,1 +1,1 @@
-"# C195_Project" 
+"# A GUI-based application that utilizes MySQL database and file server applications, lambda expressions, localization/ date/time APIs, and advanced exception control mechanisms" 
