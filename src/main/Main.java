@@ -11,18 +11,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        /*
-        Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
 
-         */
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        primaryStage.setTitle("Login Form");
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.show();
     }
 
 
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
         JDBC.openConnection();
         JDBC.closeConnection();
     }
