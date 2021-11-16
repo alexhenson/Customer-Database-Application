@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="addCust" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustCtrl">
+<AnchorPane fx:id="addCust" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustCtrl">
     <children>
         <GridPane layoutX="-2.0" layoutY="125.0" prefHeight="395.0" prefWidth="333.0">
             <columnConstraints>
@@ -49,10 +49,10 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <VBox alignment="TOP_RIGHT" layoutX="355.0" prefHeight="600.0" prefWidth="539.0" spacing="15.0">
+        <VBox alignment="TOP_RIGHT" layoutX="355.0" prefHeight="600.0" prefWidth="830.0" spacing="15.0">
             <children>
                 <TextField fx:id="searchTxt" maxWidth="-Infinity" onAction="#onActionSearch" prefWidth="200.0" promptText="Search by  ID or Name" />
-                <TableView fx:id="topApptTblView" minHeight="200.0" minWidth="1150.0" prefHeight="150.0" prefWidth="892.0" GridPane.rowIndex="1">
+                <TableView fx:id="topApptTblView" minHeight="200.0" minWidth="830" prefHeight="150.0" prefWidth="892.0" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="topApptIdCol" prefWidth="57.40001982450485" text="Appt ID" />
                         <TableColumn fx:id="topTitleCol" prefWidth="107.19998550415039" text="Title" />
@@ -67,7 +67,7 @@
                     </columns>
                 </TableView>
                 <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onActionAdd" text="Add Appointment" />
-                <TableView fx:id="btmApptTblView" minHeight="200.0" minWidth="1150.0" prefHeight="150.0" prefWidth="892.0" GridPane.rowIndex="1">
+                <TableView fx:id="btmApptTblView" minHeight="200.0" minWidth="830" prefHeight="150.0" prefWidth="892.0" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="btmApptIdCol" prefWidth="57.40001982450485" text="Appt ID" />
                         <TableColumn fx:id="btmTitleCol" prefWidth="107.19998550415039" text="Title" />
