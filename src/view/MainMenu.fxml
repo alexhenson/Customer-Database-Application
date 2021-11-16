@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuCtrl">
+    <children>
+        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="611.0" spacing="40.0">
+            <children>
+                <Label text=" Main Menu">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Label>
+                <Button fx:id="custBtn" mnemonicParsing="false" onAction="#onActionCust" prefWidth="151.0" text="Customer Table" />
+                <Button fx:id="apptBtn" mnemonicParsing="false" onAction="#onActionAppt" prefWidth="151.0" text="Appointment Table" />
+                <Button fx:id="reportsBtn" mnemonicParsing="false" onAction="#onActionReports" prefWidth="151.0" text="Reports Table" />
+                <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#onActionLogin" text="Log-in as a Different User" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
