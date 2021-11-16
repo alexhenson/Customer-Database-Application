@@ -27,7 +27,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="addApptLbl" prefHeight="35.0" prefWidth="391.0" text="Update Appointment">
+                <Label fx:id="updateApptLbl" prefHeight="35.0" prefWidth="391.0" text="Update Appointment">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font></Label>

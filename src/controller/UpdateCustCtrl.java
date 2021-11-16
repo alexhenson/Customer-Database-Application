@@ -108,7 +108,7 @@ public class UpdateCustCtrl implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
-        GUIEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/CustAppt.fxml", "Customer Appointment Form",event);
+        GUIEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Customers.fxml", "Customer Appointment Form",event);
     }
 
     @FXML
@@ -119,7 +119,7 @@ public class UpdateCustCtrl implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
-        GUIEvent.buttonAction("/view/CustAppt.fxml", "Customer Appointment Form", event);
+        GUIEvent.buttonAction("/view/Customers.fxml", "Customer Appointment Form", event);
     }
 
     @FXML

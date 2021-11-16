@@ -31,6 +31,6 @@ public class LoginCtrl implements Initializable {
 
     public void onActionSubmit(ActionEvent actionEvent) throws IOException {
         System.out.println("Submit button clicked!");
-        GUIEvent.buttonAction("/view/CustAppt.fxml", "Customer Appointment Form", actionEvent);
+        GUIEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
     }
 }

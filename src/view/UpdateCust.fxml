@@ -44,7 +44,7 @@
                 <Insets left="20.0" />
             </padding>
         </GridPane>
-        <Label fx:id="titleLbl" layoutX="59.0" layoutY="52.0" text="Add Customer">
+        <Label fx:id="titleLbl" layoutX="59.0" layoutY="52.0" text="Update Customer">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
