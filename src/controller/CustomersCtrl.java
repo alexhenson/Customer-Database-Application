@@ -1,6 +1,7 @@
 package controller;
 
 import dbAccess.DBCountries;
+import dbAccess.DBCustomers;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.Country;
+import model.Customer;
 import tools.GUIEvent;
 
 import java.io.IOException;
@@ -23,29 +26,29 @@ public class CustomersCtrl implements Initializable {
     @FXML
     private Button addBtn;
     @FXML
-    private TableColumn<?, ?> addressCol;
+    private TableColumn<Customer, String> addressCol;
     @FXML
     private Button apptBtn;
     @FXML
     private TableColumn<?, ?> countryCol11;
     @FXML
-    private TableColumn<?, ?> custIdCol;
+    private TableColumn<Customer, Integer> custIdCol;
     @FXML
-    private TableView<?> custTblView;
+    private TableView<Customer> custTblView;
     @FXML
     private AnchorPane customers;
     @FXML
     private Button delBtn;
     @FXML
-    private TableColumn<?, ?> divisionCol;
+    private TableColumn<Customer, Integer> divisionCol;
     @FXML
     private Button mainMenuBtn;
     @FXML
-    private TableColumn<?, ?> nameCol;
+    private TableColumn<Customer, String> nameCol;
     @FXML
-    private TableColumn<?, ?> phoneCol;
+    private TableColumn<Customer, String> phoneCol;
     @FXML
-    private TableColumn<?, ?> postalCol;
+    private TableColumn<Customer, String> postalCol;
     @FXML
     private Button reportsBtn;
     @FXML
@@ -57,13 +60,14 @@ public class CustomersCtrl implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*
-        ObservableList<Country> countryList = DBCountries.getAllCountries();
-        for(Country c: countryList) {
-            System.out.println("Country ID: " + c.getCountryId() + ", Country Name: " + c.getCountryName());
-        }
-
-         */
+        ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
+        custTblView.setItems(customerList);
+        custIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        divisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
+        postalCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
     @FXML

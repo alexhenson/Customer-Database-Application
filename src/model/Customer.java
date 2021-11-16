@@ -10,24 +10,25 @@ public class Customer {
     private String address;
     private String postalCode;
     private String phone;
-    private FirstLevelDivision firstLevelDivision;
+    private int division;
+    //private FirstLevelDivision firstLevelDivision;
     //private Country country; // probably don't need this, and can access through the first level division object
 
-    public Customer(int customerId, String customerName, String address, String postalCode, String phone, FirstLevelDivision firstLevelDivision) {
+    public Customer(int customerId, String customerName, String address, String postalCode, String phone, int division) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
-        this.firstLevelDivision = firstLevelDivision;
+        this.division = division;
         //this.country = country;
     }
 
-    public int getCustomerID() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerID(int customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -63,6 +64,15 @@ public class Customer {
         this.phone = phone;
     }
 
+    public int getDivision() {
+        return division;
+    }
+
+    public void setDivision(int division) {
+        this.division = division;
+    }
+
+    /*
     public FirstLevelDivision getFirstLevelDivision() {
         return firstLevelDivision;
     }
@@ -71,7 +81,7 @@ public class Customer {
         this.firstLevelDivision = firstLevelDivision;
     }
 
-    /*
+
     public Country getCountry() {
         return country;
     }
