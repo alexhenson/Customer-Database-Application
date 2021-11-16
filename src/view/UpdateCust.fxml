@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="addCust" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCustCtrl">
+<AnchorPane fx:id="updateCust" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateCustCtrl">
     <children>
         <GridPane layoutX="-2.0" layoutY="125.0" prefHeight="395.0" prefWidth="333.0">
             <columnConstraints>

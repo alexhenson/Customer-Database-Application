@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCustCtrl implements Initializable {
+public class UpdateCustCtrl implements Initializable {
 
     @FXML
     private Button addBtn;
