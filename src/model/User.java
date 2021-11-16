@@ -1,37 +1,55 @@
 package model;
 
 public class User {
-    private int userID;
+    private int userId;
     private String userName;
-    private String userPassword;
+    private String password;
 
-    public User(int userID, String userName, String userPassword) {
-        this.userID = userID;
+    public User(int userId, String userName, String password) {
+        this.userId = userId;
         this.userName = userName;
-        this.userPassword = userPassword;
+        this.password = password;
     }
 
+    /**
+     * @return the userId
+     */
     public int getUserID() {
-        return userID;
+        return userId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserID(int userId) {
+        this.userId = userId;
     }
 
+    /**
+     * @return the userName
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * @param userName the userName to set
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
