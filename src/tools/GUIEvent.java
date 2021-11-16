@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class GUIEvent {
     public static Stage stage;
@@ -25,5 +28,25 @@ public class GUIEvent {
         stage.setTitle(formName);
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    public static void cancelButtonAction(String message, String systemMsg, String fileName, String formName, ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println(systemMsg);
+            buttonAction(fileName, formName, actionEvent);
+        }
+    }
+    public static void exitButtonAction(String message, String systemMsg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will exit the program, do you want to continue?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("Exit button clicked");
+            System.exit(0);
+        }
     }
 }

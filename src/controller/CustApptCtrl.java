@@ -2,12 +2,12 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import tools.GUIEvent;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class CustApptCtrl {
     @FXML
@@ -75,10 +75,14 @@ public class CustApptCtrl {
     @FXML
     private TableColumn<?, ?> userIdCol;
 
-    public void onActionCustAdd(ActionEvent actionEvent) {
+    public void onActionCustAdd(ActionEvent actionEvent) throws IOException {
+        System.out.println("Cust add button clicked!");
+        GUIEvent.buttonAction("/view/AddCust.fxml", "Add Customer Form", actionEvent);
     }
 
-    public void onActionCustUpdate(ActionEvent actionEvent) {
+    public void onActionCustUpdate(ActionEvent actionEvent) throws IOException {
+        System.out.println("Cust update button clicked!");
+        GUIEvent.buttonAction("/view/UpdateCust.fxml", "Update Customer Form", actionEvent);
     }
 
     public void onActionCustDelete(ActionEvent actionEvent) {
@@ -87,18 +91,24 @@ public class CustApptCtrl {
     public void onActionCustSearch(ActionEvent actionEvent) {
     }
 
-    public void onActionApptAdd(ActionEvent actionEvent) {
+    public void onActionApptAdd(ActionEvent actionEvent) throws IOException {
+        System.out.println("Appt add button clicked!");
+        GUIEvent.buttonAction("/view/AddAppt.fxml", "Add Appointment Form", actionEvent);
     }
 
-    public void onActionApptUpdate(ActionEvent actionEvent) {
+    public void onActionApptUpdate(ActionEvent actionEvent) throws IOException {
+        System.out.println("Appt update button clicked!");
+        GUIEvent.buttonAction("/view/UpdateAppt.fxml", "Update Appointment Form", actionEvent);
     }
 
     public void onActionApptDelete(ActionEvent actionEvent) {
+
     }
 
     public void onActionApptSearch(ActionEvent actionEvent) {
     }
 
     public void onActionExit(ActionEvent actionEvent) {
+        GUIEvent.exitButtonAction("This will exit the program, do you want to continue?", "Exit button clicked");
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddApptCtrl implements Initializable {
+public class UpdateApptCtrl implements Initializable {
 
     @FXML
     private AnchorPane addAppt;
@@ -71,7 +71,7 @@ public class AddApptCtrl implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
-        GUIEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/CustAppt.fxml", "Customer Appointment Form",event);
+        GUIEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/CustAppt.fxml", "Customer Appointment Form",event);
     }
 
     @FXML
