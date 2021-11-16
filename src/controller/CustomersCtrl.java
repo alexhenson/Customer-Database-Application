@@ -1,5 +1,7 @@
 package controller;
 
+import dbAccess.DBCountries;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Country;
 import tools.GUIEvent;
 
 import java.io.IOException;
@@ -54,7 +57,13 @@ public class CustomersCtrl implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /*
+        ObservableList<Country> countryList = DBCountries.getAllCountries();
+        for(Country c: countryList) {
+            System.out.println("Country ID: " + c.getCountryId() + ", Country Name: " + c.getCountryName());
+        }
 
+         */
     }
 
     @FXML

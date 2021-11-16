@@ -1,5 +1,6 @@
 package tools;
 
+import database.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,6 +47,7 @@ public class GUIEvent {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             System.out.println("Exit button clicked");
+            JDBC.closeConnection();
             System.exit(0);
         }
     }

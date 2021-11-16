@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 public class Customer {
     private ObservableList<Appointment> associatedAppt = FXCollections.observableArrayList();
-    private int customerID;
+    private int customerId;
     private String customerName;
     private String address;
     private String postalCode;
@@ -13,8 +13,8 @@ public class Customer {
     private FirstLevelDivision firstLevelDivision;
     //private Country country; // probably don't need this, and can access through the first level division object
 
-    public Customer(int customerID, String customerName, String address, String postalCode, String phone, FirstLevelDivision firstLevelDivision) {
-        this.customerID = customerID;
+    public Customer(int customerId, String customerName, String address, String postalCode, String phone, FirstLevelDivision firstLevelDivision) {
+        this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
@@ -24,11 +24,11 @@ public class Customer {
     }
 
     public int getCustomerID() {
-        return customerID;
+        return customerId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setCustomerID(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {

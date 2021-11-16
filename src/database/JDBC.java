@@ -1,4 +1,4 @@
-package helper;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +22,10 @@ public abstract class JDBC {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 
     public static void closeConnection() {

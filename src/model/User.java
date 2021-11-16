@@ -14,14 +14,14 @@ public class User {
     /**
      * @return the userId
      */
-    public int getUserID() {
+    public int getUserId() {
         return userId;
     }
 
     /**
      * @param userId the userId to set
      */
-    public void setUserID(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
