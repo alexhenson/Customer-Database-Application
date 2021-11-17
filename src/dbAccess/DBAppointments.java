@@ -12,7 +12,9 @@ public class DBAppointments {
         ObservableList<Appointment> alist =FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT * FROM appointments";
+            String sql = "SELECT Appointment_ID, Title, Description, Location, Contact_Name, Type, Start, End, Customer_ID, User_ID \n" +
+                         "FROM client_schedule.appointments a \n" +
+                         "JOIN client_schedule.contacts c ON a.Contact_ID = c.Contact_ID;";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
@@ -22,14 +24,14 @@ public class DBAppointments {
                 String title = rs.getString("Title");
                 String description = rs.getString("Description");
                 String location = rs.getString("Location");
+                String contact = rs.getString("Contact_Name");
                 String type = rs.getString("Type");
                 Timestamp start = rs.getTimestamp("Start");
                 Timestamp end = rs.getTimestamp("End");
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
-                int contactId = rs.getInt("Contact_ID");
 
-                Appointment a = new Appointment(apptId, title, description, location, type, start.toLocalDateTime(), end.toLocalDateTime(), customerId, userId, contactId);
+                Appointment a = new Appointment(apptId, title, description, location, contact, type, start, end.toLocalDateTime(), customerId, userId);
                 alist.add(a);
             }
         } catch (SQLException throwables) {

@@ -71,13 +71,13 @@ public class UpdateApptCtrl implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
-        GUIEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Customers.fxml", "Customer Appointment Form",event);
+        GUIEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table",event);
     }
 
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
-        GUIEvent.buttonAction("/view/Customers.fxml", "Customer Appointment Form", event);
+        GUIEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", event);
     }
 }
 

@@ -37,7 +37,7 @@
                                 <TableColumn fx:id="addressCol" minWidth="100.0" prefWidth="292.7999572753906" text="Address" />
                                 <TableColumn fx:id="divisionCol" minWidth="119.20001220703125" prefWidth="144.0" text="First Level Division" />
                                 <TableColumn fx:id="postalCol" minWidth="71.800048828125" prefWidth="98.60003662109375" text="Postal Code" />
-                                <TableColumn fx:id="countryCol11" minWidth="67.79998779296875" prefWidth="95.00006103515625" text="Country" />
+                                <TableColumn fx:id="countryCol" minWidth="67.79998779296875" prefWidth="95.00006103515625" text="Country" />
                                 <TableColumn fx:id="phoneCol" minWidth="97.7999267578125" prefWidth="138.4000244140625" text="Phone Number" />
                             </columns>
                         </TableView>

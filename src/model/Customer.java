@@ -8,20 +8,19 @@ public class Customer {
     private int customerId;
     private String customerName;
     private String address;
+    private String division;
     private String postalCode;
+    private String country;
     private String phone;
-    private int division;
-    //private FirstLevelDivision firstLevelDivision;
-    //private Country country; // probably don't need this, and can access through the first level division object
 
-    public Customer(int customerId, String customerName, String address, String postalCode, String phone, int division) {
+    public Customer(int customerId, String customerName, String address, String division, String postalCode, String country, String phone) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
-        this.postalCode = postalCode;
-        this.phone = phone;
         this.division = division;
-        //this.country = country;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.phone = phone;
     }
 
     public int getCustomerId() {
@@ -64,33 +63,21 @@ public class Customer {
         this.phone = phone;
     }
 
-    public int getDivision() {
+    public String getDivision() {
         return division;
     }
 
-    public void setDivision(int division) {
+    public void setDivision(String division) {
         this.division = division;
     }
 
-    /*
-    public FirstLevelDivision getFirstLevelDivision() {
-        return firstLevelDivision;
-    }
-
-    public void setFirstLevelDivision(FirstLevelDivision firstLevelDivision) {
-        this.firstLevelDivision = firstLevelDivision;
-    }
-
-
-    public Country getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
     }
-
-     */
 
     /** This method adds an Appointment object to the ObservableList associatedAppt.
      *  @param appt Appointment object to add to associatedAppt Observable List

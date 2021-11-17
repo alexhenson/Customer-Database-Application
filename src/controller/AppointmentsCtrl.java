@@ -51,9 +51,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private TableColumn<Appointment, String> descCol;
     @FXML
-    private TableColumn<Appointment, LocalDateTime> endDateCol;
-    @FXML
-    private TableColumn<Appointment, ?> endTimeCol;
+    private TableColumn<Appointment, LocalDateTime> endDateTimeCol;
     @FXML
     private TableColumn<Appointment, String> locationCol;
     @FXML
@@ -63,9 +61,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private Button reportsBtn;
     @FXML
-    private TableColumn<Appointment, LocalDateTime> startDateCol;
-    @FXML
-    private TableColumn<Appointment, ?> startTimeCol;
+    private TableColumn<Appointment, LocalDateTime> startDateTimeCol;
     @FXML
     private TableColumn<Appointment, String> titleCol;
     @FXML
@@ -85,12 +81,12 @@ public class AppointmentsCtrl implements Initializable {
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         descCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateCol.setCellValueFactory(new PropertyValueFactory<>("start"));
-        endDateCol.setCellValueFactory(new PropertyValueFactory<>("end"));
-        apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
-        userIdCol.setCellValueFactory(new PropertyValueFactory<>("user"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
     @FXML
@@ -99,8 +95,9 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionAdd(ActionEvent event) {
-
+    void onActionAdd(ActionEvent event) throws IOException {
+        System.out.println("Add button clicked!");
+        GUIEvent.buttonAction("/view/AddAppt.fxml", "Add Appointment Table", event);
     }
 
     @FXML
@@ -114,8 +111,9 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionUpdate(ActionEvent event) {
-
+    void onActionUpdate(ActionEvent event) throws IOException {
+        System.out.println("Update button clicked!");
+        GUIEvent.buttonAction("/view/UpdateAppt.fxml", "Update Appointment Table", event);
     }
 
     @FXML

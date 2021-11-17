@@ -2,30 +2,32 @@ package model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Appointment {
     private int appointmentId;
     private String title;
     private String description;
     private String location;
+    private String contact;
     private String type;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private int customer;
-    private int user;
-    private int contact;
+    private DateTimeFormatter start;
+    private DateTimeFormatter end;
+    private int customerId;
+    private int userId;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customer, int user, int contact) {
+
+    public Appointment(int appointmentId, String title, String description, String location, String contact, String type, DateTimeFormatter start, DateTimeFormatter end, int customerId, int userId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
         this.location = location;
+        this.contact = contact;
         this.type = type;
         this.start = start;
         this.end = end;
-        this.customer = customer;
-        this.user = user;
-        this.contact = contact;
+        this.customerId = customerId;
+        this.userId = userId;
     }
 
     public int getAppointmentId() {
@@ -68,76 +70,35 @@ public class Appointment {
         this.type = type;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(DateTimeFormatter start) {
         this.start = start;
     }
 
-    public void setEnd(LocalDateTime end) {
+    public void setEnd(DateTimeFormatter end) {
         this.end = end;
     }
 
-    public int getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(int contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
     public int getCustomer() {
-        return customer;
+        return customerId;
     }
 
-    public void setCustomer(int customer) {
-        this.customer = customer;
+    public void setCustomer(int customerId) {
+        this.customerId = customerId;
     }
 
     public int getUser() {
-        return user;
+        return userId;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setUser(int userId) {
+        this.userId = userId;
     }
-    /*
-    public String getStart() {
-        return start;
-    }
-
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-    */
 }

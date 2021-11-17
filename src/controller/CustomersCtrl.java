@@ -30,7 +30,7 @@ public class CustomersCtrl implements Initializable {
     @FXML
     private Button apptBtn;
     @FXML
-    private TableColumn<?, ?> countryCol11;
+    private TableColumn<Customer, String> countryCol;
     @FXML
     private TableColumn<Customer, Integer> custIdCol;
     @FXML
@@ -40,7 +40,7 @@ public class CustomersCtrl implements Initializable {
     @FXML
     private Button delBtn;
     @FXML
-    private TableColumn<Customer, Integer> divisionCol;
+    private TableColumn<Customer, String> divisionCol;
     @FXML
     private Button mainMenuBtn;
     @FXML
@@ -67,12 +67,14 @@ public class CustomersCtrl implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         divisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
         postalCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
     @FXML
-    void onActionAdd(ActionEvent event) {
-
+    void onActionAdd(ActionEvent event) throws IOException {
+        System.out.println("Add button clicked!");
+        GUIEvent.buttonAction("/view/AddCust.fxml", "Add Customers Table", event);
     }
 
     @FXML
@@ -103,7 +105,8 @@ public class CustomersCtrl implements Initializable {
     }
 
     @FXML
-    void onActionUpdate(ActionEvent event) {
-
+    void onActionUpdate(ActionEvent event) throws IOException {
+        System.out.println("Update button clicked!");
+        GUIEvent.buttonAction("/view/UpdateCust.fxml", "Update Customers Table", event);
     }
 }
