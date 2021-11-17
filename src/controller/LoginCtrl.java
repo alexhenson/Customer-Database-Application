@@ -15,6 +15,7 @@ import tools.TextBoxEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
 public class LoginCtrl implements Initializable {
@@ -32,6 +33,8 @@ public class LoginCtrl implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("LoginForm is initialized!");
+        String zoneId = String.valueOf(ZonedDateTime.now().getZone());
+        zoneIdLbl.setText("[" + zoneId + "]");
     }
 
     public void onActionUsername(ActionEvent actionEvent) throws IOException {
