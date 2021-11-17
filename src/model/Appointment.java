@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Appointment {
     private int appointmentId;
@@ -8,13 +9,13 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private Timestamp start;
-    private Timestamp end;
-    private int contact;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private int customer;
     private int user;
+    private int contact;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type, Timestamp start, Timestamp end, int contact, int customer, int user) {
+    public Appointment(int appointmentId, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customer, int user, int contact) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -22,9 +23,9 @@ public class Appointment {
         this.type = type;
         this.start = start;
         this.end = end;
-        this.contact = contact;
         this.customer = customer;
         this.user = user;
+        this.contact = contact;
     }
 
     public int getAppointmentId() {
@@ -67,11 +68,11 @@ public class Appointment {
         this.type = type;
     }
 
-    public void setStart(Timestamp start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public void setEnd(Timestamp end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 

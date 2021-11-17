@@ -21,6 +21,7 @@ import tools.GUIEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AppointmentsCtrl implements Initializable {
@@ -50,7 +51,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private TableColumn<Appointment, String> descCol;
     @FXML
-    private TableColumn<Appointment, Timestamp> endDateCol;
+    private TableColumn<Appointment, LocalDateTime> endDateCol;
     @FXML
     private TableColumn<Appointment, ?> endTimeCol;
     @FXML
@@ -62,7 +63,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private Button reportsBtn;
     @FXML
-    private TableColumn<Appointment, Timestamp> startDateCol;
+    private TableColumn<Appointment, LocalDateTime> startDateCol;
     @FXML
     private TableColumn<Appointment, ?> startTimeCol;
     @FXML
@@ -84,13 +85,12 @@ public class AppointmentsCtrl implements Initializable {
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         descCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         endDateCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("user"));
-
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
     }
 
     @FXML

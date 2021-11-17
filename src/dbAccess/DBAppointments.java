@@ -25,11 +25,11 @@ public class DBAppointments {
                 String type = rs.getString("Type");
                 Timestamp start = rs.getTimestamp("Start");
                 Timestamp end = rs.getTimestamp("End");
-                int contactId = rs.getInt("Contact_ID");
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
 
-                Appointment a = new Appointment(apptId, title, description, location, type, start, end, contactId, customerId, userId);
+                Appointment a = new Appointment(apptId, title, description, location, type, start.toLocalDateTime(), end.toLocalDateTime(), customerId, userId, contactId);
                 alist.add(a);
             }
         } catch (SQLException throwables) {
