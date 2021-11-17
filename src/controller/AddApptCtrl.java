@@ -9,7 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import tools.GUIEvent;
+import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,13 +71,13 @@ public class AddApptCtrl implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
-        GUIEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table",event);
+        ButtonEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table",event);
     }
 
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
-        GUIEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
+        ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
     }
 }
 

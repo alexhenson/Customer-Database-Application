@@ -1,13 +1,10 @@
 package controller;
 
-import dbAccess.DBCountries;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import model.Country;
-import tools.GUIEvent;
+import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,18 +30,18 @@ public class MainMenuCtrl implements Initializable {
     @FXML
     void onActionAppt(ActionEvent event) throws IOException {
         System.out.println("Appointments button clicked!");
-        GUIEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", event);
+        ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", event);
     }
 
     @FXML
     void onActionCust(ActionEvent event) throws IOException {
         System.out.println("Customers button clicked!");
-        GUIEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
+        ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
     @FXML
     void onActionLogin(ActionEvent event) throws IOException {
-        GUIEvent.cancelButtonAction("You will be taken to the login screen again, do you want to continue?", "Login button clicked", "/view/Login.fxml", "Login Screen",event);
+        ButtonEvent.cancelButtonAction("You will be taken to the login screen again, do you want to continue?", "Login button clicked", "/view/Login.fxml", "Login Screen",event);
 
     }
 
@@ -55,6 +52,6 @@ public class MainMenuCtrl implements Initializable {
 
 
     public void onActionExit(ActionEvent actionEvent) {
-        GUIEvent.exitButtonAction("This will exit the program, do you want to continue?", "Exit button clicked");
+        ButtonEvent.exitButtonAction("This will exit the program, do you want to continue?", "Exit button clicked");
     }
 }

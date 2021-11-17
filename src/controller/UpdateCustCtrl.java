@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import tools.GUIEvent;
+import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -108,7 +108,7 @@ public class UpdateCustCtrl implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
-        GUIEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Customers.fxml", "Customers Table",event);
+        ButtonEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Customers.fxml", "Customers Table",event);
     }
 
     @FXML
@@ -119,7 +119,7 @@ public class UpdateCustCtrl implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
-        GUIEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
+        ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
     @FXML

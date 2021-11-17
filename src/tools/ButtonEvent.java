@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
-public class GUIEvent {
+public class ButtonEvent {
     public static Stage stage;
     public static Parent scene;
 
@@ -25,7 +25,7 @@ public class GUIEvent {
      */
     public static void buttonAction(String fileName, String formName, ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(GUIEvent.class.getResource(fileName));
+        scene = FXMLLoader.load(ButtonEvent.class.getResource(fileName));
         stage.setTitle(formName);
         stage.setScene(new Scene(scene));
         stage.show();
@@ -51,4 +51,6 @@ public class GUIEvent {
             System.exit(0);
         }
     }
+
+
 }

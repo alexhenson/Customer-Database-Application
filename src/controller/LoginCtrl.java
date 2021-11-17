@@ -1,12 +1,17 @@
 package controller;
 
+import dbAccess.DBUsers;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import tools.GUIEvent;
+import model.User;
+import tools.AlertEvent;
+import tools.ButtonEvent;
+import tools.TextBoxEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,8 +34,31 @@ public class LoginCtrl implements Initializable {
         System.out.println("LoginForm is initialized!");
     }
 
+    public void onActionUsername(ActionEvent actionEvent) throws IOException {
+        validateLogin(actionEvent, "Username text entered!");
+    }
+
+    public void onActionPassword(ActionEvent actionEvent) throws IOException {
+        validateLogin(actionEvent, "Password text entered!");
+    }
+
     public void onActionSubmit(ActionEvent actionEvent) throws IOException {
-        System.out.println("Submit button clicked!");
-        GUIEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
+        validateLogin(actionEvent, "Submit button clicked!");
+    }
+
+    public void validateLogin(ActionEvent actionEvent, String systemDialog) throws IOException {
+        System.out.println(systemDialog);
+        ObservableList<User> userList = DBUsers.getAllUsers();
+
+        String userName = usernameTxt.getText();
+        String password = passwordTxt.getText();
+
+        for (User u : userList) {
+            if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
+                ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
+                return;
+            }
+        }
+        AlertEvent.alertBox("Error Dialog", "Please enter a valid username and password.");
     }
 }

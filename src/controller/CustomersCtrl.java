@@ -1,6 +1,5 @@
 package controller;
 
-import dbAccess.DBCountries;
 import dbAccess.DBCustomers;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,12 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.Country;
 import model.Customer;
-import tools.GUIEvent;
+import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,8 +49,6 @@ public class CustomersCtrl implements Initializable {
     @FXML
     private Button reportsBtn;
     @FXML
-    private TextField searchTxt;
-    @FXML
     private Label titleLbl;
     @FXML
     private Button updateBtn;
@@ -74,13 +69,13 @@ public class CustomersCtrl implements Initializable {
     @FXML
     void onActionAdd(ActionEvent event) throws IOException {
         System.out.println("Add button clicked!");
-        GUIEvent.buttonAction("/view/AddCust.fxml", "Add Customers Table", event);
+        ButtonEvent.buttonAction("/view/AddCust.fxml", "Add Customers Table", event);
     }
 
     @FXML
     void onActionAppt(ActionEvent event) throws IOException {
         System.out.println("Appointments button clicked!");
-        GUIEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", event);
+        ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", event);
     }
 
     @FXML
@@ -91,7 +86,7 @@ public class CustomersCtrl implements Initializable {
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
         System.out.println("Main Menu button clicked!");
-        GUIEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", event);
+        ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", event);
     }
 
     @FXML
@@ -99,14 +94,10 @@ public class CustomersCtrl implements Initializable {
 
     }
 
-    @FXML
-    void onActionSearch(ActionEvent event) {
-
-    }
 
     @FXML
     void onActionUpdate(ActionEvent event) throws IOException {
         System.out.println("Update button clicked!");
-        GUIEvent.buttonAction("/view/UpdateCust.fxml", "Update Customers Table", event);
+        ButtonEvent.buttonAction("/view/UpdateCust.fxml", "Update Customers Table", event);
     }
 }
