@@ -11,13 +11,13 @@ public class Appointment {
     private String location;
     private String contact;
     private String type;
-    private DateTimeFormatter start;
-    private DateTimeFormatter end;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private int customerId;
     private int userId;
 
 
-    public Appointment(int appointmentId, String title, String description, String location, String contact, String type, DateTimeFormatter start, DateTimeFormatter end, int customerId, int userId) {
+    public Appointment(int appointmentId, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -70,11 +70,11 @@ public class Appointment {
         this.type = type;
     }
 
-    public void setStart(DateTimeFormatter start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public void setEnd(DateTimeFormatter end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 

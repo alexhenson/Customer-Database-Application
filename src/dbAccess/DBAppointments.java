@@ -4,11 +4,13 @@ import database.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
 
 public class DBAppointments {
-    public static ObservableList<Appointment> getAllAppointments() {
+    public static @NotNull
+    ObservableList<Appointment> getAllAppointments() {
         ObservableList<Appointment> alist =FXCollections.observableArrayList();
 
         try {
@@ -31,7 +33,7 @@ public class DBAppointments {
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
 
-                Appointment a = new Appointment(apptId, title, description, location, contact, type, start, end.toLocalDateTime(), customerId, userId);
+                Appointment a = new Appointment(apptId, title, description, location, contact, type, start.toLocalDateTime(), end.toLocalDateTime(), customerId, userId);
                 alist.add(a);
             }
         } catch (SQLException throwables) {

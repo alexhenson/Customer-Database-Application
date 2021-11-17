@@ -25,10 +25,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         JDBC.openConnection();
-        ObservableList<User> userList = DBUsers.getAllUsers();
-        for(User u: userList) {
-            System.out.println("User ID: " + u.getUserId() + ", User Name: " + u.getUserName() + ", Password: " + u.getPassword());
-        }
         launch(args);
     }
 }

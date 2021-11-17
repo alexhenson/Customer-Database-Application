@@ -47,7 +47,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private Button updateBtn;
     @FXML
-    private TableColumn<Appointment, Integer> contactCol;
+    private TableColumn<Appointment, String> contactCol;
     @FXML
     private TableColumn<Appointment, String> descCol;
     @FXML
@@ -83,8 +83,8 @@ public class AppointmentsCtrl implements Initializable {
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("start"));
-        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start")); //WHY?
+        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
         apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
