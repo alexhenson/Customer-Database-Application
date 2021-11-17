@@ -1,5 +1,8 @@
 package controller;
 
+import dbAccess.DBAppointments;
+import dbAccess.DBCustomers;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,11 +12,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import model.Appointment;
+import model.Customer;
 import tools.GUIEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class AppointmentsCtrl implements Initializable {
@@ -27,27 +34,27 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private Button addBtn;
     @FXML
-    private TableColumn<?, ?> apptCustIdCol;
+    private TableColumn<Appointment, Integer> apptCustIdCol;
     @FXML
     private Button delBtn;
     @FXML
-    private TableColumn<?, ?> apptIdCol;
+    private TableColumn<Appointment, Integer> apptIdCol;
     @FXML
     private TextField apptSearchTxt;
     @FXML
-    private TableView<?> apptTblView;
+    private TableView<Appointment> apptTblView;
     @FXML
     private Button updateBtn;
     @FXML
-    private TableColumn<?, ?> contactCol;
+    private TableColumn<Appointment, Integer> contactCol;
     @FXML
-    private TableColumn<?, ?> descCol;
+    private TableColumn<Appointment, String> descCol;
     @FXML
-    private TableColumn<?, ?> endDateCol;
+    private TableColumn<Appointment, Timestamp> endDateCol;
     @FXML
-    private TableColumn<?, ?> endTimeCol;
+    private TableColumn<Appointment, ?> endTimeCol;
     @FXML
-    private TableColumn<?, ?> locationCol;
+    private TableColumn<Appointment, String> locationCol;
     @FXML
     private Button mainMenuBtn;
     @FXML
@@ -55,22 +62,34 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private Button reportsBtn;
     @FXML
-    private TableColumn<?, ?> startDateCol;
+    private TableColumn<Appointment, Timestamp> startDateCol;
     @FXML
-    private TableColumn<?, ?> startTimeCol;
+    private TableColumn<Appointment, ?> startTimeCol;
     @FXML
-    private TableColumn<?, ?> titleCol;
+    private TableColumn<Appointment, String> titleCol;
     @FXML
     private Label titleLbl;
     @FXML
-    private TableColumn<?, ?> typeCol;
+    private TableColumn<Appointment, String> typeCol;
     @FXML
-    private TableColumn<?, ?> userIdCol;
+    private TableColumn<Appointment, Integer> userIdCol;
     @FXML
     private RadioButton weekRBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
+        apptTblView.setItems(apptList);
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        endDateCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("user"));
 
     }
 

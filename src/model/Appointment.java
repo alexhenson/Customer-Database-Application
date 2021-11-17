@@ -1,18 +1,20 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Appointment {
     private int appointmentId;
     private String title;
     private String description;
     private String location;
     private String type;
-    private String start;
-    private String end;
-    private Contact contact;
-    private Customer customer;
-    private User user;
+    private Timestamp start;
+    private Timestamp end;
+    private int contact;
+    private int customer;
+    private int user;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type, String start, String end, Contact contact, Customer customer, User user) {
+    public Appointment(int appointmentId, String title, String description, String location, String type, Timestamp start, Timestamp end, int contact, int customer, int user) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -65,6 +67,38 @@ public class Appointment {
         this.type = type;
     }
 
+    public void setStart(Timestamp start) {
+        this.start = start;
+    }
+
+    public void setEnd(Timestamp end) {
+        this.end = end;
+    }
+
+    public int getContact() {
+        return contact;
+    }
+
+    public void setContact(int contact) {
+        this.contact = contact;
+    }
+
+    public int getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(int customer) {
+        this.customer = customer;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+    /*
     public String getStart() {
         return start;
     }
@@ -104,4 +138,5 @@ public class Appointment {
     public void setUser(User user) {
         this.user = user;
     }
+    */
 }
