@@ -62,22 +62,6 @@ public class Appointment {
         this.location = location;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
-    }
-
     public String getContact() {
         return contact;
     }
@@ -86,19 +70,43 @@ public class Appointment {
         this.contact = contact;
     }
 
-    public int getCustomer() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomer(int customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
-    public int getUser() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUser(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 }

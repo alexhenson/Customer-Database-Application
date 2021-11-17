@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Customer {
-    private ObservableList<Appointment> associatedAppt = FXCollections.observableArrayList();
     private int customerId;
     private String customerName;
     private String address;
@@ -79,25 +78,4 @@ public class Customer {
         this.country = country;
     }
 
-    /** This method adds an Appointment object to the ObservableList associatedAppt.
-     *  @param appt Appointment object to add to associatedAppt Observable List
-     */
-    public void addAssociatedAppt(Appointment appt) {
-        associatedAppt.add(appt);
-    }
-
-    /** This method deletes an Appointment object from the ObservableList associatedAppt.
-     * @param selectedAssociatedAppt Appointment object selected in the TableView object
-     *  @return boolean value for whether Appointment was removed or not
-     */
-    public boolean deleteAssociatedAppt(Appointment selectedAssociatedAppt) {
-        return associatedAppt.remove(selectedAssociatedAppt);
-    }
-
-    /** This method returns the ObservableList associatedAppt.
-     * @return associatedAppt
-     */
-    public ObservableList<Appointment> getAllAssociatedAppt() {
-        return associatedAppt;
-    }
 }

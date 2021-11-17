@@ -83,8 +83,8 @@ public class AppointmentsCtrl implements Initializable {
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("start")); //WHY?
-        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("end"));
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("start"));  //get method (start method, "get" will be prepended) getStartFormatted (in appointment class)
+        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
