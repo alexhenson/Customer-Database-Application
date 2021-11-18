@@ -2,6 +2,8 @@ package controller;
 
 import dbAccess.DBCountries;
 import dbAccess.DBCustomers;
+import dbAccess.DBDivisions;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,13 +56,15 @@ public class AddCustCtrl implements Initializable {
     @FXML
     private ComboBox<FirstLevelDivision> fldCombo;
 
+    ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
+    ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Country> countryList = DBCountries.getAllCountries();
-        countryCombo.setPromptText("First select a country.");
+        countryCombo.setPromptText("First, select a country.");
+        fldCombo.setPromptText("Second, select a division.");
         countryCombo.setItems(countryList);
-
-        //fldCombo.setVisibleRowCount(10);
     }
 
     @FXML
@@ -72,5 +76,17 @@ public class AddCustCtrl implements Initializable {
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
+    }
+
+    public void onActionCountry(ActionEvent actionEvent) {
+        Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
+        filteredDivisionList.clear();
+        for (FirstLevelDivision d : divisionList) {
+            if (d.getCountryId() == selectedCountry.getCountryId()) {
+                filteredDivisionList.add(d);
+            }
+        }
+        fldCombo.setItems(filteredDivisionList);
+        fldCombo.setVisibleRowCount(5);
     }
 }

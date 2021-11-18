@@ -8,27 +8,28 @@ import model.FirstLevelDivision;
 
 import java.sql.*;
 
-public class DBFirstLevelDivision {
+public class DBDivisions {
     public static ObservableList<FirstLevelDivision> getAllDivisions() {
-        ObservableList<Country> clist =FXCollections.observableArrayList();
+        ObservableList<FirstLevelDivision> flist =FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT Country_ID, Country FROM client_schedule.countries;";
+            String sql = "SELECT Division_ID, Division, Country_ID FROM client_schedule.first_level_divisions;";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
+                int divisionId = rs.getInt("Division_ID");
+                String division = rs.getString("Division");
                 int countryId = rs.getInt("Country_ID");
-                String countryName = rs.getString("Country");
-                Country c = new Country(countryId, countryName);
-                clist.add(c);
+                FirstLevelDivision f = new FirstLevelDivision(divisionId, division, countryId);
+                flist.add(f);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return clist;
+        return flist;
     }
 }
 

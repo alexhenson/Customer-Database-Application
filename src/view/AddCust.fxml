@@ -52,7 +52,7 @@
                       <TextField fx:id="idTxt" disable="true" editable="false" prefHeight="26.0" prefWidth="191.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1" />
                       <Label text="Country" GridPane.rowIndex="5" />
                       <Label text="First Level Division" GridPane.rowIndex="6" />
-                      <ComboBox fx:id="countryCombo" prefWidth="255.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                      <ComboBox fx:id="countryCombo" onAction="#onActionCountry" prefWidth="255.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                       <ComboBox fx:id="fldCombo" prefWidth="255.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   </children>
                   <padding>

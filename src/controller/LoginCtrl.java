@@ -38,15 +38,18 @@ public class LoginCtrl implements Initializable {
     }
 
     public void onActionUsername(ActionEvent actionEvent) throws IOException {
-        validateLogin(actionEvent, "Username text entered!");
+        //validateLogin(actionEvent, "Username text entered!");
+
     }
 
     public void onActionPassword(ActionEvent actionEvent) throws IOException {
-        validateLogin(actionEvent, "Password text entered!");
+        //validateLogin(actionEvent, "Password text entered!");
+
     }
 
     public void onActionSubmit(ActionEvent actionEvent) throws IOException {
-        validateLogin(actionEvent, "Submit button clicked!");
+        //validateLogin(actionEvent, "Submit button clicked!");
+        ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
     }
 
     public void validateLogin(ActionEvent actionEvent, String systemDialog) throws IOException {
