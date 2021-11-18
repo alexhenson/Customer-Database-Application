@@ -1,14 +1,16 @@
 package controller;
 
+import dbAccess.DBCountries;
+import dbAccess.DBCustomers;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import model.Country;
+import model.Customer;
+import model.FirstLevelDivision;
 import tools.ButtonEvent;
 
 import java.io.IOException;
@@ -17,32 +19,6 @@ import java.util.ResourceBundle;
 
 public class AddCustCtrl implements Initializable {
 
-    @FXML
-    private Button addBtn;
-    @FXML
-    private AnchorPane addCust;
-    @FXML
-    private TableColumn<?, ?> btmApptCustIdCol;
-    @FXML
-    private TableColumn<?, ?> btmApptIdCol;
-    @FXML
-    private TableView<?> btmApptTblView;
-    @FXML
-    private TableColumn<?, ?> btmContactCol;
-    @FXML
-    private TableColumn<?, ?> btmDescCol;
-    @FXML
-    private TableColumn<?, ?> btmEndCol;
-    @FXML
-    private TableColumn<?, ?> btmLocationCol;
-    @FXML
-    private TableColumn<?, ?> btmStartCol;
-    @FXML
-    private TableColumn<?, ?> btmTitleCol;
-    @FXML
-    private TableColumn<?, ?> btmTypeCol;
-    @FXML
-    private TableColumn<?, ?> btmUserIdCol;
     @FXML
     private Button cancelBtn;
     @FXML
@@ -74,36 +50,17 @@ public class AddCustCtrl implements Initializable {
     @FXML
     private Label titleLbl;
     @FXML
-    private TableColumn<?, ?> topApptCustIdCol;
+    private ComboBox<Country> countryCombo;
     @FXML
-    private TableColumn<?, ?> topApptIdCol;
-    @FXML
-    private TableView<?> topApptTblView;
-    @FXML
-    private TableColumn<?, ?> topContactCol;
-    @FXML
-    private TableColumn<?, ?> topDescCol;
-    @FXML
-    private TableColumn<?, ?> topEndCol;
-    @FXML
-    private TableColumn<?, ?> topLocationCol;
-    @FXML
-    private TableColumn<?, ?> topStartCol;
-    @FXML
-    private TableColumn<?, ?> topTitleCol;
-    @FXML
-    private TableColumn<?, ?> topTypeCol;
-    @FXML
-    private TableColumn<?, ?> topUserIdCol;
+    private ComboBox<FirstLevelDivision> fldCombo;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Country> countryList = DBCountries.getAllCountries();
+        countryCombo.setPromptText("First select a country.");
+        countryCombo.setItems(countryList);
 
-    }
-
-    @FXML
-    void onActionAdd(ActionEvent event) {
-
+        //fldCombo.setVisibleRowCount(10);
     }
 
     @FXML
@@ -112,18 +69,8 @@ public class AddCustCtrl implements Initializable {
     }
 
     @FXML
-    void onActionRemove(ActionEvent event) {
-
-    }
-
-    @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
-    }
-
-    @FXML
-    void onActionSearch(ActionEvent event) {
-
     }
 }

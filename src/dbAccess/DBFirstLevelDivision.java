@@ -4,11 +4,12 @@ import database.JDBC;
 import model.Country;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.FirstLevelDivision;
 
 import java.sql.*;
 
-public class DBCountries {
-    public static ObservableList<Country> getAllCountries() {
+public class DBFirstLevelDivision {
+    public static ObservableList<FirstLevelDivision> getAllDivisions() {
         ObservableList<Country> clist =FXCollections.observableArrayList();
 
         try {
@@ -30,3 +31,4 @@ public class DBCountries {
         return clist;
     }
 }
+

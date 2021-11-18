@@ -39,5 +39,9 @@ public class DBCustomers {
         System.out.print(clist);
         return clist;
     }
+
+    public static void addCustomer() {
+
+    }
 }
 
