@@ -1,6 +1,6 @@
 package dbAccess;
 
-import database.JDBC;
+import dbConnection.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;

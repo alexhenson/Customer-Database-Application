@@ -1,7 +1,6 @@
 package dbAccess;
 
-import database.JDBC;
-import javafx.beans.Observable;
+import dbConnection.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
@@ -36,12 +35,20 @@ public class DBCustomers {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        System.out.print(clist);
         return clist;
     }
 
-    public static void addCustomer() {
+    public static void addCustomer(String customerName, String address, int division, String postalCode, String phone) {
+        try {
+            String sql = "INSERT INTO client_schedule.customers (Customer_ID, Customer_Name, Address, Division_ID, Postal_Code, Phone) \n" +
+                    "VALUES (NULL, customerName, address, division, postalCode, phone);";
 
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
 

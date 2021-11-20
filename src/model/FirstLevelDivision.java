@@ -37,6 +37,6 @@ public class FirstLevelDivision {
 
     @Override
     public String toString() {
-        return division;
+        return divisionId + ". " + division;
     }
 }
