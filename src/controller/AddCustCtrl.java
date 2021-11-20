@@ -13,7 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import model.Country;
 import model.Customer;
 import model.FirstLevelDivision;
+import tools.AlertEvent;
 import tools.ButtonEvent;
+import tools.ComboBoxEvent;
+import tools.TextBoxEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,11 +33,11 @@ public class AddCustCtrl implements Initializable {
     @FXML
     private Label invLbl;
     @FXML
-    private TextField invTxt;
+    private TextField addrTxt;
     @FXML
     private Label maxLbl;
     @FXML
-    private TextField maxTxt;
+    private TextField postalTxt;
     @FXML
     private Label nameLbl;
     @FXML
@@ -42,19 +45,17 @@ public class AddCustCtrl implements Initializable {
     @FXML
     private Label priceLbl;
     @FXML
-    private TextField priceTxt;
+    private TextField phoneTxt;
     @FXML
     private Button removeBtn;
     @FXML
     private Button saveBtn;
     @FXML
-    private TextField searchTxt;
-    @FXML
     private Label titleLbl;
     @FXML
     private ComboBox<Country> countryCombo;
     @FXML
-    private ComboBox<FirstLevelDivision> fldCombo;
+    private ComboBox<FirstLevelDivision> divisionCombo;
 
     ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
     ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
@@ -75,6 +76,27 @@ public class AddCustCtrl implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
+
+        String name = TextBoxEvent.validateString(nameTxt, "Name");
+        String address = TextBoxEvent.validateString(addrTxt, "Address");
+        String postalCode = TextBoxEvent.validateString(postalTxt, "Postal Code");
+        String phoneNumber = TextBoxEvent.validateString(phoneTxt, "Phone Number");
+        String country = ComboBoxEvent.validateComboBoxString(countryCombo, "Country", "getCountryName()");
+        int division = ComboBoxEvent.validateComboBoxInt(divisionCombo, "First Level Division", )
+
+        // Checks return values for each field to ensure they are valid
+        if (name == null || address == null || postalCode == null || phoneNumber == null || country == null) {
+            return;
+        }
+
+        int division = fldCombo.getSelectionModel().getSelectedItem().getDivisionId();
+
+        if (country == null || division == 0) {
+            AlertEvent.alertBox("Error Dialog", "You must select both a Country and a First Level Division to proceed.");
+            return;
+        }
+
+        DBCustomers.addCustomer(name, address, division, postalCode, phoneNumber);
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 

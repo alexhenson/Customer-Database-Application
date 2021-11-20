@@ -41,11 +41,17 @@ public class DBCustomers {
     public static void addCustomer(String customerName, String address, int division, String postalCode, String phone) {
         try {
             String sql = "INSERT INTO client_schedule.customers (Customer_ID, Customer_Name, Address, Division_ID, Postal_Code, Phone) \n" +
-                    "VALUES (NULL, customerName, address, division, postalCode, phone);";
+                    "VALUES (NULL, ?, ?, ?, ?, ?);";
 
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
-            ps.execute();
+            ps.setString(1, customerName);
+            ps.setString(2, address);
+            ps.setInt(3, division);
+            ps.setString(4, postalCode);
+            ps.setString(5, phone);
+
+            ps.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
