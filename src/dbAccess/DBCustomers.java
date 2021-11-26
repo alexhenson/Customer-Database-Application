@@ -56,5 +56,27 @@ public class DBCustomers {
             throwables.printStackTrace();
         }
     }
+
+    public static void modifyCustomer(int customerId, String customerName, String address, int division, String postalCode, String phone) {
+        try {
+            String sql = "UPDATE client_schedule.customers \n" +
+                    "SET Customer_Name = ?, Address = ?, Division_ID = ?, Postal_Code = ?, Phone = ?\n" +
+                    "WHERE Customer_ID = ?;";
+
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            ps.setString(1, customerName);
+            ps.setString(2, address);
+            ps.setInt(3, division);
+            ps.setString(4, postalCode);
+            ps.setString(5, phone);
+            ps.setInt(0, customerId);
+
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
 

@@ -21,6 +21,8 @@ import tools.TextBoxEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class AddCustCtrl implements Initializable {
 
@@ -64,7 +66,7 @@ public class AddCustCtrl implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Country> countryList = DBCountries.getAllCountries();
         countryCombo.setPromptText("First, select a country.");
-        fldCombo.setPromptText("Second, select a division.");
+        divisionCombo.setPromptText("Second, select a division.");
         countryCombo.setItems(countryList);
     }
 
@@ -81,20 +83,23 @@ public class AddCustCtrl implements Initializable {
         String address = TextBoxEvent.validateString(addrTxt, "Address");
         String postalCode = TextBoxEvent.validateString(postalTxt, "Postal Code");
         String phoneNumber = TextBoxEvent.validateString(phoneTxt, "Phone Number");
-        String country = ComboBoxEvent.validateComboBoxString(countryCombo, "Country", "getCountryName()");
-        int division = ComboBoxEvent.validateComboBoxInt(divisionCombo, "First Level Division", )
 
         // Checks return values for each field to ensure they are valid
-        if (name == null || address == null || postalCode == null || phoneNumber == null || country == null) {
+        if (name == null || address == null || postalCode == null || phoneNumber == null) {
             return;
         }
 
-        int division = fldCombo.getSelectionModel().getSelectedItem().getDivisionId();
-
-        if (country == null || division == 0) {
-            AlertEvent.alertBox("Error Dialog", "You must select both a Country and a First Level Division to proceed.");
+        if (countryCombo.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the Country combo box.");
             return;
         }
+        String country = countryCombo.getSelectionModel().getSelectedItem().getCountryName();
+
+        if (divisionCombo.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the First Level Division combo box.");
+            return;
+        }
+        int division = divisionCombo.getSelectionModel().getSelectedItem().getDivisionId();
 
         DBCustomers.addCustomer(name, address, division, postalCode, phoneNumber);
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
@@ -108,7 +113,7 @@ public class AddCustCtrl implements Initializable {
                 filteredDivisionList.add(d);
             }
         }
-        fldCombo.setItems(filteredDivisionList);
-        fldCombo.setVisibleRowCount(5);
+        divisionCombo.setItems(filteredDivisionList);
+        divisionCombo.setVisibleRowCount(5);
     }
 }

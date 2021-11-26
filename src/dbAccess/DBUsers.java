@@ -12,7 +12,7 @@ public class DBUsers {
         ObservableList<User> ulist =FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT * FROM users";
+            String sql = "SELECT  User_ID, User_Name, Password FROM client_schedule.users;";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
@@ -27,7 +27,6 @@ public class DBUsers {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return ulist;
     }
 }

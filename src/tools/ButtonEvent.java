@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ButtonEvent {
@@ -24,11 +25,12 @@ public class ButtonEvent {
      *  @throws IOException If an input or output exception occurred
      */
     public static void buttonAction(String fileName, String formName, ActionEvent actionEvent) throws IOException {
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow(); //actionEvent.getWindow()
         scene = FXMLLoader.load(ButtonEvent.class.getResource(fileName));
         stage.setTitle(formName);
         stage.setScene(new Scene(scene));
         stage.show();
+        //if you pass a control
     }
 
     public static void cancelButtonAction(String message, String systemMsg, String fileName, String formName, ActionEvent actionEvent) throws IOException {
