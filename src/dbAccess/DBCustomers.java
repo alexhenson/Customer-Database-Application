@@ -65,12 +65,12 @@ public class DBCustomers {
 
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
-            ps.setInt(0, customerId);
             ps.setString(1, customerName);
             ps.setString(2, address);
             ps.setInt(3, division);
             ps.setString(4, postalCode);
             ps.setString(5, phone);
+            ps.setInt(6, customerId);
 
 
             ps.execute();
