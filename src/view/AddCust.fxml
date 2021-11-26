@@ -42,9 +42,9 @@
                   <children>
                       <Label fx:id="idLbl" text="Customer ID" />
                       <Label fx:id="nameLbl" text="Name" GridPane.rowIndex="1" />
-                      <Label fx:id="invLbl" text="Address" GridPane.rowIndex="2" />
-                      <Label fx:id="priceLbl" text="Postal Code" GridPane.rowIndex="3" />
-                      <Label fx:id="maxLbl" text="Phone Number" GridPane.rowIndex="4" />
+                      <Label fx:id="addrLbl" text="Address" GridPane.rowIndex="2" />
+                      <Label fx:id="postalLbl" text="Postal Code" GridPane.rowIndex="3" />
+                      <Label fx:id="phoneLbl" text="Phone Number" GridPane.rowIndex="4" />
                       <TextField fx:id="nameTxt" prefHeight="26.0" prefWidth="98.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                       <TextField fx:id="addrTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                       <TextField fx:id="postalTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />

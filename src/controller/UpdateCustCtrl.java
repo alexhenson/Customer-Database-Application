@@ -1,15 +1,21 @@
 package controller;
 
+import dbAccess.DBCountries;
+import dbAccess.DBCustomers;
+import dbAccess.DBDivisions;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import model.Country;
+import model.Customer;
+import model.FirstLevelDivision;
+import tools.AlertEvent;
 import tools.ButtonEvent;
+import tools.TextBoxEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,92 +24,93 @@ import java.util.ResourceBundle;
 public class UpdateCustCtrl implements Initializable {
 
     @FXML
-    private Button addBtn;
-    @FXML
-    private AnchorPane addCust;
-    @FXML
-    private TableColumn<?, ?> btmApptCustIdCol;
-    @FXML
-    private TableColumn<?, ?> btmApptIdCol;
-    @FXML
-    private TableView<?> btmApptTblView;
-    @FXML
-    private TableColumn<?, ?> btmContactCol;
-    @FXML
-    private TableColumn<?, ?> btmDescCol;
-    @FXML
-    private TableColumn<?, ?> btmEndCol;
-    @FXML
-    private TableColumn<?, ?> btmLocationCol;
-    @FXML
-    private TableColumn<?, ?> btmStartCol;
-    @FXML
-    private TableColumn<?, ?> btmTitleCol;
-    @FXML
-    private TableColumn<?, ?> btmTypeCol;
-    @FXML
-    private TableColumn<?, ?> btmUserIdCol;
-    @FXML
-    private Button cancelBtn;
-    @FXML
-    private Label idLbl;
-    @FXML
-    private TextField idTxt;
-    @FXML
-    private Label invLbl;
-    @FXML
-    private TextField invTxt;
-    @FXML
-    private Label maxLbl;
-    @FXML
-    private TextField maxTxt;
-    @FXML
-    private Label nameLbl;
-    @FXML
-    private TextField nameTxt;
-    @FXML
-    private Label priceLbl;
-    @FXML
-    private TextField priceTxt;
-    @FXML
-    private Button removeBtn;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private TextField searchTxt;
+    private AnchorPane updateCust;
     @FXML
     private Label titleLbl;
     @FXML
-    private TableColumn<?, ?> topApptCustIdCol;
+    private Label idLbl;
     @FXML
-    private TableColumn<?, ?> topApptIdCol;
+    private Label nameLbl;
     @FXML
-    private TableView<?> topApptTblView;
+    private Label addrLbl;
     @FXML
-    private TableColumn<?, ?> topContactCol;
+    private Label postalLbl;
     @FXML
-    private TableColumn<?, ?> topDescCol;
+    private Label phoneLbl;
     @FXML
-    private TableColumn<?, ?> topEndCol;
+    private TextField custIdTxt;
     @FXML
-    private TableColumn<?, ?> topLocationCol;
+    private TextField nameTxt;
     @FXML
-    private TableColumn<?, ?> topStartCol;
+    private TextField addrTxt;
     @FXML
-    private TableColumn<?, ?> topTitleCol;
+    private TextField postalTxt;
     @FXML
-    private TableColumn<?, ?> topTypeCol;
+    private TextField phoneTxt;
     @FXML
-    private TableColumn<?, ?> topUserIdCol;
+    private TextField Txt;
+    @FXML
+    private Label countryLbl;
+    @FXML
+    private Label divisionLbl;
+    @FXML
+    private ComboBox<Country> countryCombo;
+    @FXML
+    private ComboBox<FirstLevelDivision> divisionCombo;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private Button cancelBtn;
+
+    ObservableList<Country> countryList = DBCountries.getAllCountries();
+    ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
+
+    ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        countryCombo.setItems(countryList);
+        divisionCombo.setItems(divisionList);
     }
 
-    @FXML
-    void onActionAdd(ActionEvent event) {
+    public void sendCustomer(Customer cust) {
+        custIdTxt.setText(String.valueOf(cust.getCustomerId()));
+        nameTxt.setText(cust.getCustomerName());
+        addrTxt.setText(cust.getAddress());
+        postalTxt.setText(cust.getPostalCode());
+        phoneTxt.setText(cust.getPhone());
 
+        String country = cust.getCountry();
+        Country selectedCountry = null;
+
+        for (Country c : countryList) {
+            if (country.equals(c.getCountryName())) {
+                selectedCountry = c;
+            }
+        }
+
+        if (selectedCountry == null) {
+            System.out.println("Country object is null for combo box!");
+            return;
+        } else {
+            countryCombo.setValue(selectedCountry);
+        }
+
+        String division = cust.getDivision();
+        FirstLevelDivision selectedDivision = null;
+
+        for (FirstLevelDivision fld : divisionList) {
+            if (division.equals(fld.getDivision())) {
+                selectedDivision = fld;
+            }
+        }
+
+        if (selectedDivision == null) {
+            System.out.println("Division object is null for combo box!");
+            return;
+        } else {
+            divisionCombo.setValue(selectedDivision);
+        }
     }
 
     @FXML
@@ -112,18 +119,48 @@ public class UpdateCustCtrl implements Initializable {
     }
 
     @FXML
-    void onActionRemove(ActionEvent event) {
-
-    }
-
-    @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
+
+        int customerId = Integer.parseInt(custIdTxt.getText());
+        String name = TextBoxEvent.validateString(nameTxt, "Name");
+        String address = TextBoxEvent.validateString(addrTxt, "Address");
+        String postalCode = TextBoxEvent.validateString(postalTxt, "Postal Code");
+        String phoneNumber = TextBoxEvent.validateString(phoneTxt, "Phone Number");
+
+        // Checks return values for each field to ensure they are valid
+        if (name == null || address == null || postalCode == null || phoneNumber == null) {
+            return;
+        }
+
+        if (countryCombo.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the Country combo box.");
+            return;
+        }
+        String country = countryCombo.getSelectionModel().getSelectedItem().getCountryName();
+
+        if (divisionCombo.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the First Level Division combo box.");
+            return;
+        }
+        int divisionId = divisionCombo.getSelectionModel().getSelectedItem().getDivisionId();
+
+        DBCustomers.modifyCustomer(customerId, name, address, divisionId, postalCode, phoneNumber);
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
-    @FXML
-    void onActionSearch(ActionEvent event) {
+    public void onActionCountry(ActionEvent actionEvent) {
+        Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
+        filteredDivisionList.clear();
+        for (FirstLevelDivision d : divisionList) {
+            if (d.getCountryId() == selectedCountry.getCountryId()) {
+                filteredDivisionList.add(d);
+            }
+        }
+        divisionCombo.setItems(filteredDivisionList);
+        divisionCombo.setVisibleRowCount(5);
+    }
 
+    public void onActionDivision(ActionEvent actionEvent) {
     }
 }
