@@ -13,4 +13,11 @@ public class AlertEvent {
         alertAssPart.setContentText(text);
         alertAssPart.showAndWait();
     }
+
+    public static void infoBox(String title, String text) {
+        Alert alertAssPart = new Alert(Alert.AlertType.INFORMATION);
+        alertAssPart.setTitle(title);
+        alertAssPart.setContentText(text);
+        alertAssPart.showAndWait();
+    }
 }

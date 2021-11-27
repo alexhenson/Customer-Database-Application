@@ -97,8 +97,12 @@ public class CustomersCtrl implements Initializable {
                 AlertEvent.alertBox("Error Dialog", "Please select the customer that you want to delete.");
                 return;
             }
-            DBCustomers.deleteCustomer(selectedCust.getCustomerId());
+            int customerId = selectedCust.getCustomerId();
+            String customerName = selectedCust.getCustomerName();
+
+            DBCustomers.deleteCustomer(customerId);
             custTblView.setItems(DBCustomers.getAllCustomers());
+            AlertEvent.infoBox("Info Dialog", "You have deleted " + customerName + " with customer ID# " + customerId);
         }
 
     }
