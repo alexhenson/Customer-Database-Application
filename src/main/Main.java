@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ResourceBundle;
+
 public class Main extends Application {
 
     @Override
@@ -20,5 +22,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         JDBC.openConnection();
         launch(args);
+        ResourceBundle rb = ResourceBundle.getBundle("/resourceBundle/Nat", Locale.FRANCE)
     }
 }
