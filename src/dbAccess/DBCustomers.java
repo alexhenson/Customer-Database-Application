@@ -79,5 +79,17 @@ public class DBCustomers {
             throwables.printStackTrace();
         }
     }
+
+    public static void deleteCustomer(int customerId) {
+        try {
+            String sql = "DELETE FROM client_schedule.customers WHERE Customer_ID = ?;";
+
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, customerId);
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
 

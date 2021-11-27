@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -21,6 +18,7 @@ import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomersCtrl implements Initializable {
@@ -88,6 +86,20 @@ public class CustomersCtrl implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected customer, do you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("Customer delete button clicked");
+            Customer selectedCust = custTblView.getSelectionModel().getSelectedItem();
+
+            if (selectedCust == null) {
+                AlertEvent.alertBox("Error Dialog", "Please select the customer that you want to delete.");
+                return;
+            }
+            DBCustomers.deleteCustomer(selectedCust.getCustomerId());
+            custTblView.setItems(DBCustomers.getAllCustomers());
+        }
 
     }
 
