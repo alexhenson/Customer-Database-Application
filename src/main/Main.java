@@ -15,10 +15,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Locale currentLocale = Locale.getDefault();
-        Locale locale = new Locale("fr");
+        Locale locale = new Locale("en");
 
         ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
+        //Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
+
+        //above is original
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/Login.fxml"));
+
+        //below is original
         primaryStage.setTitle("Login Form");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
