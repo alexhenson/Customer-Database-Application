@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
+
     private int appointmentId;
     private String title;
     private String description;
@@ -15,7 +16,6 @@ public class Appointment {
     private LocalDateTime end;
     private int customerId;
     private int userId;
-
 
     public Appointment(int appointmentId, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId) {
         this.appointmentId = appointmentId;
