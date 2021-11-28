@@ -18,15 +18,10 @@ public class Main extends Application {
         Locale locale = new Locale("en");
 
         ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
-        //Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
-
-        //above is original
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
 
         //below is original
-        primaryStage.setTitle("Login Form");
+        primaryStage.setTitle(rb.getString("primaryStage.setTitle"));
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }

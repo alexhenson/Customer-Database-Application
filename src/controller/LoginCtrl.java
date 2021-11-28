@@ -36,18 +36,13 @@ public class LoginCtrl implements Initializable {
     @FXML
     private Label zoneIdLbl;
 
+    Locale currentLocale = Locale.getDefault();
+    ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("LoginForm is initialized!");
-        /*
-        ZoneId z = ZoneId.of(); //need to figure this out
-        ZonedDateTime zdt = ZonedDateTime.now( z ) ; // Capture the current moment as seen through the wall-clock time used by the people of a particular region (a time zone).
-        Instant instant = zdt.toInstant() ;  // Adjust from a zone to UTC, if needed. An `Instant` is always in UTC by definition.         Locale loc = Locale.getDefault();
-        DateTimeFormatter format = DateTimeFormatter.ofLocalizedDateTime( FormatStyle.FULL ).withLocale(loc);
 
-        String zoneId = String.valueOf(ZonedDateTime.now().getZone());
-        String output = zoneId.format(String.valueOf(format));
-         */
         String zoneId = String.valueOf(ZonedDateTime.now().getZone());
         zoneIdLbl.setText("[" + zoneId + "]");
     }
@@ -77,6 +72,6 @@ public class LoginCtrl implements Initializable {
                 return;
             }
         }
-        AlertEvent.alertBox("Error Dialog", "Please enter a valid username and password.");
+        AlertEvent.alertBox(rb.getString("alertBox.title"), rb.getString("alertBox.text"));
     }
 }
