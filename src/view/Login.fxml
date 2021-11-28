@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginCtrl">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginCtrl">
     <children>
         <VBox alignment="CENTER" layoutX="159.0" prefHeight="400.0" prefWidth="310.0" spacing="10.0">
             <children>
-                <Label fx:id="loginLbl" contentDisplay="CENTER" text="Log-in Form" textAlignment="CENTER">
+                <Label fx:id="loginLbl" contentDisplay="CENTER" text="%label" textAlignment="CENTER">
                     <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                     </font>
                 </Label>
-                <TextField fx:id="usernameTxt" alignment="CENTER" onAction="#onActionUsername" promptText="Username" />
-                <TextField fx:id="passwordTxt" alignment="CENTER" onAction="#onActionPassword" promptText="Password" />
-                <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#onActionSubmit" prefHeight="49.0" prefWidth="94.0" text="Submit">
+                <TextField fx:id="usernameTxt" alignment="CENTER" onAction="#onActionUsername" promptText="%username" />
+                <TextField fx:id="passwordTxt" alignment="CENTER" onAction="#onActionPassword" promptText="%password" />
+                <Button fx:id="submitBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionSubmit" prefHeight="88.0" prefWidth="132.0" text="%submit" textAlignment="CENTER">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                     </font></Button>
-                <Label fx:id="zoneIdLbl" text="Zone Id" />
+                <Label fx:id="zoneIdLbl" text="Zone ID" />
             </children>
         </VBox>
     </children>

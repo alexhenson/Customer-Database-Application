@@ -7,13 +7,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        Locale currentLocale = Locale.getDefault();
+        Locale locale = new Locale("fr");
+
+        ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
         primaryStage.setTitle("Login Form");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
@@ -22,6 +27,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         JDBC.openConnection();
         launch(args);
-        ResourceBundle rb = ResourceBundle.getBundle("/resourceBundle/Nat", Locale.FRANCE)
     }
 }

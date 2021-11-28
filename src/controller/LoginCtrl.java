@@ -15,7 +15,13 @@ import tools.TextBoxEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.IllformedLocaleException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginCtrl implements Initializable {
@@ -33,6 +39,15 @@ public class LoginCtrl implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("LoginForm is initialized!");
+        /*
+        ZoneId z = ZoneId.of(); //need to figure this out
+        ZonedDateTime zdt = ZonedDateTime.now( z ) ; // Capture the current moment as seen through the wall-clock time used by the people of a particular region (a time zone).
+        Instant instant = zdt.toInstant() ;  // Adjust from a zone to UTC, if needed. An `Instant` is always in UTC by definition.         Locale loc = Locale.getDefault();
+        DateTimeFormatter format = DateTimeFormatter.ofLocalizedDateTime( FormatStyle.FULL ).withLocale(loc);
+
+        String zoneId = String.valueOf(ZonedDateTime.now().getZone());
+        String output = zoneId.format(String.valueOf(format));
+         */
         String zoneId = String.valueOf(ZonedDateTime.now().getZone());
         zoneIdLbl.setText("[" + zoneId + "]");
     }
