@@ -40,8 +40,30 @@ public class DBAppointments {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return alist;
+    }
+
+    public static void addAppointment(String title,String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId) {
+        try {
+            String sql = "INSERT INTO client_schedule.appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) \n" +
+                    "VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, description);
+            ps.setString(3, location);
+            ps.setString(4, type);
+            ps.setTimestamp(5, start);
+            ps.setTimestamp(6, end);
+            ps.setInt(7, customerId);
+            ps.setInt(8, userId);
+            ps.setInt(9, contactId);
+
+            ps.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }
 
