@@ -4,7 +4,10 @@ import dbAccess.DBAppointments;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -12,7 +15,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import model.Appointment;
+import tools.AlertEvent;
 import tools.ButtonEvent;
 
 import java.io.IOException;
@@ -102,7 +107,24 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     void onActionUpdate(ActionEvent event) throws IOException {
         System.out.println("Update button clicked!");
-        ButtonEvent.buttonAction("/view/UpdateAppt.fxml", "Update Appointment Table", event);
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getResource("/view/UpdateAppt.fxml"));
+        loader.load();
+
+        UpdateApptCtrl UApptController = loader.getController();
+
+        if (apptTblView.getSelectionModel().getSelectedItem() == null) {
+            System.out.println("Selected appointment was null.");
+            AlertEvent.alertBox("Error Dialog", "Please select an appointment to update.");
+            return;
+        }
+
+        UApptController.sendAppointment(apptTblView.getSelectionModel().getSelectedItem());
+        CustomersCtrl.stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        CustomersCtrl.stage.setScene(new Scene(scene));
+        CustomersCtrl.stage.show();
     }
 
     @FXML
