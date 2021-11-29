@@ -1,7 +1,9 @@
 package controller;
 
 import dbAccess.DBContacts;
+import dbAccess.DBCustomers;
 import dbAccess.DBDivisions;
+import dbAccess.DBUsers;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import model.Appointment;
-import model.Contact;
-import model.FirstLevelDivision;
+import model.*;
 import tools.ButtonEvent;
 
 import java.io.IOException;
@@ -30,11 +30,11 @@ public class AddApptCtrl implements Initializable {
     @FXML
     private Button cancelBtn;
     @FXML
-    private ComboBox<?> contactCombo;
+    private ComboBox<Contact> contactCombo;
     @FXML
     private Label contactLbl;
     @FXML
-    private ComboBox<?> custIdCombo;
+    private ComboBox<Customer> custIdCombo;
     @FXML
     private Label descLbl;
     @FXML
@@ -64,18 +64,27 @@ public class AddApptCtrl implements Initializable {
     @FXML
     private TextField titleTxt;
     @FXML
-    private ComboBox<?> typeCombo;
+    private ComboBox<String> typeCombo;
     @FXML
     private Label typeLbl;
     @FXML
-    private ComboBox<?> userIdCombo;
+    private ComboBox<User> userIdCombo;
 
     ObservableList<String> typeList = Appointment.getTypeList();
     ObservableList<Contact> contactList = DBContacts.getAllContacts();
+    ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
+    ObservableList<User> userList = DBUsers.getAllUsers();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        userIdCombo.setPromptText("User ID");
+        contactCombo.setPromptText("Contact Name");
+        typeCombo.setPromptText("Meeting Type");
+        custIdCombo.setPromptText("Customer ID");
+        userIdCombo.setItems(userList);
+        contactCombo.setItems(contactList);
+        typeCombo.setItems(typeList);
+        custIdCombo.setItems(customerList);
     }
 
     @FXML
