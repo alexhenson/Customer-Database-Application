@@ -1,10 +1,15 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
+
+    private static ObservableList<String> typeList = FXCollections.observableArrayList();
 
     private int appointmentId;
     private String title;
@@ -28,6 +33,14 @@ public class Appointment {
         this.end = end;
         this.customerId = customerId;
         this.userId = userId;
+    }
+
+    public static ObservableList<String> getTypeList() {
+        return typeList;
+    }
+
+    public static void setTypeList(ObservableList<String> typeList) {
+        Appointment.typeList = typeList;
     }
 
     public int getAppointmentId() {

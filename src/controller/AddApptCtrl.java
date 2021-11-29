@@ -1,5 +1,8 @@
 package controller;
 
+import dbAccess.DBContacts;
+import dbAccess.DBDivisions;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +12,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Appointment;
+import model.Contact;
+import model.FirstLevelDivision;
 import tools.ButtonEvent;
 
 import java.io.IOException;
@@ -63,6 +69,9 @@ public class AddApptCtrl implements Initializable {
     private Label typeLbl;
     @FXML
     private ComboBox<?> userIdCombo;
+
+    ObservableList<String> typeList = Appointment.getTypeList();
+    ObservableList<Contact> contactList = DBContacts.getAllContacts();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
