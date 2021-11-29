@@ -1,6 +1,7 @@
 package controller;
 
 import dbAccess.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,10 @@ import tools.TextBoxEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddApptCtrl implements Initializable {
@@ -39,9 +44,7 @@ public class AddApptCtrl implements Initializable {
     @FXML
     private TextField descTxt;
     @FXML
-    private DatePicker endDatePkr;
-    @FXML
-    private ComboBox<?> endTimeCombo;
+    private ComboBox<LocalTime> endTimeCombo;
     @FXML
     private Label idLbl;
     @FXML
@@ -55,9 +58,9 @@ public class AddApptCtrl implements Initializable {
     @FXML
     private Button saveBtn;
     @FXML
-    private DatePicker startDatePkr;
+    private DatePicker datePkr;
     @FXML
-    private ComboBox<?> startTimeCombo;
+    private ComboBox<LocalTime> startTimeCombo;
     @FXML
     private Label titleLbl;
     @FXML
@@ -73,6 +76,8 @@ public class AddApptCtrl implements Initializable {
     ObservableList<Contact> contactList = DBContacts.getAllContacts();
     ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
     ObservableList<User> userList = DBUsers.getAllUsers();
+    ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
+    ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,10 +85,23 @@ public class AddApptCtrl implements Initializable {
         contactCombo.setPromptText("Contact Name");
         typeCombo.setPromptText("Meeting Type");
         custIdCombo.setPromptText("Customer ID");
+        startTimeCombo.setPromptText("First, Start Time");
+        endTimeCombo.setPromptText("Then, End Time");
+        datePkr.setPromptText("Appointment Date");
         userIdCombo.setItems(userList);
         contactCombo.setItems(contactList);
         typeCombo.setItems(typeList);
         custIdCombo.setItems(customerList);
+
+        LocalTime start = LocalTime.of(9,0);
+        LocalTime end = LocalTime.of(17,0);
+
+        while (start.isBefore(end.plusSeconds(1))) {
+            startTimeList.add(start);
+            //startTimeCombo.getItems().add(start);
+            start = start.plusMinutes(30);
+        }
+        startTimeCombo.setItems(startTimeList);
     }
 
     @FXML
@@ -123,7 +141,29 @@ public class AddApptCtrl implements Initializable {
         }
         String type = typeCombo.getSelectionModel().getSelectedItem();
 
-        //need to combine date and time into datetime objects
+        if (datePkr.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the Date picker box.");
+            return;
+        }
+        LocalDate date = datePkr.getValue();
+
+        if (startTimeCombo.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the Start Time combo box.");
+            return;
+        }
+        LocalTime startTime = startTimeCombo.getSelectionModel().getSelectedItem();
+
+        if (endTimeCombo.getValue() == null) {
+            AlertEvent.alertBox("Error Dialog", "Please select a value for the End Time combo box.");
+            return;
+        }
+        LocalTime endTime = endTimeCombo.getSelectionModel().getSelectedItem();
+
+        LocalDateTime localStart = LocalDateTime.of(date, startTime);
+        LocalDateTime localEnd = LocalDateTime.of(date, endTime);
+
+        Timestamp start = Timestamp.valueOf(localStart);
+        Timestamp end = Timestamp.valueOf(localEnd);
 
         DBAppointments.addAppointment(title, description, location, type, start, end, custId, userId, contactId);
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
@@ -132,6 +172,20 @@ public class AddApptCtrl implements Initializable {
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         ButtonEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table",event);
+    }
+
+    public void onActionStartTime(ActionEvent actionEvent) {
+        LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
+        endTimeList.clear();
+        LocalTime start = selectedStartTime.plusMinutes(30);
+        LocalTime end = LocalTime.of(17,0);
+
+        while (start.isBefore(end.plusSeconds(1))) {
+            endTimeList.add(start);
+            start = start.plusMinutes(30);
+        }
+        endTimeCombo.setItems(endTimeList);
+        endTimeCombo.setPromptText("Select End Time");
     }
 }
 
