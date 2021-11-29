@@ -1,6 +1,8 @@
 package controller;
 
-import dbAccess.DBAppointments;
+import dbAccess.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -72,9 +74,28 @@ public class UpdateApptCtrl implements Initializable {
     @FXML
     private ComboBox<User> userIdCombo;
 
+    ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
+    ObservableList<User> userList = DBUsers.getAllUsers();
+    ObservableList<Contact> contactList = DBContacts.getAllContacts();
+    ObservableList<String> typeList = Appointment.getTypeList();
+    ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
+    ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userIdCombo.setItems(userList);
+        contactCombo.setItems(contactList);
+        typeCombo.setItems(typeList);
+        custIdCombo.setItems(customerList);
 
+        LocalTime start = LocalTime.of(9,0);
+        LocalTime end = LocalTime.of(17,0);
+
+        while (start.isBefore(end.plusSeconds(1))) {
+            startTimeList.add(start);
+            start = start.plusMinutes(30);
+        }
+        startTimeCombo.setItems(startTimeList);
     }
 
     public void sendAppointment(Appointment appt) {
@@ -86,7 +107,7 @@ public class UpdateApptCtrl implements Initializable {
         String type = appt.getType();
 
         if (type == null) {
-            System.out.println("Country object is null for combo box!");
+            System.out.println("Type object is null for combo box!");
             return;
         } else {
             typeCombo.setValue(type);

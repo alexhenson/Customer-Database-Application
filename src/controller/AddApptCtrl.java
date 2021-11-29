@@ -98,7 +98,6 @@ public class AddApptCtrl implements Initializable {
 
         while (start.isBefore(end.plusSeconds(1))) {
             startTimeList.add(start);
-            //startTimeCombo.getItems().add(start);
             start = start.plusMinutes(30);
         }
         startTimeCombo.setItems(startTimeList);
