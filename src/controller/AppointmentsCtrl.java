@@ -162,9 +162,8 @@ public class AppointmentsCtrl implements Initializable {
         ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
 
         for (Appointment a : apptList) {
-            //if (a.getStart().toLocalDate() ) //need to figure out how to filter by month
+            if (a.getStart().toLocalDate() ) //need to figure out how to filter by month
         }
-
         apptTblView.setItems(apptMonthList);
     }
 

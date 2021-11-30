@@ -6,11 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import model.*;
 import tools.AlertEvent;
@@ -184,7 +180,7 @@ public class AddApptCtrl implements Initializable {
             start = start.plusMinutes(30);
         }
         endTimeCombo.setItems(endTimeList);
-        endTimeCombo.setPromptText("Select End Time");
+        endTimeCombo.setValue(selectedStartTime.plusMinutes(30));
     }
 }
 
