@@ -2,6 +2,7 @@ package controller;
 
 import dbAccess.DBAppointments;
 import dbAccess.DBCustomers;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,9 +72,10 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private RadioButton weekRBtn;
 
+    ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
         apptTblView.setItems(apptList);
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -89,7 +91,7 @@ public class AppointmentsCtrl implements Initializable {
 
     @FXML
     void onActionAll(ActionEvent event) {
-
+        apptTblView.setItems(DBAppointments.getAllAppointments());
     }
 
     @FXML
@@ -157,7 +159,13 @@ public class AppointmentsCtrl implements Initializable {
 
     @FXML
     void onActionMonth(ActionEvent event) {
+        ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
 
+        for (Appointment a : apptList) {
+            //if (a.getStart().toLocalDate() ) //need to figure out how to filter by month
+        }
+
+        apptTblView.setItems(apptMonthList);
     }
 
     @FXML
