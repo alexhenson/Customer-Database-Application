@@ -6,6 +6,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="appointments" prefHeight="450.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsCtrl">
+<AnchorPane fx:id="appointments" prefHeight="450.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsCtrl">
     <children>
         <VBox alignment="CENTER" prefHeight="450.0" prefWidth="1200.0" spacing="20.0">
             <children>
@@ -26,9 +27,12 @@
                 </Label>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                     <children>
-                        <RadioButton fx:id="weekRBtn" layoutX="731.0" layoutY="24.0" mnemonicParsing="false" onAction="#onActionWeek" text="View by Week" />
-                        <RadioButton fx:id="monthRBtn" layoutX="549.0" layoutY="24.0" mnemonicParsing="false" onAction="#onActionMonth" text="View by Month" />
-                        <RadioButton fx:id="allRBtn" layoutX="400.0" layoutY="24.0" mnemonicParsing="false" onAction="#onActionAll" text="View All" />
+                        <RadioButton fx:id="weekRBtn" layoutX="731.0" layoutY="24.0" mnemonicParsing="false" onAction="#onActionWeek" text="View by Week">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="viewTG" />
+                     </toggleGroup></RadioButton>
+                        <RadioButton fx:id="monthRBtn" layoutX="549.0" layoutY="24.0" mnemonicParsing="false" onAction="#onActionMonth" text="View by Month" toggleGroup="$viewTG" />
+                        <RadioButton fx:id="allRBtn" layoutX="400.0" layoutY="24.0" mnemonicParsing="false" onAction="#onActionAll" selected="true" text="View All" toggleGroup="$viewTG" />
                     </children>
                 </AnchorPane>
                 <GridPane alignment="CENTER" maxWidth="1150.0" minWidth="1150.0" prefHeight="380" prefWidth="1150.0">

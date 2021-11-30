@@ -21,7 +21,10 @@ import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -73,6 +76,11 @@ public class AppointmentsCtrl implements Initializable {
     private RadioButton weekRBtn;
 
     ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
+
+    LocalDate currentDate = LocalDate.now();
+    Month currentMonth = currentDate.getMonth();
+    LocalDate currentDay = currentDate;
+    LocalDate nextWeekDay = currentDate.plusDays(7);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -160,9 +168,10 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     void onActionMonth(ActionEvent event) {
         ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
-
         for (Appointment a : apptList) {
-            if (a.getStart().toLocalDate() ) //need to figure out how to filter by month
+            if (currentMonth.equals(a.getStart().getMonth())) {
+                apptMonthList.add(a);
+            }
         }
         apptTblView.setItems(apptMonthList);
     }
@@ -174,6 +183,13 @@ public class AppointmentsCtrl implements Initializable {
 
     @FXML
     void onActionWeek(ActionEvent event) {
-
+        ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
+        for (Appointment a : apptList) {
+            LocalDate apptDate = a.getStart().toLocalDate();
+            if ((apptDate.isAfter(currentDay) || apptDate.isEqual(currentDay)) && (apptDate.isBefore(nextWeekDay) || apptDate.isEqual(nextWeekDay))) {
+                apptWeekList.add(a);
+            }
+        }
+        apptTblView.setItems(apptWeekList);
     }
 }
