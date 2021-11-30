@@ -113,20 +113,73 @@ public class UpdateApptCtrl implements Initializable {
             typeCombo.setValue(type);
         }
 
-        String division = cust.getDivision();
-        FirstLevelDivision selectedDivision = null;
+        String contact = appt.getContact();
+        Contact selectedContact = null;
 
-        for (FirstLevelDivision fld : divisionList) {
-            if (division.equals(fld.getDivision())) {
-                selectedDivision = fld;
+        for (Contact c : contactList) {
+            if (contact.equals(c.getContactName())) {
+                selectedContact = c;
             }
         }
 
-        if (selectedDivision == null) {
-            System.out.println("Division object is null for combo box!");
+        if (selectedContact == null) {
+            System.out.println("Contact object is null for combo box!");
             return;
         } else {
-            divisionCombo.setValue(selectedDivision);
+            contactCombo.setValue(selectedContact);
+        }
+
+        int customerId = appt.getCustomerId();
+        Customer selectedCustomer = null;
+
+        for (Customer c : customerList) {
+            if (customerId == c.getCustomerId()) {
+                selectedCustomer = c;
+            }
+        }
+
+        if (selectedCustomer == null) {
+            System.out.println("Customer object is null for combo box!");
+            return;
+        } else {
+            custIdCombo.setValue(selectedCustomer);
+        }
+
+        int userId = appt.getUserId();
+        User selectedUser = null;
+
+        for (User u : userList) {
+            if (userId == u.getUserId()) {
+                selectedUser = u;
+            }
+        }
+
+        if (selectedUser == null) {
+            System.out.println("User object is null for combo box!");
+            return;
+        } else {
+            userIdCombo.setValue(selectedUser);
+        }
+
+        LocalDateTime start = appt.getStart();
+        LocalDateTime end = appt.getEnd();
+        LocalDate selectedDate = start.toLocalDate();
+        LocalTime selectedStartTime = start.toLocalTime();
+        LocalTime selectedEndTime = end.toLocalTime();
+
+        if (selectedDate == null) {
+            System.out.println("Date object is null for date picker!");
+            return;
+        } else if (selectedStartTime == null) {
+            System.out.println("Start time object is null for combo box!");
+            return;
+        } else if (selectedEndTime == null) {
+            System.out.println("End time object is null for combo box!");
+            return;
+        } else {
+            datePkr.setValue(selectedDate);
+            startTimeCombo.setValue(selectedStartTime);
+            endTimeCombo.setValue(selectedEndTime);
         }
     }
 
@@ -138,6 +191,7 @@ public class UpdateApptCtrl implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
+        int appointmentId = Integer.parseInt(idTxt.getText());
         String title = TextBoxEvent.validateString(titleTxt, "Title");
         String description = TextBoxEvent.validateString(descTxt, "Description");
         String location = TextBoxEvent.validateString(locationTxt, "Location");
@@ -195,11 +249,22 @@ public class UpdateApptCtrl implements Initializable {
         Timestamp start = Timestamp.valueOf(localStart);
         Timestamp end = Timestamp.valueOf(localEnd);
 
-        DBAppointments.addAppointment(title, description, location, type, start, end, custId, userId, contactId);
+        DBAppointments.updateAppointment(appointmentId, title, description, location, type, start, end, custId, userId, contactId);
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
     }
 
     public void onActionStartTime(ActionEvent actionEvent) {
+        LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
+        endTimeList.clear();
+        LocalTime start = selectedStartTime.plusMinutes(30);
+        LocalTime end = LocalTime.of(17,0);
+
+        while (start.isBefore(end.plusSeconds(1))) {
+            endTimeList.add(start);
+            start = start.plusMinutes(30);
+        }
+        endTimeCombo.setItems(endTimeList);
+        endTimeCombo.setValue(selectedStartTime.plusMinutes(30));
     }
 }
 

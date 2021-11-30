@@ -145,7 +145,7 @@ public class UpdateCustCtrl implements Initializable {
         }
         int divisionId = divisionCombo.getSelectionModel().getSelectedItem().getDivisionId();
 
-        DBCustomers.modifyCustomer(customerId, name, address, divisionId, postalCode, phoneNumber);
+        DBCustomers.updateCustomer(customerId, name, address, divisionId, postalCode, phoneNumber);
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 

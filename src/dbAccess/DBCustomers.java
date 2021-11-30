@@ -57,7 +57,7 @@ public class DBCustomers {
         }
     }
 
-    public static void modifyCustomer(int customerId, String customerName, String address, int division, String postalCode, String phone) {
+    public static void updateCustomer(int customerId, String customerName, String address, int division, String postalCode, String phone) {
         try {
             String sql = "UPDATE client_schedule.customers \n" +
                     "SET Customer_Name = ?, Address = ?, Division_ID = ?, Postal_Code = ?, Phone = ?\n" +

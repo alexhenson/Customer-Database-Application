@@ -104,7 +104,6 @@ public class CustomersCtrl implements Initializable {
             custTblView.setItems(DBCustomers.getAllCustomers());
             AlertEvent.infoBox("Info Dialog", "You have deleted " + customerName + " with customer ID# " + customerId);
         }
-
     }
 
     @FXML

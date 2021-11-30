@@ -1,6 +1,7 @@
 package controller;
 
 import dbAccess.DBAppointments;
+import dbAccess.DBCustomers;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,21 +9,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.Customer;
 import tools.AlertEvent;
 import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentsCtrl implements Initializable {
@@ -101,7 +100,24 @@ public class AppointmentsCtrl implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected appointment, do you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("Appointment delete button clicked");
+            Appointment selectedAppt = apptTblView.getSelectionModel().getSelectedItem();
+
+            if (selectedAppt == null) {
+                AlertEvent.alertBox("Error Dialog", "Please select the appointment that you want to delete.");
+                return;
+            }
+            int appointmentId = selectedAppt.getAppointmentId();
+            String type = selectedAppt.getType();
+
+            DBAppointments.deleteAppointment(appointmentId);
+            apptTblView.setItems(DBAppointments.getAllAppointments());
+            AlertEvent.infoBox("Info Dialog", "You have canceled a(n) " + type + " with Appointment ID# " + appointmentId);
+        }
     }
 
     @FXML
