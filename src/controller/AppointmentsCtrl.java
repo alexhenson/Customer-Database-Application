@@ -21,10 +21,7 @@ import tools.ButtonEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -81,6 +78,11 @@ public class AppointmentsCtrl implements Initializable {
     Month currentMonth = currentDate.getMonth();
     LocalDate currentDay = currentDate;
     LocalDate nextWeekDay = currentDate.plusDays(7);
+
+    LocalTime openingHour = LocalTime.of(8,0);
+    LocalTime closingHour = LocalTime.of(22,0);
+    ZoneId etZoneId = ZoneId.of("America/New_York");
+    ZonedDateTime etZDT = ZonedDateTime.of(currentDate, openingHour, etZoneId);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
