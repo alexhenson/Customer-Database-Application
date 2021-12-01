@@ -15,9 +15,10 @@ public class DBAppointments {
         ObservableList<Appointment> alist =FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT Appointment_ID, Title, Description, Location, Contact_Name, Type, Start, End, Customer_ID, User_ID \n" +
-                         "FROM client_schedule.appointments a \n" +
-                         "JOIN client_schedule.contacts c ON a.Contact_ID = c.Contact_ID;";
+            String sql = "SELECT Appointment_ID, Title, Description, Location, Contact_Name, Type, Start, End, Customer_ID, User_ID " +
+                         "FROM client_schedule.appointments a " +
+                         "JOIN client_schedule.contacts c ON a.Contact_ID = c.Contact_ID " +
+                         "ORDER BY Appointment_ID ASC";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();

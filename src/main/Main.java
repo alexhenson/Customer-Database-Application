@@ -20,7 +20,7 @@ public class Main extends Application {
         Locale currentLocale = Locale.getDefault();
         Locale locale = new Locale("en");
 
-        ResourceBundle rb = ResourceBundle.getBundle("Nat", locale);
+        ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
         Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
 
         //below is original

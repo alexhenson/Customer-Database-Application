@@ -50,7 +50,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private TableColumn<Appointment, String> descCol;
     @FXML
-    private TableColumn<Appointment, LocalDateTime> endDateTimeCol;
+    private TableColumn<Appointment, String> endDateTimeCol;
     @FXML
     private TableColumn<Appointment, String> locationCol;
     @FXML
@@ -60,7 +60,7 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private Button reportsBtn;
     @FXML
-    private TableColumn<Appointment, LocalDateTime> startDateTimeCol;
+    private TableColumn<Appointment, String> startDateTimeCol;
     @FXML
     private TableColumn<Appointment, String> titleCol;
     @FXML
@@ -84,6 +84,10 @@ public class AppointmentsCtrl implements Initializable {
     ZoneId etZoneId = ZoneId.of("America/New_York");
     ZonedDateTime etZDT = ZonedDateTime.of(currentDate, openingHour, etZoneId);
 
+    /*
+    Turn 8:00am 10pm ET to Local date time.  Use saturday and Sunday.
+     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         apptTblView.setItems(apptList);
@@ -93,7 +97,7 @@ public class AppointmentsCtrl implements Initializable {
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("start"));  //get method (start method, "get" will be prepended) getStartFormatted (in appointment class)
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startString"));  //get method (start method, "get" will be prepended) getStartFormatted (in appointment class)
         endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));

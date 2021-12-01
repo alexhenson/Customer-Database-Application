@@ -29,8 +29,8 @@ public class ButtonEvent {
         scene = FXMLLoader.load(ButtonEvent.class.getResource(fileName));
         stage.setTitle(formName);
         stage.setScene(new Scene(scene));
+        stage.centerOnScreen();
         stage.show();
-        //if you pass a control
     }
 
     public static void cancelButtonAction(String message, String systemMsg, String fileName, String formName, ActionEvent actionEvent) throws IOException {

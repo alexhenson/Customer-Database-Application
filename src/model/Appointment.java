@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
@@ -89,6 +91,16 @@ public class Appointment {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getStartString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
+
+        ZonedDateTime startZDT = start.atZone(ZoneId.systemDefault());
+
+        String str = startZDT.format(formatter);
+        System.out.println("start = " + str);
+        return startZDT.format(formatter);
     }
 
     public LocalDateTime getStart() {

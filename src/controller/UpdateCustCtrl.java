@@ -67,13 +67,16 @@ public class UpdateCustCtrl implements Initializable {
 
     ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
 
+    private Customer selectedCustomer;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryCombo.setItems(countryList);
-        divisionCombo.setItems(divisionList);
+
     }
 
     public void sendCustomer(Customer cust) {
+        selectedCustomer = cust;
         custIdTxt.setText(String.valueOf(cust.getCustomerId()));
         nameTxt.setText(cust.getCustomerName());
         addrTxt.setText(cust.getAddress());
@@ -95,6 +98,9 @@ public class UpdateCustCtrl implements Initializable {
         } else {
             countryCombo.setValue(selectedCountry);
         }
+
+        filterDivisions(selectedCountry);
+        divisionCombo.setItems(filteredDivisionList);
 
         String division = cust.getDivision();
         FirstLevelDivision selectedDivision = null;
@@ -151,9 +157,16 @@ public class UpdateCustCtrl implements Initializable {
 
     public void onActionCountry(ActionEvent actionEvent) {
         Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
+        filterDivisions(selectedCountry);
+    }
+
+    public void onActionDivision(ActionEvent actionEvent) {
+    }
+
+    public void filterDivisions(Country country) {
         filteredDivisionList.clear();
         for (FirstLevelDivision d : divisionList) {
-            if (d.getCountryId() == selectedCountry.getCountryId()) {
+            if (d.getCountryId() == country.getCountryId()) {
                 filteredDivisionList.add(d);
             }
         }
@@ -161,6 +174,5 @@ public class UpdateCustCtrl implements Initializable {
         divisionCombo.setVisibleRowCount(5);
     }
 
-    public void onActionDivision(ActionEvent actionEvent) {
-    }
+
 }
