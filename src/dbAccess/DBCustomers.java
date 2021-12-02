@@ -12,10 +12,11 @@ public class DBCustomers {
         ObservableList<Customer> clist =FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT Customer_ID, Customer_Name, Address, Division, Postal_Code, Country, Phone \n" +
-                         "FROM client_schedule.customers cu \n" +
-                         "JOIN client_schedule.first_level_divisions f ON cu.Division_ID = f.Division_ID\n" +
-                         "JOIN client_schedule.countries co ON co.Country_ID = f.Country_ID;";
+            String sql = "SELECT Customer_ID, Customer_Name, Address, Division, Postal_Code, Country, Phone " +
+                         "FROM client_schedule.customers cu " +
+                         "JOIN client_schedule.first_level_divisions f ON cu.Division_ID = f.Division_ID " +
+                         "JOIN client_schedule.countries co ON co.Country_ID = f.Country_ID " +
+                         "ORDER BY Customer_ID ASC";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
