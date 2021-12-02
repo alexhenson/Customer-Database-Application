@@ -95,11 +95,7 @@ public class Appointment {
 
     public String getStartString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
-
         ZonedDateTime startZDT = start.atZone(ZoneId.systemDefault());
-
-        String str = startZDT.format(formatter);
-        System.out.println("start = " + str);
         return startZDT.format(formatter);
     }
 
@@ -109,6 +105,12 @@ public class Appointment {
 
     public void setStart(LocalDateTime start) {
         this.start = start;
+    }
+
+    public String getEndString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
+        ZonedDateTime endZDT = end.atZone(ZoneId.systemDefault());
+        return endZDT.format(formatter);
     }
 
     public LocalDateTime getEnd() {

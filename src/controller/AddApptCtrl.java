@@ -12,6 +12,7 @@ import model.*;
 import tools.AlertEvent;
 import tools.ButtonEvent;
 import tools.TextBoxEvent;
+import tools.TimeHelper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,12 +90,14 @@ public class AddApptCtrl implements Initializable {
         typeCombo.setItems(typeList);
         custIdCombo.setItems(customerList);
 
-        LocalTime start = LocalTime.of(9,0);
-        LocalTime end = LocalTime.of(17,0);
+        LocalTime start = TimeHelper.etLocalOpen.toLocalTime();
+        LocalTime end = TimeHelper.etLocalClose.toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
             startTimeList.add(start);
             start = start.plusMinutes(30);
+
+
         }
         startTimeCombo.setItems(startTimeList);
     }
@@ -172,12 +175,13 @@ public class AddApptCtrl implements Initializable {
     public void onActionStartTime(ActionEvent actionEvent) {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
         endTimeList.clear();
-        LocalTime start = selectedStartTime.plusMinutes(30);
-        LocalTime end = LocalTime.of(17,0);
+
+        LocalTime start = selectedStartTime;
+        LocalTime end = TimeHelper.etLocalClose.toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
-            endTimeList.add(start);
             start = start.plusMinutes(30);
+            endTimeList.add(start);
         }
         endTimeCombo.setItems(endTimeList);
         endTimeCombo.setValue(selectedStartTime.plusMinutes(30));

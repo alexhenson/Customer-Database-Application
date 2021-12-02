@@ -18,6 +18,7 @@ import model.Appointment;
 import model.Customer;
 import tools.AlertEvent;
 import tools.ButtonEvent;
+import tools.TimeHelper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,20 +75,6 @@ public class AppointmentsCtrl implements Initializable {
 
     ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
 
-    LocalDate currentDate = LocalDate.now();
-    Month currentMonth = currentDate.getMonth();
-    LocalDate currentDay = currentDate;
-    LocalDate nextWeekDay = currentDate.plusDays(7);
-
-    LocalTime openingHour = LocalTime.of(8,0);
-    LocalTime closingHour = LocalTime.of(22,0);
-    ZoneId etZoneId = ZoneId.of("America/New_York");
-    ZonedDateTime etZDT = ZonedDateTime.of(currentDate, openingHour, etZoneId);
-
-    /*
-    Turn 8:00am 10pm ET to Local date time.  Use saturday and Sunday.
-     */
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         apptTblView.setItems(apptList);
@@ -97,8 +84,8 @@ public class AppointmentsCtrl implements Initializable {
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startString"));  //get method (start method, "get" will be prepended) getStartFormatted (in appointment class)
-        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        startDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startString"));
+        endDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endString"));
         apptCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
@@ -175,7 +162,7 @@ public class AppointmentsCtrl implements Initializable {
     void onActionMonth(ActionEvent event) {
         ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
         for (Appointment a : apptList) {
-            if (currentMonth.equals(a.getStart().getMonth())) {
+            if (TimeHelper.currentMonth.equals(a.getStart().getMonth())) {
                 apptMonthList.add(a);
             }
         }
@@ -192,7 +179,7 @@ public class AppointmentsCtrl implements Initializable {
         ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
         for (Appointment a : apptList) {
             LocalDate apptDate = a.getStart().toLocalDate();
-            if ((apptDate.isAfter(currentDay) || apptDate.isEqual(currentDay)) && (apptDate.isBefore(nextWeekDay) || apptDate.isEqual(nextWeekDay))) {
+            if ((apptDate.isAfter(TimeHelper.currentDay) || apptDate.isEqual(TimeHelper.currentDay)) && (apptDate.isBefore(TimeHelper.nextWeekDay) || apptDate.isEqual(TimeHelper.nextWeekDay))) {
                 apptWeekList.add(a);
             }
         }
