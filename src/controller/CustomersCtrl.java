@@ -1,5 +1,6 @@
 package controller;
 
+import dbAccess.DBAppointments;
 import dbAccess.DBCustomers;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Customer;
 import tools.AlertEvent;
 import tools.ButtonEvent;
@@ -97,6 +99,16 @@ public class CustomersCtrl implements Initializable {
                 AlertEvent.alertBox("Error Dialog", "Please select the customer that you want to delete.");
                 return;
             }
+
+            ObservableList<Appointment> appointmentList = DBAppointments.getAllAppointments();
+
+            for (Appointment a : appointmentList) {
+                if (a.getCustomerId() == selectedCust.getCustomerId()) {
+                    AlertEvent.alertBox("Error Dialog", "You must delete all appointments associated with customer ID: " + selectedCust.getCustomerId() + " first.");
+                    return;
+                }
+            }
+
             int customerId = selectedCust.getCustomerId();
             String customerName = selectedCust.getCustomerName();
 
