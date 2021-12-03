@@ -143,6 +143,7 @@ public class AppointmentsCtrl implements Initializable {
         CustomersCtrl.stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Parent scene = loader.getRoot();
         CustomersCtrl.stage.setScene(new Scene(scene));
+        CustomersCtrl.stage.centerOnScreen();
         CustomersCtrl.stage.show();
     }
 

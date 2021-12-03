@@ -150,6 +150,7 @@ public class CustomersCtrl implements Initializable {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
+        stage.centerOnScreen();
         stage.show();
     }
 }

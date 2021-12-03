@@ -15,10 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.*;
-import tools.AlertEvent;
-import tools.ButtonEvent;
-import tools.TextBoxEvent;
-import tools.TimeHelper;
+import tools.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,28 +72,21 @@ public class UpdateApptCtrl implements Initializable {
     @FXML
     private ComboBox<User> userIdCombo;
 
-    ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
-    ObservableList<User> userList = DBUsers.getAllUsers();
-    ObservableList<Contact> contactList = DBContacts.getAllContacts();
-    ObservableList<String> typeList = Appointment.getTypeList();
-    ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
-    ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userIdCombo.setItems(userList);
-        contactCombo.setItems(contactList);
-        typeCombo.setItems(typeList);
-        custIdCombo.setItems(customerList);
+        userIdCombo.setItems(StaticObservableLists.userList);
+        contactCombo.setItems(StaticObservableLists.contactList);
+        typeCombo.setItems(StaticObservableLists.typeList);
+        custIdCombo.setItems(StaticObservableLists.customerList);
 
         LocalTime start = TimeHelper.etLocalOpen.toLocalTime();
         LocalTime end = TimeHelper.etLocalClose.toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
-            startTimeList.add(start);
-            start = start.plusMinutes(30);
+            StaticObservableLists.startTimeList.add(start);
+            start = start.plusMinutes(15);
         }
-        startTimeCombo.setItems(startTimeList);
+        startTimeCombo.setItems(StaticObservableLists.startTimeList);
     }
 
     public void sendAppointment(Appointment appt) {
@@ -117,7 +107,7 @@ public class UpdateApptCtrl implements Initializable {
         String contact = appt.getContact();
         Contact selectedContact = null;
 
-        for (Contact c : contactList) {
+        for (Contact c : StaticObservableLists.contactList) {
             if (contact.equals(c.getContactName())) {
                 selectedContact = c;
             }
@@ -133,7 +123,7 @@ public class UpdateApptCtrl implements Initializable {
         int customerId = appt.getCustomerId();
         Customer selectedCustomer = null;
 
-        for (Customer c : customerList) {
+        for (Customer c : StaticObservableLists.customerList) {
             if (customerId == c.getCustomerId()) {
                 selectedCustomer = c;
             }
@@ -149,7 +139,7 @@ public class UpdateApptCtrl implements Initializable {
         int userId = appt.getUserId();
         User selectedUser = null;
 
-        for (User u : userList) {
+        for (User u : StaticObservableLists.userList) {
             if (userId == u.getUserId()) {
                 selectedUser = u;
             }
@@ -247,6 +237,27 @@ public class UpdateApptCtrl implements Initializable {
         LocalDateTime localStart = LocalDateTime.of(date, startTime);
         LocalDateTime localEnd = LocalDateTime.of(date, endTime);
 
+        for (Appointment a : StaticObservableLists.appointmentList) {
+            if (a.getCustomerId() == custId) {
+                StaticObservableLists.sameCustApptList.add(a);
+            }
+        }
+
+        for (Appointment a : StaticObservableLists.sameCustApptList) {
+            if ((localStart.isAfter(a.getStart()) || localStart.isEqual(a.getStart())) && localStart.isBefore(a.getEnd())) {
+                AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time conflicts with an existing meeting for customer #" + custId + ".");
+                return;
+            }
+            if (localEnd.isAfter(a.getStart()) && (localEnd.isBefore(a.getEnd()) || localEnd.isEqual(a.getEnd()))) {
+                AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose end time conflicts with an existing meeting for customer #" + custId + ".");
+                return;
+            }
+            if ((localStart.isBefore(a.getStart()) || localStart.isEqual(a.getStart())) && (localEnd.isAfter(a.getEnd()) || localEnd.isEqual(a.getEnd()))) {
+                AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time and end time completely envelope an existing meeting for customer #" + custId + ".");
+                return;
+            }
+        }
+
         Timestamp start = Timestamp.valueOf(localStart);
         Timestamp end = Timestamp.valueOf(localEnd);
 
@@ -256,16 +267,16 @@ public class UpdateApptCtrl implements Initializable {
 
     public void onActionStartTime(ActionEvent actionEvent) {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
-        endTimeList.clear();
+        StaticObservableLists.endTimeList.clear();
 
         LocalTime start = selectedStartTime;
         LocalTime end = TimeHelper.etLocalClose.toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
-            start = start.plusMinutes(30);
-            endTimeList.add(start);
+            start = start.plusMinutes(15);
+            StaticObservableLists.endTimeList.add(start);
         }
-        endTimeCombo.setItems(endTimeList);
+        endTimeCombo.setItems(StaticObservableLists.endTimeList);
         endTimeCombo.setValue(selectedStartTime.plusMinutes(30));
     }
 }
