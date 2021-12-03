@@ -160,6 +160,13 @@ public class AddApptCtrl implements Initializable {
         LocalDateTime localStart = LocalDateTime.of(date, startTime);
         LocalDateTime localEnd = LocalDateTime.of(date, endTime);
 
+        ObservableList<Appointment> sameCustApptList = FXCollections.observableArrayList();
+
+        for (Appointment a : ) //get all appointments
+
+        // This is where you need to perform check on overlapping appointments.
+
+
         Timestamp start = Timestamp.valueOf(localStart);
         Timestamp end = Timestamp.valueOf(localEnd);
 
