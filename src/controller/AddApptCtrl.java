@@ -164,11 +164,19 @@ public class AddApptCtrl implements Initializable {
         ObservableList<Appointment> sameCustApptList = FXCollections.observableArrayList();
 
         for (Appointment a : appointmentList) {
-            if ((localStart.isAfter(a.getStart()) || localStart.isEqual(a.getStart()) && localStart.isBefore(a.getEnd()))) // need to get end as well as edge cases
+            if ((localStart.isAfter(a.getStart()) || localStart.isEqual(a.getStart())) && localStart.isBefore(a.getEnd())) {
+                AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time conflicts with an existing meeting for customer #" + custId + ".");
+                return;
+            }
+            if (localEnd.isAfter(a.getStart()) && (localEnd.isBefore(a.getEnd()) || localEnd.isEqual(a.getEnd()))) {
+                AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose end time conflicts with an existing meeting for customer #" + custId + ".");
+                return;
+            }
+            if ((localStart.isBefore(a.getStart()) || localStart.isEqual(a.getStart())) && (localEnd.isAfter(a.getEnd()) || localEnd.isEqual(a.getEnd()))) {
+                AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time and end time completely envelope an existing meeting for customer #" + custId + ".");
+                return;
+            }
         }
-
-        // This is where you need to perform check on overlapping appointments.
-
 
         Timestamp start = Timestamp.valueOf(localStart);
         Timestamp end = Timestamp.valueOf(localEnd);
