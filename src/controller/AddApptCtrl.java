@@ -72,6 +72,7 @@ public class AddApptCtrl implements Initializable {
     ObservableList<String> typeList = Appointment.getTypeList();
     ObservableList<Contact> contactList = DBContacts.getAllContacts();
     ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
+    ObservableList<Appointment> appointmentList = DBAppointments.getAllAppointments();
     ObservableList<User> userList = DBUsers.getAllUsers();
     ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
     ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
@@ -162,7 +163,9 @@ public class AddApptCtrl implements Initializable {
 
         ObservableList<Appointment> sameCustApptList = FXCollections.observableArrayList();
 
-        for (Appointment a : ) //get all appointments
+        for (Appointment a : appointmentList) {
+            if ((localStart.isAfter(a.getStart()) || localStart.isEqual(a.getStart()) && localStart.isBefore(a.getEnd()))) // need to get end as well as edge cases
+        }
 
         // This is where you need to perform check on overlapping appointments.
 
