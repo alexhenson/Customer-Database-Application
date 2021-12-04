@@ -237,6 +237,16 @@ public class UpdateApptCtrl implements Initializable {
         LocalDateTime localStart = LocalDateTime.of(date, startTime);
         LocalDateTime localEnd = LocalDateTime.of(date, endTime);
 
+        if (localStart.isBefore(TimeHelper.etLocalOpen) || localStart.isAfter(TimeHelper.etLocalClose)) {
+            AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time falls outside of the business hours of 8:00am to 10pm EST.");
+            return;
+        }
+
+        if (localEnd.isBefore(TimeHelper.etLocalOpen) || localEnd.isAfter(TimeHelper.etLocalClose)) {
+            AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose end time falls outside of the business hours of 8:00am to 10pm EST.");
+            return;
+        }
+
         for (Appointment a : StaticObservableLists.appointmentList) {
             if (a.getCustomerId() == custId) {
                 StaticObservableLists.sameCustApptList.add(a);

@@ -8,10 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.Appointment;
 import model.User;
-import tools.AlertEvent;
-import tools.ButtonEvent;
-import tools.TextBoxEvent;
+import tools.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +19,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.IllformedLocaleException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -68,6 +68,19 @@ public class LoginCtrl implements Initializable {
 
         for (User u : userList) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
+                boolean foundAppt = false;
+                for (Appointment a : StaticObservableLists.appointmentList) {
+                    if (u.getUserId() == a.getUserId() && a.getStart().toLocalTime().isAfter(TimeHelper.currentTime.minusSeconds(1))) {
+                        long timeDifference = ChronoUnit.MINUTES.between(TimeHelper.currentTime, a.getStart().toLocalTime());
+                        if (timeDifference >= 0 && timeDifference <= 15) {
+                            AlertEvent.infoBox("Appointment Soon!", "User #" + u.getUserId() + " has an appointment starting in about " + timeDifference + " minutes!");
+                            foundAppt = true;
+                        }
+                    }
+                }
+                if (!foundAppt) {
+                    AlertEvent.infoBox("No Pertinent Appointments", "User #" + u.getUserId() + " does not have any appointments within 15 minutes.");
+                }
                 ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
                 return;
             }

@@ -1,10 +1,13 @@
 package tools;
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 public class TimeHelper {
 
     public static LocalDate currentDate = LocalDate.now();
+    public static LocalTime currentTime = LocalTime.now();
+
     public static Month currentMonth = currentDate.getMonth();
     public static LocalDate currentDay = currentDate;
     public static LocalDate nextWeekDay = currentDate.plusDays(7);
