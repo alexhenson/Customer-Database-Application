@@ -7,12 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import model.Appointment;
+import model.Contact;
 import tools.ButtonEvent;
 import tools.StaticObservableLists;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
+import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.EnumSet;
 import java.util.Locale;
@@ -87,7 +89,7 @@ public class ReportsCtrl implements Initializable {
                 "Brainstorming Session: " + countBrainstorm + "\n" +
                 "Career Planning: " + countCareer + "\n\n";
 
-        custStr += "Customer Appointment Counts by Month: \n";
+        custStr += "Customer Appointment Counts by Month:\n";
 
         for (int i = 0; i < countByMonth.length; i++) {
             custStr += "Month " + (i + 1) + ": " + countByMonth[i] + "\n";
@@ -99,12 +101,11 @@ public class ReportsCtrl implements Initializable {
         System.out.println("Contact Radio button selected.");
         textArea.clear();
 
-        int lengthOfContactList = StaticObservableLists.contactList.size();
         String contactStr = "";
-        for (int i = 0; i < lengthOfContactList; i++) {
-            contactStr += "Contact ID #" + i + ":\n";
+        for (Contact c : StaticObservableLists.contactList) {
+            contactStr += "Contact Name - " + c + ":\n";
             for (Appointment a : StaticObservableLists.appointmentList) {
-                if (a.getContact().equals(StaticObservableLists.contactList.get(i).getContactName())) {
+                if (a.getContact().equals(c.getContactName())) {
                     contactStr += a + "\n";
                 }
             }
