@@ -171,8 +171,9 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionReports(ActionEvent event) {
-
+    void onActionReports(ActionEvent event) throws IOException {
+        System.out.println("Reports button clicked!");
+        ButtonEvent.buttonAction("/view/Reports.fxml", "Reports Form", event);
     }
 
     @FXML

@@ -136,4 +136,10 @@ public class Appointment {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public String toString() {
+        return "Appointment ID: " + appointmentId + ", Title: " + title + ", Type: " + type +
+                ", Description: " + description + ", Start Date and Time: " + getStartString() +
+                ", End Date and Time: " + getEndString() + ", Customer ID " + customerId;
+    }
 }
