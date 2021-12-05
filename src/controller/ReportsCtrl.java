@@ -19,6 +19,7 @@ import java.time.format.TextStyle;
 import java.util.EnumSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class ReportsCtrl implements Initializable {
 
@@ -65,6 +66,7 @@ public class ReportsCtrl implements Initializable {
         int countBrainstorm = 0;
         int countCareer = 0;
         int[] countByMonth = new int[12];
+        EnumSet<Month> months = EnumSet.allOf(Month.class);
 
         for (Appointment a : StaticObservableLists.appointmentList) {
             if (a.getType().equals("Planning Session")) {
@@ -91,8 +93,11 @@ public class ReportsCtrl implements Initializable {
 
         custStr += "Customer Appointment Counts by Month:\n";
 
-        for (int i = 0; i < countByMonth.length; i++) {
-            custStr += "Month " + (i + 1) + ": " + countByMonth[i] + "\n";
+        int monthInt = 0;
+        for (Month m : months) {
+            String monthName = m.getDisplayName(TextStyle.FULL , Locale.US);
+            custStr += monthName + ": " + countByMonth[monthInt] + "\n";
+            monthInt++;
         }
         textArea.setText(custStr);
     }
@@ -111,6 +116,15 @@ public class ReportsCtrl implements Initializable {
             }
             contactStr += "\n";
         }
+
+        int sizeOfContact = StaticObservableLists.contactList.size();
+        Contact[] contactArr = new Contact[sizeOfContact];
+        for(int i = 0; i < sizeOfContact; i++) {
+            contactArr[i] = StaticObservableLists.contactList.get(i);
+        }
+        Stream<Contact> contactStream = Stream.of(contactArr);
+        Stream<Contact> sortedContactEmail = contactStream.sorted((Contact a, Contact b) -> a.getEmail().compareTo(b.getEmail()));
+        sortedContactEmail.forEach((c) -> System.out.println(c + "'s Email: " + c.getEmail()));
         textArea.setText(contactStr);
     }
 
