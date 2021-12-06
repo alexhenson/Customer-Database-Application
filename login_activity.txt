@@ -1,0 +1,29 @@
+Username Entered: test, Password Entered: test, Date: 2021-12-05, Time: 21:09:03.000410700 America/ChicagoLogin Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05T21:14:21.293708400-06:00[America/Chicago], Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:16 CST, Login Successful: true
+Username Entered: admin, Password Entered: admin, Date and Time: 2021-12-05 21:22 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:27 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:36 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:42 CST, Login Successful: true
+Username Entered: test, Password Entered: tes, Date and Time: 2021-12-05 21:47 CST, Login Successful: false
+Username Entered: tes, Password Entered: tes, Date and Time: 2021-12-05 21:47 CST, Login Successful: false
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:48 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:50 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 21:56 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 22:00 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 22:06 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 22:06 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-05 22:10 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 11:50 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:09 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:12 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:14 CST, Login Successful: true
+Username Entered: test, Password Entered: tes, Date and Time: 2021-12-06 12:36 CST, Login Successful: false
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:36 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:36 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:38 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:52 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 12:53 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 13:42 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 13:51 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 13:51 CST, Login Successful: true
