@@ -4,15 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import model.User;
 import tools.ButtonEvent;
-import tools.StaticObservableLists;
-import tools.TimeHelper;
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class MainMenuCtrl implements Initializable {
@@ -46,8 +42,8 @@ public class MainMenuCtrl implements Initializable {
 
     @FXML
     void onActionLogin(ActionEvent event) throws IOException {
-        ButtonEvent.cancelButtonAction("You will be taken to the login screen again, do you want to continue?", "Login button clicked", "/view/Login.fxml", "Login Screen",event);
-
+        System.out.println("Login button clicked!");
+        ButtonEvent.buttonAction("/view/Login.fxml", "Login Screen", event);
     }
 
     @FXML

@@ -25,7 +25,7 @@ public class ButtonEvent {
      *  @throws IOException If an input or output exception occurred
      */
     public static void buttonAction(String fileName, String formName, ActionEvent actionEvent) throws IOException {
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow(); //actionEvent.getWindow()
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(ButtonEvent.class.getResource(fileName));
         stage.setTitle(formName);
         stage.setScene(new Scene(scene));
@@ -43,12 +43,12 @@ public class ButtonEvent {
         }
     }
     public static void exitButtonAction(String message, String systemMsg) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will exit the program, do you want to continue?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
 
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("Exit button clicked");
+            System.out.println(systemMsg);
             JDBC.closeConnection();
             System.exit(0);
         }

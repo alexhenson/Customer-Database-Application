@@ -12,9 +12,12 @@ import model.Appointment;
 import model.User;
 import tools.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,14 +64,16 @@ public class LoginCtrl implements Initializable {
 
     public void validateLogin(ActionEvent actionEvent, String systemDialog) throws IOException {
         System.out.println(systemDialog);
-        ObservableList<User> userList = DBUsers.getAllUsers();
 
         String userName = usernameTxt.getText();
         String password = passwordTxt.getText();
 
-        for (User u : userList) {
+        boolean loginSuccess = false;
+
+        for (User u : StaticObservableLists.userList) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 boolean foundAppt = false;
+                loginSuccess = true;
                 for (Appointment a : StaticObservableLists.appointmentList) {
                     if (u.getUserId() == a.getUserId() && a.getStart().toLocalTime().isAfter(TimeHelper.currentTime.minusSeconds(1))) {
                         long timeDifference = ChronoUnit.MINUTES.between(TimeHelper.currentTime, a.getStart().toLocalTime());
@@ -78,6 +83,9 @@ public class LoginCtrl implements Initializable {
                         }
                     }
                 }
+
+                loginWriter(userName, password, loginSuccess);
+
                 if (!foundAppt) {
                     AlertEvent.infoBox("No Pertinent Appointments", "User #" + u.getUserId() + " does not have any appointments within 15 minutes.");
                 }
@@ -85,6 +93,21 @@ public class LoginCtrl implements Initializable {
                 return;
             }
         }
+        loginWriter(userName, password, loginSuccess);
         AlertEvent.alertBox(rb.getString("alertBox.title"), rb.getString("alertBox.text"));
+    }
+
+    public void loginWriter(String username, String password, boolean isSuccessful) throws IOException {
+        String filename = "login_activity.txt";
+        FileWriter loginFW = new FileWriter(filename, true);
+        PrintWriter outputFilePW = new PrintWriter(loginFW);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
+        ZonedDateTime zdt = LocalDateTime.now().atZone(ZoneId.systemDefault());
+
+        outputFilePW.println("Username Entered: " + username + ", Password Entered: " + password + ", Date and Time: " + zdt.format(formatter) + ", Login Successful: " + isSuccessful);
+
+        loginFW.close();
+        outputFilePW.close();
     }
 }
