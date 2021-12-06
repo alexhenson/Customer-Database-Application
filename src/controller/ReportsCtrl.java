@@ -3,8 +3,6 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import model.Appointment;
 import model.Contact;
@@ -16,27 +14,15 @@ import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.Month;
 import java.time.format.TextStyle;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
 public class ReportsCtrl implements Initializable {
-
     @FXML
     private TextArea textArea;
-    @FXML
-    private RadioButton custApptRBtn;
-    @FXML
-    private RadioButton contactRBtn;
-    @FXML
-    private RadioButton dayRButton;
-    @FXML
-    private Button mainMenuBtn;
-    @FXML
-    private Button apptBtn;
-    @FXML
-    private Button custBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,7 +43,7 @@ public class ReportsCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", actionEvent);
     }
 
-    public void onActionCustApptRBtn(ActionEvent actionEvent) {
+    public void onActionCustApptRBtn() {
         System.out.println("Customer Radio button selected.");
         textArea.clear();
         int countPlanning = 0;
@@ -69,52 +55,60 @@ public class ReportsCtrl implements Initializable {
         EnumSet<Month> months = EnumSet.allOf(Month.class);
 
         for (Appointment a : StaticObservableLists.appointmentList) {
-            if (a.getType().equals("Planning Session")) {
-                countPlanning++;
-            } else if (a.getType().equals("De-Briefing")) {
-                countDebrief++;
-            } else if (a.getType().equals("Financial Advisory")) {
-                countFinancial++;
-            } else if (a.getType().equals("Brainstorming Session")) {
-                countBrainstorm++;
-            } else if (a.getType().equals("Career Planning")) {
-                countCareer++;
+            switch (a.getType()) {
+                case "Planning Session":
+                    countPlanning++;
+                    break;
+                case "De-Briefing":
+                    countDebrief++;
+                    break;
+                case "Financial Advisory":
+                    countFinancial++;
+                    break;
+                case "Brainstorming Session":
+                    countBrainstorm++;
+                    break;
+                case "Career Planning":
+                    countCareer++;
+                    break;
             }
 
             int month = a.getStart().getMonthValue();
             countByMonth[month - 1]++;
         }
-        String custStr = "Customer Appointment Counts by Meeting Type: \n" +
+        StringBuilder custStr = new StringBuilder("Customer Appointment Counts by Meeting Type: \n" +
                 "Planning Session: " + countPlanning + "\n" +
                 "De-Briefing: " + countDebrief + "\n" +
                 "Financial Advisory: " + countFinancial + "\n" +
                 "Brainstorming Session: " + countBrainstorm + "\n" +
-                "Career Planning: " + countCareer + "\n\n";
+                "Career Planning: " + countCareer + "\n\n");
 
-        custStr += "Customer Appointment Counts by Month:\n";
+        custStr.append("Customer Appointment Counts by Month:\n");
 
         int monthInt = 0;
         for (Month m : months) {
             String monthName = m.getDisplayName(TextStyle.FULL , Locale.US);
-            custStr += monthName + ": " + countByMonth[monthInt] + "\n";
+            custStr.append(monthName).append(": ").append(countByMonth[monthInt]).append("\n");
             monthInt++;
         }
-        textArea.setText(custStr);
+        textArea.setText(custStr.toString());
+        System.out.println("All Appointments:");
+        StaticObservableLists.appointmentList.forEach(System.out::println);
     }
 
-    public void onActionContactRBtn(ActionEvent actionEvent) {
+    public void onActionContactRBtn() {
         System.out.println("Contact Radio button selected.");
         textArea.clear();
 
-        String contactStr = "";
+        StringBuilder contactStr = new StringBuilder();
         for (Contact c : StaticObservableLists.contactList) {
-            contactStr += "Contact Name - " + c + ":\n";
+            contactStr.append("Contact Name - ").append(c).append(":\n");
             for (Appointment a : StaticObservableLists.appointmentList) {
                 if (a.getContact().equals(c.getContactName())) {
-                    contactStr += a + "\n";
+                    contactStr.append(a).append("\n");
                 }
             }
-            contactStr += "\n";
+            contactStr.append("\n");
         }
 
         int sizeOfContact = StaticObservableLists.contactList.size();
@@ -123,19 +117,19 @@ public class ReportsCtrl implements Initializable {
             contactArr[i] = StaticObservableLists.contactList.get(i);
         }
         Stream<Contact> contactStream = Stream.of(contactArr);
-        Stream<Contact> sortedContactEmail = contactStream.sorted((Contact a, Contact b) -> a.getEmail().compareTo(b.getEmail()));
+        Stream<Contact> sortedContactEmail = contactStream.sorted(Comparator.comparing(Contact::getEmail));
         sortedContactEmail.forEach((c) -> System.out.println(c + "'s Email: " + c.getEmail()));
-        textArea.setText(contactStr);
+        textArea.setText(contactStr.toString());
     }
 
-    public void onActionDayRBtn(ActionEvent actionEvent) {
+    public void onActionDayRBtn() {
         System.out.println("Day Radio button selected.");
         textArea.clear();
 
-        String dayStr = "";
+        StringBuilder dayStr = new StringBuilder();
 
         EnumSet<DayOfWeek> dows = EnumSet.allOf(DayOfWeek.class);
-        dayStr += "Appointment Counts by Days of the Week:\n";
+        dayStr.append("Appointment Counts by Days of the Week:\n");
         for(DayOfWeek dow : dows) {
             String dowName = dow.getDisplayName(TextStyle.FULL , Locale.US);
             int apptCount = 0;
@@ -144,9 +138,8 @@ public class ReportsCtrl implements Initializable {
                     apptCount++;
                 }
             }
-            dayStr += dowName + ": " + apptCount + "\n";
-            apptCount = 0;
+            dayStr.append(dowName).append(": ").append(apptCount).append("\n");
         }
-        textArea.setText(dayStr);
+        textArea.setText(dayStr.toString());
     }
 }

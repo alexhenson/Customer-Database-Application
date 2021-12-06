@@ -19,7 +19,6 @@
                 <Button fx:id="custBtn" mnemonicParsing="false" onAction="#onActionCust" prefWidth="151.0" text="Customer Table" />
                 <Button fx:id="apptBtn" mnemonicParsing="false" onAction="#onActionAppt" prefWidth="151.0" text="Appointment Table" />
                 <Button fx:id="reportsBtn" mnemonicParsing="false" onAction="#onActionReports" prefWidth="151.0" text="Reports Table" />
-                <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#onActionLogin" prefWidth="151.0" text="Log-out" />
                 <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#onActionExit" prefWidth="151.0" text="Exit" />
             </children>
             <opaqueInsets>

@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import model.Country;
 import model.Customer;
 import model.FirstLevelDivision;
@@ -22,21 +21,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UpdateCustCtrl implements Initializable {
-
-    @FXML
-    private AnchorPane updateCust;
-    @FXML
-    private Label titleLbl;
-    @FXML
-    private Label idLbl;
-    @FXML
-    private Label nameLbl;
-    @FXML
-    private Label addrLbl;
-    @FXML
-    private Label postalLbl;
-    @FXML
-    private Label phoneLbl;
     @FXML
     private TextField custIdTxt;
     @FXML
@@ -48,35 +32,21 @@ public class UpdateCustCtrl implements Initializable {
     @FXML
     private TextField phoneTxt;
     @FXML
-    private TextField Txt;
-    @FXML
-    private Label countryLbl;
-    @FXML
-    private Label divisionLbl;
-    @FXML
     private ComboBox<Country> countryCombo;
     @FXML
     private ComboBox<FirstLevelDivision> divisionCombo;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button cancelBtn;
 
     ObservableList<Country> countryList = DBCountries.getAllCountries();
     ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
 
     ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
 
-    private Customer selectedCustomer;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryCombo.setItems(countryList);
-
     }
 
     public void sendCustomer(Customer cust) {
-        selectedCustomer = cust;
         custIdTxt.setText(String.valueOf(cust.getCustomerId()));
         nameTxt.setText(cust.getCustomerName());
         addrTxt.setText(cust.getAddress());
@@ -143,7 +113,6 @@ public class UpdateCustCtrl implements Initializable {
             AlertEvent.alertBox("Error Dialog", "Please select a value for the Country combo box.");
             return;
         }
-        String country = countryCombo.getSelectionModel().getSelectedItem().getCountryName();
 
         if (divisionCombo.getValue() == null) {
             AlertEvent.alertBox("Error Dialog", "Please select a value for the First Level Division combo box.");
@@ -155,12 +124,9 @@ public class UpdateCustCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
-    public void onActionCountry(ActionEvent actionEvent) {
+    public void onActionCountry() {
         Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
         filterDivisions(selectedCountry);
-    }
-
-    public void onActionDivision(ActionEvent actionEvent) {
     }
 
     public void filterDivisions(Country country) {
@@ -173,6 +139,4 @@ public class UpdateCustCtrl implements Initializable {
         divisionCombo.setItems(filteredDivisionList);
         divisionCombo.setVisibleRowCount(5);
     }
-
-
 }

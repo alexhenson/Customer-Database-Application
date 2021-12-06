@@ -1,7 +1,6 @@
 package tools;
 
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 
 public class TimeHelper {
 
@@ -17,11 +16,9 @@ public class TimeHelper {
 
     public static ZoneId etZoneId = ZoneId.of("America/New_York");
     public static ZoneId localZoneId = ZoneId.systemDefault();
-    public static ZonedDateTime etZonedOpen = utcZonedOpening.withZoneSameInstant(etZoneId);
     public static ZonedDateTime localZonedOpen = utcZonedOpening.withZoneSameInstant(localZoneId);
     public static LocalDateTime etLocalOpen = localZonedOpen.toLocalDateTime();
 
-    public static ZonedDateTime etZonedClose = utcZonedClosing.withZoneSameInstant(etZoneId);
     public static ZonedDateTime localZonedClose = utcZonedClosing.withZoneSameInstant(localZoneId);
     public static LocalDateTime etLocalClose = localZonedClose.toLocalDateTime();
 }

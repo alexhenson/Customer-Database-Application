@@ -11,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ButtonEvent {

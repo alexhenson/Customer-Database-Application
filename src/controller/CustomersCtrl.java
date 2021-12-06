@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Customer;
@@ -24,13 +23,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomersCtrl implements Initializable {
-
-    @FXML
-    private Button addBtn;
     @FXML
     private TableColumn<Customer, String> addressCol;
-    @FXML
-    private Button apptBtn;
     @FXML
     private TableColumn<Customer, String> countryCol;
     @FXML
@@ -38,25 +32,13 @@ public class CustomersCtrl implements Initializable {
     @FXML
     private TableView<Customer> custTblView;
     @FXML
-    private AnchorPane customers;
-    @FXML
-    private Button delBtn;
-    @FXML
     private TableColumn<Customer, String> divisionCol;
-    @FXML
-    private Button mainMenuBtn;
     @FXML
     private TableColumn<Customer, String> nameCol;
     @FXML
     private TableColumn<Customer, String> phoneCol;
     @FXML
     private TableColumn<Customer, String> postalCol;
-    @FXML
-    private Button reportsBtn;
-    @FXML
-    private Label titleLbl;
-    @FXML
-    private Button updateBtn;
 
     public static Stage stage;
     public static Parent scene;
@@ -87,7 +69,7 @@ public class CustomersCtrl implements Initializable {
     }
 
     @FXML
-    void onActionDelete(ActionEvent event) {
+    void onActionDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected customer, do you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
 

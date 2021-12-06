@@ -1,7 +1,6 @@
 package controller;
 
 import dbAccess.DBAppointments;
-import dbAccess.DBCustomers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,10 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Appointment;
-import model.Customer;
 import tools.AlertEvent;
 import tools.ButtonEvent;
 import tools.TimeHelper;
@@ -27,25 +24,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentsCtrl implements Initializable {
-
-    @FXML
-    private Button custBtn;
-    @FXML
-    private RadioButton allRBtn;
-    @FXML
-    private AnchorPane appointments;
-    @FXML
-    private Button addBtn;
     @FXML
     private TableColumn<Appointment, Integer> apptCustIdCol;
-    @FXML
-    private Button delBtn;
     @FXML
     private TableColumn<Appointment, Integer> apptIdCol;
     @FXML
     private TableView<Appointment> apptTblView;
-    @FXML
-    private Button updateBtn;
     @FXML
     private TableColumn<Appointment, String> contactCol;
     @FXML
@@ -55,23 +39,13 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private TableColumn<Appointment, String> locationCol;
     @FXML
-    private Button mainMenuBtn;
-    @FXML
-    private RadioButton monthRBtn;
-    @FXML
-    private Button reportsBtn;
-    @FXML
     private TableColumn<Appointment, String> startDateTimeCol;
     @FXML
     private TableColumn<Appointment, String> titleCol;
     @FXML
-    private Label titleLbl;
-    @FXML
     private TableColumn<Appointment, String> typeCol;
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
-    @FXML
-    private RadioButton weekRBtn;
 
     ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
 
@@ -91,7 +65,7 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionAll(ActionEvent event) {
+    void onActionAll() {
         apptTblView.setItems(DBAppointments.getAllAppointments());
     }
 
@@ -102,7 +76,7 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionDelete(ActionEvent event) {
+    void onActionDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected appointment, do you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
 
@@ -160,7 +134,7 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionMonth(ActionEvent event) {
+    void onActionMonth() {
         ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
         for (Appointment a : apptList) {
             if (TimeHelper.currentMonth.equals(a.getStart().getMonth())) {
@@ -177,7 +151,7 @@ public class AppointmentsCtrl implements Initializable {
     }
 
     @FXML
-    void onActionWeek(ActionEvent event) {
+    void onActionWeek() {
         ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
         for (Appointment a : apptList) {
             LocalDate apptDate = a.getStart().toLocalDate();

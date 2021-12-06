@@ -1,7 +1,5 @@
 package controller;
 
-import dbAccess.DBUsers;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,20 +14,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
-import java.util.IllformedLocaleException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginCtrl implements Initializable {
-    @FXML
-    private Label loginLbl;
     @FXML
     private TextField passwordTxt;
     @FXML
@@ -50,11 +43,11 @@ public class LoginCtrl implements Initializable {
         zoneIdLbl.setText("[" + zoneId + "]");
     }
 
-    public void onActionUsername(ActionEvent actionEvent) throws IOException {
+    public void onActionUsername() {
         passwordTxt.requestFocus();
     }
 
-    public void onActionPassword(ActionEvent actionEvent) throws IOException {
+    public void onActionPassword() {
         submitBtn.requestFocus();
     }
 
@@ -68,12 +61,10 @@ public class LoginCtrl implements Initializable {
         String userName = usernameTxt.getText();
         String password = passwordTxt.getText();
 
-        boolean loginSuccess = false;
-
         for (User u : StaticObservableLists.userList) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 boolean foundAppt = false;
-                loginSuccess = true;
+
                 for (Appointment a : StaticObservableLists.appointmentList) {
                     if (u.getUserId() == a.getUserId() && a.getStart().toLocalTime().isAfter(TimeHelper.currentTime.minusSeconds(1))) {
                         long timeDifference = ChronoUnit.MINUTES.between(TimeHelper.currentTime, a.getStart().toLocalTime());
@@ -83,17 +74,17 @@ public class LoginCtrl implements Initializable {
                         }
                     }
                 }
-
-                loginWriter(userName, password, loginSuccess);
+                loginWriter(userName, password, true);
 
                 if (!foundAppt) {
                     AlertEvent.infoBox("No Pertinent Appointments", "User #" + u.getUserId() + " does not have any appointments within 15 minutes.");
                 }
+
                 ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
                 return;
             }
         }
-        loginWriter(userName, password, loginSuccess);
+        loginWriter(userName, password, false);
         AlertEvent.alertBox(rb.getString("alertBox.title"), rb.getString("alertBox.text"));
     }
 

@@ -1,19 +1,12 @@
 package controller;
 
 import dbAccess.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.*;
 import tools.*;
 
@@ -26,49 +19,26 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class UpdateApptCtrl implements Initializable {
-
-    @FXML
-    private AnchorPane addAppt;
-    @FXML
-    private Label updateApptLbl;
-    @FXML
-    private Button cancelBtn;
     @FXML
     private ComboBox<Contact> contactCombo;
     @FXML
-    private Label contactLbl;
-    @FXML
     private ComboBox<Customer> custIdCombo;
-    @FXML
-    private Label descLbl;
     @FXML
     private TextField descTxt;
     @FXML
     private ComboBox<LocalTime> endTimeCombo;
     @FXML
-    private Label idLbl;
-    @FXML
     private TextField idTxt;
     @FXML
-    private Label locationLbl;
-    @FXML
     private TextField locationTxt;
-    @FXML
-    private Label minLbl;
-    @FXML
-    private Button saveBtn;
     @FXML
     private DatePicker datePkr;
     @FXML
     private ComboBox<LocalTime> startTimeCombo;
     @FXML
-    private Label titleLbl;
-    @FXML
     private TextField titleTxt;
     @FXML
     private ComboBox<String> typeCombo;
-    @FXML
-    private Label typeLbl;
     @FXML
     private ComboBox<User> userIdCombo;
 
@@ -275,7 +245,7 @@ public class UpdateApptCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
     }
 
-    public void onActionStartTime(ActionEvent actionEvent) {
+    public void onActionStartTime() {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
         StaticObservableLists.endTimeList.clear();
 

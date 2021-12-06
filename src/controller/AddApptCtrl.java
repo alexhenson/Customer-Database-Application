@@ -1,13 +1,10 @@
 package controller;
 
 import dbAccess.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import model.*;
 import tools.*;
 
@@ -20,49 +17,24 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddApptCtrl implements Initializable {
-
-    @FXML
-    private AnchorPane addAppt;
-    @FXML
-    private Label addApptLbl;
-    @FXML
-    private Button cancelBtn;
     @FXML
     private ComboBox<Contact> contactCombo;
     @FXML
-    private Label contactLbl;
-    @FXML
     private ComboBox<Customer> custIdCombo;
-    @FXML
-    private Label descLbl;
     @FXML
     private TextField descTxt;
     @FXML
     private ComboBox<LocalTime> endTimeCombo;
     @FXML
-    private Label idLbl;
-    @FXML
-    private TextField idTxt;
-    @FXML
-    private Label locationLbl;
-    @FXML
     private TextField locationTxt;
-    @FXML
-    private Label minLbl;
-    @FXML
-    private Button saveBtn;
     @FXML
     private DatePicker datePkr;
     @FXML
     private ComboBox<LocalTime> startTimeCombo;
     @FXML
-    private Label titleLbl;
-    @FXML
     private TextField titleTxt;
     @FXML
     private ComboBox<String> typeCombo;
-    @FXML
-    private Label typeLbl;
     @FXML
     private ComboBox<User> userIdCombo;
 
@@ -191,7 +163,7 @@ public class AddApptCtrl implements Initializable {
         ButtonEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table", event);
     }
 
-    public void onActionStartTime(ActionEvent actionEvent) {
+    public void onActionStartTime() {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
         StaticObservableLists.endTimeList.clear();
 

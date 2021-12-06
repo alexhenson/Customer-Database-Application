@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import model.Appointment;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -18,12 +19,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Locale currentLocale = Locale.getDefault();
-        Locale locale = new Locale("en");
 
         ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"), rb);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Login.fxml")), rb);
 
-        //below is original
         primaryStage.setTitle(rb.getString("primaryStage.setTitle"));
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
