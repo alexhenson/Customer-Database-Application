@@ -20,10 +20,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
+/** This class is responsible for the functionality of the "Reports" controller. */
 public class ReportsCtrl implements Initializable {
     @FXML
     private TextArea textArea;
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/** This class is responsible for the functionality of the "Add Appt" controller. */
 public class AddApptCtrl implements Initializable {
     @FXML
     private ComboBox<Contact> contactCombo;
@@ -38,6 +39,10 @@ public class AddApptCtrl implements Initializable {
     @FXML
     private ComboBox<User> userIdCombo;
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userIdCombo.setPromptText("User ID");
@@ -62,6 +67,12 @@ public class AddApptCtrl implements Initializable {
         startTimeCombo.setItems(StaticObservableLists.startTimeList);
     }
 
+    /** This method activates when the Save button is clicked.
+     *  The input in the text boxes and combo boxes will be validated and then saved to a new appointment.
+     *  The appointment will be saved in the the database with Java based SQL methods.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
@@ -158,11 +169,17 @@ public class AddApptCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
     }
 
+    /** This method activates when the Cancel button is clicked.
+     *  This will clear all input fields and go back to the Appointment controller.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         ButtonEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table", event);
     }
 
+    /** This method is responsible for setting the times in the End time combo box based on the time selected in the Start time combo box. */
     public void onActionStartTime() {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
         StaticObservableLists.endTimeList.clear();

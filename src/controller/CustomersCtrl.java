@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class is responsible for the functionality of the "Customers" controller. */
 public class CustomersCtrl implements Initializable {
     @FXML
     private TableColumn<Customer, String> addressCol;
@@ -43,6 +44,10 @@ public class CustomersCtrl implements Initializable {
     public static Stage stage;
     public static Parent scene;
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
@@ -56,18 +61,29 @@ public class CustomersCtrl implements Initializable {
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
+    /** This method will take you to the Add Customer Form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionAdd(ActionEvent event) throws IOException {
         System.out.println("Add button clicked!");
         ButtonEvent.buttonAction("/view/AddCust.fxml", "Add Customers Table", event);
     }
 
+    /** This method will take you to the Appointments Form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionAppt(ActionEvent event) throws IOException {
         System.out.println("Appointments button clicked!");
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", event);
     }
 
+    /** This method will delete the selected Customer.
+     *  You must select the Customer you wish to delete in the TableView.
+     */
     @FXML
     void onActionDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected customer, do you want to continue?");
@@ -100,19 +116,31 @@ public class CustomersCtrl implements Initializable {
         }
     }
 
+    /** This method will change the scene to the Main Menu form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
         System.out.println("Main Menu button clicked!");
         ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", event);
     }
 
+    /** This method will change the scene to the Reports form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionReports(ActionEvent event) throws IOException {
         System.out.println("Reports button clicked!");
         ButtonEvent.buttonAction("/view/Reports.fxml", "Reports Form", event);
     }
 
-
+    /** This method will take you to the Update Customer Form.
+     *  You must select the Customer you wish to modify in the TableView.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionUpdate(ActionEvent event) throws IOException {
         System.out.println("Update button clicked!");

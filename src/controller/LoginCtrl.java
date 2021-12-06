@@ -22,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/** This class is responsible for the functionality of the "Login" controller. */
 public class LoginCtrl implements Initializable {
     @FXML
     private TextField passwordTxt;
@@ -35,6 +36,10 @@ public class LoginCtrl implements Initializable {
     Locale currentLocale = Locale.getDefault();
     ResourceBundle rb = ResourceBundle.getBundle("Nat", currentLocale);
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("LoginForm is initialized!");
@@ -43,18 +48,29 @@ public class LoginCtrl implements Initializable {
         zoneIdLbl.setText("[" + zoneId + "]");
     }
 
+    /** This method will shift the cursor to the passwordTxt text box. */
     public void onActionUsername() {
         passwordTxt.requestFocus();
     }
 
+    /** This method will shift the focus to the Submit button. */
     public void onActionPassword() {
         submitBtn.requestFocus();
     }
 
+    /** This method will call the validateLogin method.
+     *  @param actionEvent object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     public void onActionSubmit(ActionEvent actionEvent) throws IOException {
         validateLogin(actionEvent, "Submit button clicked!");
     }
 
+    /** This method will !!!!!!
+     *  @param actionEvent object to trigger actions
+     *  @param systemDialog The string passed to the System.out.println() function.
+     *  @throws IOException If an input or output exception occurred
+     */
     public void validateLogin(ActionEvent actionEvent, String systemDialog) throws IOException {
         System.out.println(systemDialog);
 

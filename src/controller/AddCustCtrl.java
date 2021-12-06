@@ -2,7 +2,6 @@ package controller;
 
 import dbAccess.DBCountries;
 import dbAccess.DBCustomers;
-import dbAccess.DBDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static tools.StaticObservableLists.divisionList;
+
+/** This class is responsible for the functionality of the "Add Cust" controller. */
 public class AddCustCtrl implements Initializable {
     @FXML
     private TextField addrTxt;
@@ -33,9 +35,12 @@ public class AddCustCtrl implements Initializable {
     @FXML
     private ComboBox<FirstLevelDivision> divisionCombo;
 
-    ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
     ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Country> countryList = DBCountries.getAllCountries();
@@ -44,11 +49,22 @@ public class AddCustCtrl implements Initializable {
         countryCombo.setItems(countryList);
     }
 
+    /** This method activates when the Cancel button is clicked.
+     *  This will clear all input fields and go back to the Customer controller.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         ButtonEvent.cancelButtonAction("This will clear all field values, do you want to continue?", "Cancel button clicked", "/view/Customers.fxml", "Customers Table",event);
     }
 
+    /** This method activates when the Save button is clicked.
+     *  The input in the text boxes and combo boxes will be validated and then saved to a new customer.
+     *  The customer will be saved in the the database with Java based SQL methods.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
@@ -78,6 +94,7 @@ public class AddCustCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
+    /** This method sets the data for the Division combo box based on what is selected in the Country combo box. */
     public void onActionCountry() {
         Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
         filteredDivisionList.clear();

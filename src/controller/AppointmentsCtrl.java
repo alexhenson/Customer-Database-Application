@@ -23,6 +23,9 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static tools.StaticObservableLists.appointmentList;
+
+/** This class is responsible for the functionality of the "Appointments" controller. */
 public class AppointmentsCtrl implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> apptCustIdCol;
@@ -47,11 +50,13 @@ public class AppointmentsCtrl implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
 
-    ObservableList<Appointment> apptList = DBAppointments.getAllAppointments();
-
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        apptTblView.setItems(apptList);
+        apptTblView.setItems(appointmentList);
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         descCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -64,17 +69,50 @@ public class AppointmentsCtrl implements Initializable {
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
+    /** This method is responsible for setting the apptTblView to show all Appointments. */
     @FXML
     void onActionAll() {
         apptTblView.setItems(DBAppointments.getAllAppointments());
     }
 
+    /** This method is responsible for setting the apptTblView to show all Appointments in the current month. */
+    @FXML
+    void onActionMonth() {
+        ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
+        for (Appointment a : appointmentList) {
+            if (TimeHelper.currentMonth.equals(a.getStart().getMonth())) {
+                apptMonthList.add(a);
+            }
+        }
+        apptTblView.setItems(apptMonthList);
+    }
+
+    /** This method is responsible for setting the apptTblView to show all Appointments in the next seven days. */
+    @FXML
+    void onActionWeek() {
+        ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
+        for (Appointment a : appointmentList) {
+            LocalDate apptDate = a.getStart().toLocalDate();
+            if ((apptDate.isAfter(TimeHelper.currentDay) || apptDate.isEqual(TimeHelper.currentDay)) && (apptDate.isBefore(TimeHelper.nextWeekDay) || apptDate.isEqual(TimeHelper.nextWeekDay))) {
+                apptWeekList.add(a);
+            }
+        }
+        apptTblView.setItems(apptWeekList);
+    }
+
+    /** This method will take you to the Add Appointment Form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionAdd(ActionEvent event) throws IOException {
         System.out.println("Add button clicked!");
         ButtonEvent.buttonAction("/view/AddAppt.fxml", "Add Appointment Table", event);
     }
 
+    /** This method will delete the selected Appointment.
+     *  You must select the Appointment you wish to delete in the TableView.
+     */
     @FXML
     void onActionDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected appointment, do you want to continue?");
@@ -97,6 +135,11 @@ public class AppointmentsCtrl implements Initializable {
         }
     }
 
+    /** This method will take you to the Update Appointment Form.
+     *  You must select the Appointment you wish to modify in the TableView.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionUpdate(ActionEvent event) throws IOException {
         System.out.println("Update button clicked!");
@@ -121,44 +164,33 @@ public class AppointmentsCtrl implements Initializable {
         CustomersCtrl.stage.show();
     }
 
+    /** This method will change the scene to the Customers form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionCust(ActionEvent event) throws IOException {
         System.out.println("Customers button clicked!");
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
+    /** This method will change the scene to the Main Menu form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
         System.out.println("Main Menu button clicked!");
         ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", event);
     }
 
-    @FXML
-    void onActionMonth() {
-        ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
-        for (Appointment a : apptList) {
-            if (TimeHelper.currentMonth.equals(a.getStart().getMonth())) {
-                apptMonthList.add(a);
-            }
-        }
-        apptTblView.setItems(apptMonthList);
-    }
-
+    /** This method will change the scene to the Reports form.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionReports(ActionEvent event) throws IOException {
         System.out.println("Reports button clicked!");
         ButtonEvent.buttonAction("/view/Reports.fxml", "Reports Form", event);
-    }
-
-    @FXML
-    void onActionWeek() {
-        ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
-        for (Appointment a : apptList) {
-            LocalDate apptDate = a.getStart().toLocalDate();
-            if ((apptDate.isAfter(TimeHelper.currentDay) || apptDate.isEqual(TimeHelper.currentDay)) && (apptDate.isBefore(TimeHelper.nextWeekDay) || apptDate.isEqual(TimeHelper.nextWeekDay))) {
-                apptWeekList.add(a);
-            }
-        }
-        apptTblView.setItems(apptWeekList);
     }
 }

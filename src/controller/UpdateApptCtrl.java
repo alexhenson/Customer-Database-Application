@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/** This class is responsible for the functionality of the "Update Appt" controller. */
 public class UpdateApptCtrl implements Initializable {
     @FXML
     private ComboBox<Contact> contactCombo;
@@ -42,6 +43,10 @@ public class UpdateApptCtrl implements Initializable {
     @FXML
     private ComboBox<User> userIdCombo;
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userIdCombo.setItems(StaticObservableLists.userList);
@@ -144,11 +149,22 @@ public class UpdateApptCtrl implements Initializable {
         }
     }
 
+    /** This method activates when the Cancel button is clicked.
+     *  This will clear all input fields and go back to the Appointment controller.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         ButtonEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Appointments.fxml", "Appointments Table",event);
     }
 
+    /** This method activates when the Save button is clicked.
+     *  The input in the text boxes and combo boxes will be validated and then saved to an existing appointment.
+     *  The appointment will be saved in the the database with Java based SQL methods.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");

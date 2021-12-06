@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static tools.StaticObservableLists.countryList;
+import static tools.StaticObservableLists.divisionList;
+
+/** This class is responsible for the functionality of the "Update Cust" controller. */
 public class UpdateCustCtrl implements Initializable {
     @FXML
     private TextField custIdTxt;
@@ -36,11 +40,12 @@ public class UpdateCustCtrl implements Initializable {
     @FXML
     private ComboBox<FirstLevelDivision> divisionCombo;
 
-    ObservableList<Country> countryList = DBCountries.getAllCountries();
-    ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
-
     ObservableList<FirstLevelDivision> filteredDivisionList = FXCollections.observableArrayList();
 
+    /** This method activates when the scene starts.
+     *  @param url for initialization
+     *  @param resourceBundle for initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryCombo.setItems(countryList);
@@ -89,11 +94,22 @@ public class UpdateCustCtrl implements Initializable {
         }
     }
 
+    /** This method activates when the Cancel button is clicked.
+     *  This will clear all input fields and go back to the Customer controller.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         ButtonEvent.cancelButtonAction("None of your changes will be saved, do you want to continue?", "Cancel button clicked", "/view/Customers.fxml", "Customers Table",event);
     }
 
+    /** This method activates when the Save button is clicked.
+     *  The input in the text boxes and combo boxes will be validated and then saved to an existing customer.
+     *  The customer will be saved in the the database with Java based SQL methods.
+     *  @param event object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
         System.out.println("Save button clicked!");
