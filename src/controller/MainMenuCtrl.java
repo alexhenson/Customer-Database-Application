@@ -40,7 +40,7 @@ public class MainMenuCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
-    @FXML
+    @FXML //Should remove ue to bug
     void onActionLogin(ActionEvent event) throws IOException {
         System.out.println("Login button clicked!");
         ButtonEvent.buttonAction("/view/Login.fxml", "Login Screen", event);
