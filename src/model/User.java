@@ -1,5 +1,6 @@
 package model;
 
+/** This class is responsible for the functionality of the User class. */
 public class User {
     private int userId;
     private String userName;

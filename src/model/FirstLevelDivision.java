@@ -1,5 +1,6 @@
 package model;
 
+/** This class is responsible for the functionality of the FirstLevelDivision class. */
 public class FirstLevelDivision {
     private int divisionId;
     private String division;

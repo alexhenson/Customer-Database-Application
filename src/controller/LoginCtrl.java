@@ -66,7 +66,9 @@ public class LoginCtrl implements Initializable {
         validateLogin(actionEvent, "Submit button clicked!");
     }
 
-    /** This method will !!!!!!
+    /** This method will validate the login information for the username and password.
+     *  Additionally this method also contains code to set up an alert for any appointment within 15 minutes of login.
+     *  Code also calls loginWriter method.
      *  @param actionEvent object to trigger actions
      *  @param systemDialog The string passed to the System.out.println() function.
      *  @throws IOException If an input or output exception occurred
@@ -104,6 +106,12 @@ public class LoginCtrl implements Initializable {
         AlertEvent.alertBox(rb.getString("alertBox.title"), rb.getString("alertBox.text"));
     }
 
+    /** This method writes the login activity of every login attempt to a text file.
+     *  @param username object to trigger actions
+     *  @param password The string passed to the System.out.println() function.
+     *  @param isSuccessful The string passed to the System.out.println() function.
+     *  @throws IOException If an input or output exception occurred
+     */
     public void loginWriter(String username, String password, boolean isSuccessful) throws IOException {
         String filename = "login_activity.txt";
         FileWriter loginFW = new FileWriter(filename, true);

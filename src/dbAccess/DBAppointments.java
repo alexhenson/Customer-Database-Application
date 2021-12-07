@@ -9,7 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.*;
 import java.time.LocalDateTime;
 
+/** This class is responsible for the SQL functionality for Appointment objects. */
 public class DBAppointments {
+
+    /** This method uses SQL specific methods to access a database and create an ObservableList of Appointment objects.
+     *  @return ObservableList of Appointment objects
+     */
     public static @NotNull
     ObservableList<Appointment> getAllAppointments() {
         ObservableList<Appointment> alist =FXCollections.observableArrayList();
@@ -44,6 +49,17 @@ public class DBAppointments {
         return alist;
     }
 
+    /** This method uses SQL specific methods to add Appointment objects to the database.
+     *  @param title the title to set
+     *  @param description the description to set
+     *  @param location the location to set
+     *  @param type the type to set
+     *  @param start the start to set
+     *  @param end the end to set
+     *  @param customerId the customerId to set
+     *  @param userId the userId to set
+     *  @param contactId the contactId to set
+     */
     public static void addAppointment(String title,String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId) {
         try {
             String sql = "INSERT INTO client_schedule.appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) \n" +
@@ -66,6 +82,17 @@ public class DBAppointments {
         }
     }
 
+    /** This method uses SQL specific methods to update Appointment objects in the database.
+     *  @param title the title to set
+     *  @param description the description to set
+     *  @param location the location to set
+     *  @param type the type to set
+     *  @param start the start to set
+     *  @param end the end to set
+     *  @param customerId the customerId to set
+     *  @param userId the userId to set
+     *  @param contactId the contactId to set
+     */
     public static void updateAppointment(int appointmentId, String title,String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId) {
         try {
             String sql = "UPDATE client_schedule.appointments\n" +
@@ -91,6 +118,9 @@ public class DBAppointments {
         }
     }
 
+    /** This method uses SQL specific methods to delete Appointment objects from the database.
+     *  @param appointmentId the appointmentId to set
+     */
     public static void deleteAppointment(int appointmentId) {
         try {
             String sql = "DELETE FROM client_schedule.appointments WHERE Appointment_ID = ?;";

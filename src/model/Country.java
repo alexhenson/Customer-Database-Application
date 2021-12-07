@@ -1,5 +1,6 @@
 package model;
 
+/** This class is responsible for the functionality of the Country class. */
 public class Country {
     private int countryId;
     private String countryName;

@@ -1,5 +1,6 @@
 package model;
 
+/** This class is responsible for the functionality of the Customer class. */
 public class Customer {
     private int customerId;
     private String customerName;

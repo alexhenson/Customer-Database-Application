@@ -64,6 +64,9 @@ public class UpdateApptCtrl implements Initializable {
         startTimeCombo.setItems(StaticObservableLists.startTimeList);
     }
 
+    /** This method allows user to send data from AppointmentsCtrl controller to the UpdateApptCtrl controller.
+     *  @param appt selected from AppointmentCtrl
+     */
     public void sendAppointment(Appointment appt) {
         idTxt.setText(String.valueOf(appt.getAppointmentId()));
         titleTxt.setText(appt.getTitle());
@@ -261,6 +264,7 @@ public class UpdateApptCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointment Table", event);
     }
 
+    /** This method is responsible for setting the times in the End time combo box based on the time selected in the Start time combo box. */
     public void onActionStartTime() {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
         StaticObservableLists.endTimeList.clear();

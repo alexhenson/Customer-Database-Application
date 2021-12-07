@@ -1,8 +1,6 @@
 package controller;
 
-import dbAccess.DBCountries;
 import dbAccess.DBCustomers;
-import dbAccess.DBDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +49,9 @@ public class UpdateCustCtrl implements Initializable {
         countryCombo.setItems(countryList);
     }
 
+    /** This method allows user to send data from CustomersCtrl controller to the UpdateCustCtrl controller.
+     *  @param cust selected from AppointmentCtrl
+     */
     public void sendCustomer(Customer cust) {
         custIdTxt.setText(String.valueOf(cust.getCustomerId()));
         nameTxt.setText(cust.getCustomerName());
@@ -140,11 +141,13 @@ public class UpdateCustCtrl implements Initializable {
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", event);
     }
 
+    /** This method calls the filterDivisions method. */
     public void onActionCountry() {
         Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
         filterDivisions(selectedCountry);
     }
 
+    /** This method sets the data for the Division combo box based on what is selected in the Country combo box. */
     public void filterDivisions(Country country) {
         filteredDivisionList.clear();
         for (FirstLevelDivision d : divisionList) {

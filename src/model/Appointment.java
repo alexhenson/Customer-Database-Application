@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** This class is responsible for the functionality of the Appointment class. */
 public class Appointment {
 
     private static ObservableList<String> typeList = FXCollections.observableArrayList();

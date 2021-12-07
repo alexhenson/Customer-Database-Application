@@ -30,24 +30,41 @@ public class ReportsCtrl implements Initializable {
      *  @param resourceBundle for initialization
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) { }
 
-    }
+    /** This method will take you to the Customers Form.
+     *  @param actionEvent object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     public void onActionCust(ActionEvent actionEvent) throws IOException {
         System.out.println("Customers button clicked!");
         ButtonEvent.buttonAction("/view/Customers.fxml", "Customers Table", actionEvent);
     }
 
+    /** This method will take you to the Main Menu Form.
+     *  @param actionEvent object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     public void onActionMainMenu(ActionEvent actionEvent) throws IOException {
         System.out.println("Main Menu button clicked!");
         ButtonEvent.buttonAction("/view/MainMenu.fxml", "Main Menu", actionEvent);
     }
 
+    /** This method will take you to the Appointment Form.
+     *  @param actionEvent object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     public void onActionAppt(ActionEvent actionEvent) throws IOException {
         System.out.println("Appointments button clicked!");
         ButtonEvent.buttonAction("/view/Appointments.fxml", "Appointments Table", actionEvent);
     }
 
+    /** This method calculates the information necessary for the Customer Appointment Report.
+     *  Additionally, at the end of the method it uses a forEach method and a LAMBDA expression to
+     *  print out all of the objects in the appointmentList.  It is advantageous to use a LAMBDA here
+     *  because we can print the entire ObservableList without actually writing a for each loop to
+     *  do it.  We have saved some lines of code doing it this way.
+     */
     public void onActionCustApptRBtn() {
         System.out.println("Customer Radio button selected.");
         textArea.clear();
@@ -97,10 +114,20 @@ public class ReportsCtrl implements Initializable {
             monthInt++;
         }
         textArea.setText(custStr.toString());
+
+        //LAMBDA EXPRESSION #1
         System.out.println("All Appointments:");
         StaticObservableLists.appointmentList.forEach(System.out::println);
     }
 
+    /** This method calculates the information necessary for the Contact Appointment Report.
+     *  At the end of the method I used two more LAMBDA expressions, I converted the ObservableList
+     *  to an array, the array into a stream, and then sorted the stream with a Comparator object
+     *  using the LAMBDA expression 'Contact::getEmail', I used another LAMBDA expression,
+     *  'c + "'s Email: " + c.getEmail()' to print out the stream wiht a for each method.
+     *  The first LAMBDA expression was useful to use the Comparator method 'comparing' in a very concise
+     *  and easy-to-read way.
+     */
     public void onActionContactRBtn() {
         System.out.println("Contact Radio button selected.");
         textArea.clear();
@@ -115,7 +142,9 @@ public class ReportsCtrl implements Initializable {
             }
             contactStr.append("\n");
         }
+        textArea.setText(contactStr.toString());
 
+        //LAMBDA EXPRESSION #2
         int sizeOfContact = StaticObservableLists.contactList.size();
         Contact[] contactArr = new Contact[sizeOfContact];
         for(int i = 0; i < sizeOfContact; i++) {
@@ -124,9 +153,11 @@ public class ReportsCtrl implements Initializable {
         Stream<Contact> contactStream = Stream.of(contactArr);
         Stream<Contact> sortedContactEmail = contactStream.sorted(Comparator.comparing(Contact::getEmail));
         sortedContactEmail.forEach((c) -> System.out.println(c + "'s Email: " + c.getEmail()));
-        textArea.setText(contactStr.toString());
     }
 
+    /** This method calculates the information necessary for the Appointment Day Report
+     *  This report shows the count of the Appointments categorized by the day of the week.
+     */
     public void onActionDayRBtn() {
         System.out.println("Day Radio button selected.");
         textArea.clear();

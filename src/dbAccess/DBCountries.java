@@ -7,7 +7,11 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
+/** This class is responsible for the SQL functionality for Appointment objects. */
 public class DBCountries {
+    /** This method uses SQL specific methods to access a database and create an ObservableList of Country objects.
+     *  @return ObservableList of Country objects
+     */
     public static ObservableList<Country> getAllCountries() {
         ObservableList<Country> clist =FXCollections.observableArrayList();
 

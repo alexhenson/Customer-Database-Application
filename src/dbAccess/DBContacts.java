@@ -7,7 +7,11 @@ import model.Contact;
 
 import java.sql.*;
 
+/** This class is responsible for the SQL functionality for Appointment objects. */
 public class DBContacts {
+    /** This method uses SQL specific methods to access a database and create an ObservableList of Contact objects.
+     *  @return ObservableList of Contact objects
+     */
     public static ObservableList<Contact> getAllContacts() {
         ObservableList<Contact> clist =FXCollections.observableArrayList();
 

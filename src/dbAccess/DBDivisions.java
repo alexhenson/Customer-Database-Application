@@ -7,7 +7,11 @@ import model.FirstLevelDivision;
 
 import java.sql.*;
 
+/** This class is responsible for the SQL functionality for Appointment objects. */
 public class DBDivisions {
+    /** This method uses SQL specific methods to access a database and create an ObservableList of Division objects.
+     *  @return ObservableList of Division objects
+     */
     public static ObservableList<FirstLevelDivision> getAllDivisions() {
         ObservableList<FirstLevelDivision> flist =FXCollections.observableArrayList();
 

@@ -7,7 +7,11 @@ import model.Customer;
 
 import java.sql.*;
 
+/** This class is responsible for the SQL functionality for Appointment objects. */
 public class DBCustomers {
+    /** This method uses SQL specific methods to access a database and create an ObservableList of Customer objects.
+     *  @return ObservableList of Customer objects
+     */
     public static ObservableList<Customer> getAllCustomers() {
         ObservableList<Customer> clist =FXCollections.observableArrayList();
 
@@ -39,6 +43,13 @@ public class DBCustomers {
         return clist;
     }
 
+    /** This method uses SQL specific methods to add Customer objects to the database.
+     *  @param customerName the customerName to set
+     *  @param address the address to set
+     *  @param division the division to set
+     *  @param postalCode the postalCode to set
+     *  @param phone the phone to set
+     */
     public static void addCustomer(String customerName, String address, int division, String postalCode, String phone) {
         try {
             String sql = "INSERT INTO client_schedule.customers (Customer_ID, Customer_Name, Address, Division_ID, Postal_Code, Phone) \n" +
@@ -58,6 +69,13 @@ public class DBCustomers {
         }
     }
 
+    /** This method uses SQL specific methods to update Customer objects in the database.
+     *  @param customerName the customerName to set
+     *  @param address the address to set
+     *  @param division the division to set
+     *  @param postalCode the postalCode to set
+     *  @param phone the phone to set
+     */
     public static void updateCustomer(int customerId, String customerName, String address, int division, String postalCode, String phone) {
         try {
             String sql = "UPDATE client_schedule.customers \n" +
@@ -81,6 +99,9 @@ public class DBCustomers {
         }
     }
 
+    /** This method uses SQL specific methods to delete Customer objects from the database.
+     *  @param customerId the customerId to set
+     */
     public static void deleteCustomer(int customerId) {
         try {
             String sql = "DELETE FROM client_schedule.customers WHERE Customer_ID = ?;";

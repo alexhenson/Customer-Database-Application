@@ -1,5 +1,6 @@
 package model;
 
+/** This class is responsible for the functionality of the Contact class. */
 public class Contact {
     private int contactId;
     private String contactName;

@@ -3,6 +3,7 @@ package dbConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/** This class is responsible for the connecting the IntelliJ IDE to the MySQL database. */
 public abstract class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -14,6 +15,7 @@ public abstract class JDBC {
     private static final String password = "Passw0rd!";
     public static Connection connection; // Connection Interface
 
+    /** This method opens the database connection. */
     public static void openConnection() {
         try {
             Class.forName(driver); // Locate Driver
@@ -24,10 +26,14 @@ public abstract class JDBC {
         }
     }
 
+    /** This method returns the database connection object.
+     *  @return the connection object
+     */
     public static Connection getConnection() {
         return connection;
     }
 
+    /** This method closes the database connection. */
     public static void closeConnection() {
         try {
             connection.close();

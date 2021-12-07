@@ -7,7 +7,11 @@ import model.User;
 
 import java.sql.*;
 
+/** This class is responsible for the SQL functionality for Appointment objects. */
 public class DBUsers {
+    /** This method uses SQL specific methods to access a database and create an ObservableList of User objects.
+     *  @return ObservableList of User objects
+     */
     public static ObservableList<User> getAllUsers() {
         ObservableList<User> ulist =FXCollections.observableArrayList();
 
