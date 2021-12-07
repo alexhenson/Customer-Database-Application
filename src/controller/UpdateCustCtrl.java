@@ -147,7 +147,9 @@ public class UpdateCustCtrl implements Initializable {
         filterDivisions(selectedCountry);
     }
 
-    /** This method sets the data for the Division combo box based on what is selected in the Country combo box. */
+    /** This method sets the data for the Division combo box based on what is selected in the Country combo box.
+     *  @param country the country to set
+     */
     public void filterDivisions(Country country) {
         filteredDivisionList.clear();
         for (FirstLevelDivision d : divisionList) {

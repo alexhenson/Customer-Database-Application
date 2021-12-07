@@ -83,6 +83,7 @@ public class DBAppointments {
     }
 
     /** This method uses SQL specific methods to update Appointment objects in the database.
+     * @param appointmentId the appointmentId to set
      *  @param title the title to set
      *  @param description the description to set
      *  @param location the location to set

@@ -70,6 +70,7 @@ public class DBCustomers {
     }
 
     /** This method uses SQL specific methods to update Customer objects in the database.
+     * @param customerId the customerId to set
      *  @param customerName the customerName to set
      *  @param address the address to set
      *  @param division the division to set
