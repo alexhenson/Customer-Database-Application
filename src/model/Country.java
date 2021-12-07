@@ -5,6 +5,10 @@ public class Country {
     private int countryId;
     private String countryName;
 
+    /** This constructor initializes the fields from the two parameters.
+     *   @param countryId to set countryId
+     *   @param countryName to set countryName
+     */
     public Country(int countryId, String countryName) {
         this.countryId = countryId;
         this.countryName = countryName;

@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 /** This class is responsible for the functionality of the Appointment class. */
 public class Appointment {
 
+    // This Observable list will a typeList of Strings to fill the 'Meeting Type' combo boxes in Add and Update Appointments
     private static ObservableList<String> typeList = FXCollections.observableArrayList();
 
     private int appointmentId;
@@ -24,6 +25,18 @@ public class Appointment {
     private int customerId;
     private int userId;
 
+    /** This constructor initializes the fields from the ten parameters.
+     *   @param appointmentId to set appointmentId
+     *   @param title to set title
+     *   @param description to set description
+     *   @param location to set location
+     *   @param contact to set contact
+     *   @param type to set type
+     *   @param start to set start
+     *   @param end to set end
+     *   @param customerId to set customerId
+     *   @param userId to set userId
+     */
     public Appointment(int appointmentId, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId) {
         this.appointmentId = appointmentId;
         this.title = title;

@@ -6,6 +6,11 @@ public class User {
     private String userName;
     private String password;
 
+    /** This constructor initializes the fields from the three parameters.
+     *   @param userId to set userId
+     *   @param userName to set userName
+     *   @param password to set password
+     */
     public User(int userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;

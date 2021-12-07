@@ -6,6 +6,11 @@ public class FirstLevelDivision {
     private String division;
     private int countryId;
 
+    /** This constructor initializes the fields from the three parameters.
+     *   @param divisionId to set divisionId
+     *   @param division to set division
+     *   @param countryId to set countryId
+     */
     public FirstLevelDivision(int divisionId, String division, int countryId) {
         this.divisionId = divisionId;
         this.division = division;

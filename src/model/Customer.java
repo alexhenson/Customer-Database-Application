@@ -10,6 +10,15 @@ public class Customer {
     private String country;
     private String phone;
 
+    /** This constructor initializes the fields from the seven parameters.
+     *   @param customerId to set customerId
+     *   @param customerName to set customerName
+     *   @param address to set address
+     *   @param division to set division
+     *   @param postalCode to set postalCode
+     *   @param country to set country
+     *   @param phone to set phone
+     */
     public Customer(int customerId, String customerName, String address, String division, String postalCode, String country, String phone) {
         this.customerId = customerId;
         this.customerName = customerName;

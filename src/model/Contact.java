@@ -6,6 +6,11 @@ public class Contact {
     private String contactName;
     private String email;
 
+    /** This constructor initializes the fields from the three parameters.
+     *   @param contactId to set contactId
+     *   @param contactName to set contactName
+     *   @param email to set email
+     */
     public Contact(int contactId, String contactName, String email) {
         this.contactId = contactId;
         this.contactName = contactName;
