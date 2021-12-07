@@ -59,6 +59,9 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * @return the object as a String
+     */
     @Override
     public String toString() {
         return "User ID: " + userId;

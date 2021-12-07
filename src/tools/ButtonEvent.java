@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/** This helper class is responsible for the functionality of all the Button objects in the program. */
 public class ButtonEvent {
     public static Stage stage;
     public static Parent scene;
@@ -32,6 +33,14 @@ public class ButtonEvent {
         stage.show();
     }
 
+    /** Static method that will allow user to change scenes with the click of a button.
+     *  @param message alert message
+     *  @param systemMsg message for the console
+     *  @param fileName name of the file to change the scene
+     *  @param formName name of the form to place as the title
+     *  @param actionEvent object to trigger actions
+     *  @throws IOException If an input or output exception occurred
+     */
     public static void cancelButtonAction(String message, String systemMsg, String fileName, String formName, ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
         Optional<ButtonType> result = alert.showAndWait();
@@ -41,6 +50,11 @@ public class ButtonEvent {
             buttonAction(fileName, formName, actionEvent);
         }
     }
+
+    /** Static method that will allow user exit the program and close the database connection.
+     *  @param message alert message
+     *  @param systemMsg message for the console
+     */
     public static void exitButtonAction(String message, String systemMsg) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
 
@@ -52,6 +66,4 @@ public class ButtonEvent {
             System.exit(0);
         }
     }
-
-
 }

@@ -28,3 +28,4 @@ Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 13:42 
 Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 13:51 CST, Login Successful: true
 Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 13:51 CST, Login Successful: true
 Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 14:31 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-06 21:05 CST, Login Successful: true

@@ -7,6 +7,7 @@ import model.*;
 
 import java.time.LocalTime;
 
+/** This helper class is responsible for keeping all of the ObservableLists in the program in one place to be accessed statically. */
 public class StaticObservableLists {
     public static ObservableList<String> typeList = Appointment.getTypeList();
     public static ObservableList<Contact> contactList = DBContacts.getAllContacts();

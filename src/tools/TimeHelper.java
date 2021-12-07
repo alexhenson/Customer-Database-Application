@@ -2,6 +2,7 @@ package tools;
 
 import java.time.*;
 
+/** This helper class is responsible for the functionality of the Date and Time objects in the program. */
 public class TimeHelper {
 
     public static LocalDate currentDate = LocalDate.now();

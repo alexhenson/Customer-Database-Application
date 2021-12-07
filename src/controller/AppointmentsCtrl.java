@@ -23,8 +23,6 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static tools.StaticObservableLists.appointmentList;
-
 /** This class is responsible for the functionality of the "Appointments" controller. */
 public class AppointmentsCtrl implements Initializable {
     @FXML
@@ -49,6 +47,8 @@ public class AppointmentsCtrl implements Initializable {
     private TableColumn<Appointment, String> typeCol;
     @FXML
     private TableColumn<Appointment, Integer> userIdCol;
+
+    ObservableList<Appointment> appointmentList = DBAppointments.getAllAppointments();
 
     /** This method activates when the scene starts.
      *  @param url for initialization

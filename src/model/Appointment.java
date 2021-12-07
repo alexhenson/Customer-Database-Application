@@ -50,106 +50,181 @@ public class Appointment {
         this.userId = userId;
     }
 
+    /**
+     * @return the typeList
+     */
     public static ObservableList<String> getTypeList() {
         return typeList;
     }
 
+    /**
+     * @param typeList the typeList to set
+     */
     public static void setTypeList(ObservableList<String> typeList) {
         Appointment.typeList = typeList;
     }
 
+    /**
+     * @return the appointmentId
+     */
     public int getAppointmentId() {
         return appointmentId;
     }
 
+    /**
+     * @param appointmentId the appointmentId to set
+     */
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
     }
 
+    /**
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @param title the title to set
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description the description to set
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return the location
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * @param location the location to set
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * @return the contact
+     */
     public String getContact() {
         return contact;
     }
 
+    /**
+     * @param contact the contact to set
+     */
     public void setContact(String contact) {
         this.contact = contact;
     }
 
+    /**
+     * @return the type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * @param type the type to set
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * @return the LocalDateTime object as a String
+     */
     public String getStartString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
         ZonedDateTime startZDT = start.atZone(ZoneId.systemDefault());
         return startZDT.format(formatter);
     }
 
+    /**
+     * @return the start
+     */
     public LocalDateTime getStart() {
         return start;
     }
 
+    /**
+     * @param start the start to set
+     */
     public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
+    /**
+     * @return the LocalDateTime object as a String
+     */
     public String getEndString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
         ZonedDateTime endZDT = end.atZone(ZoneId.systemDefault());
         return endZDT.format(formatter);
     }
 
+    /**
+     * @return the end
+     */
     public LocalDateTime getEnd() {
         return end;
     }
 
+    /**
+     * @param end the end to set
+     */
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
+    /**
+     * @return the customerId
+     */
     public int getCustomerId() {
         return customerId;
     }
 
+    /**
+     * @param customerId the customerId to set
+     */
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
+    /**
+     * @return the userId
+     */
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * @param userId the userId to set
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
+    /**
+     * @return the object as a String
+     */
     public String toString() {
         return "Appointment ID: " + appointmentId + ", Title: " + title + ", Type: " + type +
                 ", Description: " + description + ", Start Date and Time: " + getStartString() +

@@ -2,6 +2,7 @@ package tools;
 
 import javafx.scene.control.TextField;
 
+/** This helper class is responsible for the functionality of the TextBox objects in the program. */
 public class TextBoxEvent {
     /** This method validates a String from the text box.
      *  @param textField object used with getText() method
