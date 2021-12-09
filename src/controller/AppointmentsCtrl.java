@@ -87,7 +87,7 @@ public class AppointmentsCtrl implements Initializable {
         apptTblView.setItems(apptMonthList);
     }
 
-    /** This method is responsible for setting the apptTblView to show all Appointments in the next seven days. */
+    /** This method is responsible for setting the apptTblView to show all Appointments in the current week starting from the previous or current Sunday. */
     @FXML
     void onActionWeek() {
         ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
