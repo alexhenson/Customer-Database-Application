@@ -93,7 +93,7 @@ public class AppointmentsCtrl implements Initializable {
         ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
         for (Appointment a : appointmentList) {
             LocalDate apptDate = a.getStart().toLocalDate();
-            if ((apptDate.isAfter(TimeHelper.currentDay) || apptDate.isEqual(TimeHelper.currentDay)) && (apptDate.isBefore(TimeHelper.nextWeekDay) || apptDate.isEqual(TimeHelper.nextWeekDay))) {
+            if ((apptDate.isAfter(TimeHelper.previousOrCurrentSunday) || apptDate.isEqual(TimeHelper.previousOrCurrentSunday)) && (apptDate.isBefore(TimeHelper.nextWeekDay) || apptDate.isEqual(TimeHelper.nextWeekDay))) {
                 apptWeekList.add(a);
             }
         }

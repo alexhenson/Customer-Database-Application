@@ -4,7 +4,6 @@ import dbConnection.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
-import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -15,8 +14,7 @@ public class DBAppointments {
     /** This method uses SQL specific methods to access a database and create an ObservableList of Appointment objects.
      *  @return ObservableList of Appointment objects
      */
-    public static @NotNull
-    ObservableList<Appointment> getAllAppointments() {
+    public static ObservableList<Appointment> getAllAppointments() {
         ObservableList<Appointment> alist =FXCollections.observableArrayList();
 
         try {

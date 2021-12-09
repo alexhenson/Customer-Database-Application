@@ -57,7 +57,7 @@ public class UpdateApptCtrl implements Initializable {
         LocalTime start = TimeHelper.etLocalOpen.toLocalTime();
         LocalTime end = TimeHelper.etLocalClose.toLocalTime();
 
-        while (start.isBefore(end.plusSeconds(1))) {
+        while (start.isBefore(end.minusMinutes(15).plusSeconds(1))) {
             StaticObservableLists.startTimeList.add(start);
             start = start.plusMinutes(15);
         }
@@ -269,15 +269,15 @@ public class UpdateApptCtrl implements Initializable {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
         StaticObservableLists.endTimeList.clear();
 
-        LocalTime start = selectedStartTime;
+        LocalTime start = selectedStartTime.plusMinutes(15);
         LocalTime end = TimeHelper.etLocalClose.toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
-            start = start.plusMinutes(15);
             StaticObservableLists.endTimeList.add(start);
+            start = start.plusMinutes(15);
         }
         endTimeCombo.setItems(StaticObservableLists.endTimeList);
-        endTimeCombo.setValue(selectedStartTime.plusMinutes(30));
+        endTimeCombo.setValue(selectedStartTime.plusMinutes(15));
     }
 }
 

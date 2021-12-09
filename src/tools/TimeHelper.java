@@ -1,25 +1,25 @@
 package tools;
 
 import java.time.*;
+import java.time.temporal.TemporalAdjusters;
 
 /** This helper class is responsible for the functionality of the Date and Time objects in the program. */
 public class TimeHelper {
-
     public static LocalDate currentDate = LocalDate.now();
     public static LocalTime currentTime = LocalTime.now();
 
     public static Month currentMonth = currentDate.getMonth();
-    public static LocalDate currentDay = currentDate;
-    public static LocalDate nextWeekDay = currentDate.plusDays(7);
-
-    public static ZonedDateTime utcZonedOpening = ZonedDateTime.of(currentDate.atTime(13, 00), ZoneOffset.UTC);
-    public static ZonedDateTime utcZonedClosing = ZonedDateTime.of(currentDate.plusDays(1).atTime(2, 30), ZoneOffset.UTC);
+    public static LocalDate previousOrCurrentSunday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+    public static LocalDate nextWeekDay = previousOrCurrentSunday.plusDays(7);
 
     public static ZoneId etZoneId = ZoneId.of("America/New_York");
+    public static ZonedDateTime etZonedOpening = ZonedDateTime.of(currentDate.atTime(8, 00), etZoneId);
+    public static ZonedDateTime etZonedClosing = ZonedDateTime.of(currentDate.atTime(22, 00), etZoneId);
+
     public static ZoneId localZoneId = ZoneId.systemDefault();
-    public static ZonedDateTime localZonedOpen = utcZonedOpening.withZoneSameInstant(localZoneId);
+    public static ZonedDateTime localZonedOpen = etZonedOpening.withZoneSameInstant(localZoneId);
     public static LocalDateTime etLocalOpen = localZonedOpen.toLocalDateTime();
 
-    public static ZonedDateTime localZonedClose = utcZonedClosing.withZoneSameInstant(localZoneId);
+    public static ZonedDateTime localZonedClose = etZonedClosing.withZoneSameInstant(localZoneId);
     public static LocalDateTime etLocalClose = localZonedClose.toLocalDateTime();
 }
