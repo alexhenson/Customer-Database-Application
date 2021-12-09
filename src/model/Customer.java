@@ -131,5 +131,5 @@ public class Customer {
      * @return the object as a String
      */
     @Override
-    public String toString() { return "Customer ID: " + customerId; }
+    public String toString() { return "ID: " + customerId + ", Name: " + customerName; }
 }
