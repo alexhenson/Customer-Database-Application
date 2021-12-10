@@ -23,6 +23,8 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static tools.TimeHelper.*;
+
 /** This class is responsible for the functionality of the "Appointments" controller. */
 public class AppointmentsCtrl implements Initializable {
     @FXML
@@ -80,7 +82,7 @@ public class AppointmentsCtrl implements Initializable {
     void onActionMonth() {
         ObservableList<Appointment> apptMonthList = FXCollections.observableArrayList();
         for (Appointment a : appointmentList) {
-            if (TimeHelper.currentMonth.equals(a.getStart().getMonth())) {
+            if(a.getStart().isAfter(getCurrentMonthFirstDay()) && a.getStart().isBefore(getCurrentMonthLastDay())) {
                 apptMonthList.add(a);
             }
         }
@@ -92,8 +94,8 @@ public class AppointmentsCtrl implements Initializable {
     void onActionWeek() {
         ObservableList<Appointment> apptWeekList = FXCollections.observableArrayList();
         for (Appointment a : appointmentList) {
-            LocalDate apptDate = a.getStart().toLocalDate();
-            if ((apptDate.isAfter(TimeHelper.previousOrCurrentSunday) || apptDate.isEqual(TimeHelper.previousOrCurrentSunday)) && (apptDate.isBefore(TimeHelper.nextWeekDay) || apptDate.isEqual(TimeHelper.nextWeekDay))) {
+            LocalDateTime apptDate = a.getStart();
+            if ((apptDate.isAfter(getPreviousOrCurrentSunday()) || apptDate.isEqual(getPreviousOrCurrentSunday())) && (apptDate.isBefore(getNextSunday()) || apptDate.isEqual(getNextSunday()))) {
                 apptWeekList.add(a);
             }
         }

@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import static tools.TimeHelper.getETLocalClosingHours;
+import static tools.TimeHelper.getETLocalOpeningHours;
+
 /** This class is responsible for the functionality of the "Add Appt" controller. */
 public class AddApptCtrl implements Initializable {
     @FXML
@@ -57,8 +60,8 @@ public class AddApptCtrl implements Initializable {
         typeCombo.setItems(StaticObservableLists.typeList);
         custIdCombo.setItems(StaticObservableLists.customerList);
 
-        LocalTime start = TimeHelper.etLocalOpen.toLocalTime();
-        LocalTime end = TimeHelper.etLocalClose.toLocalTime();
+        LocalTime start = getETLocalOpeningHours().toLocalTime();
+        LocalTime end = getETLocalClosingHours().toLocalTime();
 
         while (start.isBefore(end.minusMinutes(15).plusSeconds(1))) {
             StaticObservableLists.startTimeList.add(start);
@@ -131,6 +134,7 @@ public class AddApptCtrl implements Initializable {
         LocalDateTime localStart = LocalDateTime.of(date, startTime);
         LocalDateTime localEnd = LocalDateTime.of(date, endTime);
 
+        /*
         if (localStart.isBefore(TimeHelper.etLocalOpen) || localStart.isAfter(TimeHelper.etLocalClose)) {
             AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time falls outside of the business hours of 8:00am to 10pm EST.");
             return;
@@ -140,6 +144,7 @@ public class AddApptCtrl implements Initializable {
             AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose end time falls outside of the business hours of 8:00am to 10pm EST.");
             return;
         }
+         */
 
         for (Appointment a : StaticObservableLists.appointmentList) {
             if (a.getCustomerId() == custId) {
@@ -185,7 +190,7 @@ public class AddApptCtrl implements Initializable {
         StaticObservableLists.endTimeList.clear();
 
         LocalTime start = selectedStartTime.plusMinutes(15);
-        LocalTime end = TimeHelper.etLocalClose.toLocalTime();
+        LocalTime end = getETLocalClosingHours().toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
             StaticObservableLists.endTimeList.add(start);

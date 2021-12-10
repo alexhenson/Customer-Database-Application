@@ -22,6 +22,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static tools.TimeHelper.getCurrentTime;
+
 /** This class is responsible for the functionality of the "Login" controller. */
 public class LoginCtrl implements Initializable {
     @FXML
@@ -84,8 +86,8 @@ public class LoginCtrl implements Initializable {
                 boolean foundAppt = false;
 
                 for (Appointment a : StaticObservableLists.appointmentList) {
-                    if (u.getUserId() == a.getUserId() && a.getStart().toLocalTime().isAfter(TimeHelper.currentTime.minusSeconds(1))) {
-                        long timeDifference = ChronoUnit.MINUTES.between(TimeHelper.currentTime, a.getStart().toLocalTime());
+                    if (u.getUserId() == a.getUserId() && a.getStart().toLocalTime().isAfter(getCurrentTime().minusSeconds(1))) {
+                        long timeDifference = ChronoUnit.MINUTES.between(getCurrentTime(), a.getStart().toLocalTime());
                         if (timeDifference >= 0 && timeDifference <= 15) {
                             AlertEvent.infoBox("Appointment Soon!", "User #" + u.getUserId() + " has an appointment starting in about " + timeDifference + " minutes!");
                             foundAppt = true;

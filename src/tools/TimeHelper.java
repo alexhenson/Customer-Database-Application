@@ -5,21 +5,76 @@ import java.time.temporal.TemporalAdjusters;
 
 /** This helper class is responsible for the functionality of the Date and Time objects in the program. */
 public class TimeHelper {
-    public static LocalDate currentDate = LocalDate.now();
-    public static LocalTime currentTime = LocalTime.now();
+    private static final ZoneId etZoneId = ZoneId.of("America/New_York");
+    private static final ZoneId localZoneId = ZoneId.systemDefault();
 
-    public static Month currentMonth = currentDate.getMonth();
-    public static LocalDate previousOrCurrentSunday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
-    public static LocalDate nextWeekDay = previousOrCurrentSunday.plusDays(7);
+    /**
+     * @return the current LocalDate object
+     */
+    public static LocalDate getCurrentDate() {
+        return LocalDate.now();
+    }
 
-    public static ZoneId etZoneId = ZoneId.of("America/New_York");
-    public static ZonedDateTime etZonedOpening = ZonedDateTime.of(currentDate.atTime(8, 00), etZoneId);
-    public static ZonedDateTime etZonedClosing = ZonedDateTime.of(currentDate.atTime(22, 00), etZoneId);
+    /**
+     * @return the current LocalTime object
+     */
+    public static LocalTime getCurrentTime() {
+        return LocalTime.now();
+    }
 
-    public static ZoneId localZoneId = ZoneId.systemDefault();
-    public static ZonedDateTime localZonedOpen = etZonedOpening.withZoneSameInstant(localZoneId);
-    public static LocalDateTime etLocalOpen = localZonedOpen.toLocalDateTime();
+    /**
+     * @return the LocalDateTime object for the previous or current Sunday
+     */
+    public static LocalDateTime getPreviousOrCurrentSunday() {
+        return LocalDateTime.of(LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)), LocalTime.of(0,0));
+    }
 
-    public static ZonedDateTime localZonedClose = etZonedClosing.withZoneSameInstant(localZoneId);
-    public static LocalDateTime etLocalClose = localZonedClose.toLocalDateTime();
+    /**
+     * @return the LocalDateTime object for the next Sunday
+     */
+    public static LocalDateTime getNextSunday() {
+        return getPreviousOrCurrentSunday().plusDays(7);
+    }
+
+    /**
+     * @return the LocalDateTime object for the first day of the current month
+     */
+    public static LocalDateTime getCurrentMonthFirstDay() {
+        return LocalDateTime.of(YearMonth.now().atDay(1), LocalTime.of(0,0));
+    }
+
+    /**
+     * @return the LocalDateTime object for the last day of the current month
+     */
+    public static LocalDateTime getCurrentMonthLastDay() {
+        return getCurrentMonthFirstDay().plusMonths(1);
+    }
+
+    /**
+     * @return the ZonedDateTime object for the eastern time opening hours
+     */
+    public static ZonedDateTime getETZonedOpeningHours() {
+        return ZonedDateTime.of(LocalDate.now().atTime(8, 00), etZoneId);
+    }
+
+    /**
+     * @return the ZonedDateTime object for the eastern time closing hours
+     */
+    public static ZonedDateTime getETZonedClosingHours() {
+        return ZonedDateTime.of(LocalDate.now().atTime(22, 00), etZoneId);
+    }
+
+    /**
+     * @return the LocalDateTime object for the eastern time opening hours
+     */
+    public static LocalDateTime getETLocalOpeningHours() {
+        return getETZonedOpeningHours().withZoneSameInstant(localZoneId).toLocalDateTime();
+    }
+
+    /**
+     * @return the LocalDateTime object for the eastern time opening hours
+     */
+    public static LocalDateTime getETLocalClosingHours() {
+        return getETZonedClosingHours().withZoneSameInstant(localZoneId).toLocalDateTime();
+    }
 }
