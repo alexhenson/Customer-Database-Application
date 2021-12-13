@@ -71,49 +71,52 @@ public class ReportsCtrl implements Initializable {
     public void onActionCustApptRBtn() {
         System.out.println("Customer Radio button selected.");
         textArea.clear();
-        int countPlanning = 0;
-        int countDebrief = 0;
-        int countFinancial = 0;
-        int countBrainstorm = 0;
-        int countCareer = 0;
+
         int[] countByMonth = new int[12];
         EnumSet<Month> months = EnumSet.allOf(Month.class);
 
         for (Appointment a : getAppointmentList()) {
-            switch (a.getType()) {
-                case "Planning Session":
-                    countPlanning++;
-                    break;
-                case "De-Briefing":
-                    countDebrief++;
-                    break;
-                case "Financial Advisory":
-                    countFinancial++;
-                    break;
-                case "Brainstorming Session":
-                    countBrainstorm++;
-                    break;
-                case "Career Planning":
-                    countCareer++;
-                    break;
-            }
-
             int month = a.getStart().getMonthValue();
             countByMonth[month - 1]++;
         }
-        StringBuilder custStr = new StringBuilder("Customer Appointment Counts by Meeting Type: \n" +
-                "Planning Session: " + countPlanning + "\n" +
-                "De-Briefing: " + countDebrief + "\n" +
-                "Financial Advisory: " + countFinancial + "\n" +
-                "Brainstorming Session: " + countBrainstorm + "\n" +
-                "Career Planning: " + countCareer + "\n\n");
-
-        custStr.append("Customer Appointment Counts by Month:\n");
+        StringBuilder custStr = new StringBuilder("Customer Appointment Counts by Month and Type:\n");
 
         int monthInt = 0;
         for (Month m : months) {
             String monthName = m.getDisplayName(TextStyle.FULL , Locale.US);
             custStr.append(monthName).append(": ").append(countByMonth[monthInt]).append("\n");
+            int countPlanning = 0;
+            int countDebrief = 0;
+            int countFinancial = 0;
+            int countBrainstorm = 0;
+            int countCareer = 0;
+            for (Appointment a : getAppointmentList()) {
+                if (a.getStart().getMonthValue() == m.getValue())
+                    switch (a.getType()) {
+                        case "Planning Session":
+                            countPlanning++;
+                            break;
+                        case "De-Briefing":
+                            countDebrief++;
+                            break;
+                        case "Financial Advisory":
+                            countFinancial++;
+                            break;
+                        case "Brainstorming Session":
+                            countBrainstorm++;
+                            break;
+                        case "Career Planning":
+                            countCareer++;
+                            break;
+                    }
+            }
+            if (countPlanning > 0) { custStr.append("    Planning Session: " + countPlanning + "\n");}
+            if (countDebrief > 0) { custStr.append("    De-Briefing: " + countDebrief + "\n");}
+            if (countFinancial > 0) { custStr.append("    Financial Advisory: " + countFinancial + "\n");}
+            if (countBrainstorm > 0) { custStr.append("    Brainstorming Session: " + countBrainstorm + "\n");}
+            if (countCareer > 0) { custStr.append("    Career Planning: " + countCareer + "\n\n");}
+
+
             monthInt++;
         }
         textArea.setText(custStr.toString());
