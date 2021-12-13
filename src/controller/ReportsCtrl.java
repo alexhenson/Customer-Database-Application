@@ -20,6 +20,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
+import static tools.StaticObservableLists.getAppointmentList;
+import static tools.StaticObservableLists.getContactList;
+
 /** This class is responsible for the functionality of the "Reports" controller. */
 public class ReportsCtrl implements Initializable {
     @FXML
@@ -76,7 +79,7 @@ public class ReportsCtrl implements Initializable {
         int[] countByMonth = new int[12];
         EnumSet<Month> months = EnumSet.allOf(Month.class);
 
-        for (Appointment a : StaticObservableLists.appointmentList) {
+        for (Appointment a : getAppointmentList()) {
             switch (a.getType()) {
                 case "Planning Session":
                     countPlanning++;
@@ -117,7 +120,7 @@ public class ReportsCtrl implements Initializable {
 
         //LAMBDA EXPRESSION #1
         System.out.println("All Appointments:");
-        StaticObservableLists.appointmentList.forEach(System.out::println);
+        getAppointmentList().forEach(System.out::println);
     }
 
     /** This method calculates the information necessary for the Contact Appointment Report.
@@ -133,9 +136,9 @@ public class ReportsCtrl implements Initializable {
         textArea.clear();
 
         StringBuilder contactStr = new StringBuilder();
-        for (Contact c : StaticObservableLists.contactList) {
+        for (Contact c : getContactList()) {
             contactStr.append("Contact Name - ").append(c).append(":\n");
-            for (Appointment a : StaticObservableLists.appointmentList) {
+            for (Appointment a : getAppointmentList()) {
                 if (a.getContact().equals(c.getContactName())) {
                     contactStr.append(a).append("\n");
                 }
@@ -145,10 +148,10 @@ public class ReportsCtrl implements Initializable {
         textArea.setText(contactStr.toString());
 
         //LAMBDA EXPRESSION #2
-        int sizeOfContact = StaticObservableLists.contactList.size();
+        int sizeOfContact = getContactList().size();
         Contact[] contactArr = new Contact[sizeOfContact];
         for(int i = 0; i < sizeOfContact; i++) {
-            contactArr[i] = StaticObservableLists.contactList.get(i);
+            contactArr[i] = getContactList().get(i);
         }
         Stream<Contact> contactStream = Stream.of(contactArr);
         Stream<Contact> sortedContactEmail = contactStream.sorted(Comparator.comparing(Contact::getEmail));
@@ -169,7 +172,7 @@ public class ReportsCtrl implements Initializable {
         for(DayOfWeek dow : dows) {
             String dowName = dow.getDisplayName(TextStyle.FULL , Locale.US);
             int apptCount = 0;
-            for (Appointment a : StaticObservableLists.appointmentList) {
+            for (Appointment a : getAppointmentList()) {
                 if (a.getStart().getDayOfWeek().equals(dow)) {
                     apptCount++;
                 }

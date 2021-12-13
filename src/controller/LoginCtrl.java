@@ -22,6 +22,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static tools.StaticObservableLists.getAppointmentList;
+import static tools.StaticObservableLists.getUserList;
 import static tools.TimeHelper.getCurrentTime;
 
 /** This class is responsible for the functionality of the "Login" controller. */
@@ -81,15 +83,17 @@ public class LoginCtrl implements Initializable {
         String userName = usernameTxt.getText();
         String password = passwordTxt.getText();
 
-        for (User u : StaticObservableLists.userList) {
+        for (User u : getUserList()) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 boolean foundAppt = false;
 
-                for (Appointment a : StaticObservableLists.appointmentList) {
+                for (Appointment a : getAppointmentList()) {
                     if (u.getUserId() == a.getUserId() && a.getStart().toLocalTime().isAfter(getCurrentTime().minusSeconds(1))) {
                         long timeDifference = ChronoUnit.MINUTES.between(getCurrentTime(), a.getStart().toLocalTime());
                         if (timeDifference >= 0 && timeDifference <= 15) {
-                            AlertEvent.infoBox("Appointment Soon!", "User #" + u.getUserId() + " has an appointment starting in about " + timeDifference + " minutes!");
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
+                            ZonedDateTime startZDT = a.getStart().atZone(ZoneId.systemDefault());
+                            AlertEvent.infoBox("Appointment Soon!", "User #" + u.getUserId() + " has an appointment starting in about " + timeDifference + " minutes!  The appointment is on " + startZDT.format(formatter) + ".");
                             foundAppt = true;
                         }
                     }

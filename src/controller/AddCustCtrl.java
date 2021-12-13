@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static tools.StaticObservableLists.divisionList;
+import static tools.StaticObservableLists.getDivisionList;
 
 /** This class is responsible for the functionality of the "Add Cust" controller. */
 public class AddCustCtrl implements Initializable {
@@ -98,7 +98,7 @@ public class AddCustCtrl implements Initializable {
     public void onActionCountry() {
         Country selectedCountry = countryCombo.getSelectionModel().getSelectedItem();
         filteredDivisionList.clear();
-        for (FirstLevelDivision d : divisionList) {
+        for (FirstLevelDivision d : getDivisionList()) {
             if (d.getCountryId() == selectedCountry.getCountryId()) {
                 filteredDivisionList.add(d);
             }

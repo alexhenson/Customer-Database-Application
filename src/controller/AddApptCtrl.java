@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import static model.Appointment.getTypeList;
+import static tools.StaticObservableLists.*;
 import static tools.TimeHelper.getETLocalClosingHours;
 import static tools.TimeHelper.getETLocalOpeningHours;
 
@@ -55,19 +57,19 @@ public class AddApptCtrl implements Initializable {
         startTimeCombo.setPromptText("First, Start Time");
         endTimeCombo.setPromptText("Then, End Time");
         datePkr.setPromptText("Appointment Date");
-        userIdCombo.setItems(StaticObservableLists.userList);
-        contactCombo.setItems(StaticObservableLists.contactList);
-        typeCombo.setItems(StaticObservableLists.typeList);
-        custIdCombo.setItems(StaticObservableLists.customerList);
+        userIdCombo.setItems(getUserList());
+        contactCombo.setItems(getContactList());
+        typeCombo.setItems(getTypeList());
+        custIdCombo.setItems(getCustomerList());
 
         LocalTime start = getETLocalOpeningHours().toLocalTime();
         LocalTime end = getETLocalClosingHours().toLocalTime();
 
         while (start.isBefore(end.minusMinutes(15).plusSeconds(1))) {
-            StaticObservableLists.startTimeList.add(start);
+            setStartTimeList(start);
             start = start.plusMinutes(15);
         }
-        startTimeCombo.setItems(StaticObservableLists.startTimeList);
+        startTimeCombo.setItems(getStartTimeList());
     }
 
     /** This method activates when the Save button is clicked.
@@ -146,13 +148,13 @@ public class AddApptCtrl implements Initializable {
         }
          */
 
-        for (Appointment a : StaticObservableLists.appointmentList) {
+        for (Appointment a : getAppointmentList()) {
             if (a.getCustomerId() == custId) {
-                StaticObservableLists.sameCustApptList.add(a);
+                setSameCustApptList(a);
             }
         }
 
-        for (Appointment a : StaticObservableLists.sameCustApptList) {
+        for (Appointment a : getSameCustApptList()) {
             if ((localStart.isAfter(a.getStart()) || localStart.isEqual(a.getStart())) && localStart.isBefore(a.getEnd())) {
                 AlertEvent.alertBox("Error Dialog", "You are creating an appointment whose start time conflicts with an existing meeting for customer #" + custId + ".");
                 return;
@@ -187,16 +189,16 @@ public class AddApptCtrl implements Initializable {
     /** This method is responsible for setting the times in the End time combo box based on the time selected in the Start time combo box. */
     public void onActionStartTime() {
         LocalTime selectedStartTime = startTimeCombo.getSelectionModel().getSelectedItem();
-        StaticObservableLists.endTimeList.clear();
+        clearEndTimeList();
 
         LocalTime start = selectedStartTime.plusMinutes(15);
         LocalTime end = getETLocalClosingHours().toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
-            StaticObservableLists.endTimeList.add(start);
+            setEndTimeList(start);
             start = start.plusMinutes(15);
         }
-        endTimeCombo.setItems(StaticObservableLists.endTimeList);
+        endTimeCombo.setItems(getEndTimeList());
         endTimeCombo.setValue(selectedStartTime.plusMinutes(15));
     }
 }

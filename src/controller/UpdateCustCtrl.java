@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static tools.StaticObservableLists.countryList;
-import static tools.StaticObservableLists.divisionList;
+import static tools.StaticObservableLists.getCountryList;
+import static tools.StaticObservableLists.getDivisionList;
 
 /** This class is responsible for the functionality of the "Update Cust" controller. */
 public class UpdateCustCtrl implements Initializable {
@@ -46,7 +46,7 @@ public class UpdateCustCtrl implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        countryCombo.setItems(countryList);
+        countryCombo.setItems(getCountryList());
     }
 
     /** This method allows user to send data from CustomersCtrl controller to the UpdateCustCtrl controller.
@@ -62,7 +62,7 @@ public class UpdateCustCtrl implements Initializable {
         String country = cust.getCountry();
         Country selectedCountry = null;
 
-        for (Country c : countryList) {
+        for (Country c : getCountryList()) {
             if (country.equals(c.getCountryName())) {
                 selectedCountry = c;
             }
@@ -81,7 +81,7 @@ public class UpdateCustCtrl implements Initializable {
         String division = cust.getDivision();
         FirstLevelDivision selectedDivision = null;
 
-        for (FirstLevelDivision fld : divisionList) {
+        for (FirstLevelDivision fld : getDivisionList()) {
             if (division.equals(fld.getDivision())) {
                 selectedDivision = fld;
             }
@@ -152,7 +152,7 @@ public class UpdateCustCtrl implements Initializable {
      */
     public void filterDivisions(Country country) {
         filteredDivisionList.clear();
-        for (FirstLevelDivision d : divisionList) {
+        for (FirstLevelDivision d : getDivisionList()) {
             if (d.getCountryId() == country.getCountryId()) {
                 filteredDivisionList.add(d);
             }

@@ -9,14 +9,58 @@ import java.time.LocalTime;
 
 /** This helper class is responsible for keeping all of the ObservableLists in the program in one place to be accessed statically. */
 public class StaticObservableLists {
-    public static ObservableList<String> typeList = Appointment.getTypeList();
-    public static ObservableList<Contact> contactList = DBContacts.getAllContacts();
-    public static ObservableList<Customer> customerList = DBCustomers.getAllCustomers();
-    public static ObservableList<Appointment> appointmentList = DBAppointments.getAllAppointments();
-    public static ObservableList<Country> countryList = DBCountries.getAllCountries();
-    public static ObservableList<FirstLevelDivision> divisionList = DBDivisions.getAllDivisions();
-    public static ObservableList<User> userList = DBUsers.getAllUsers();
-    public static ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
-    public static ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
-    public static ObservableList<Appointment> sameCustApptList = FXCollections.observableArrayList();
+    private static ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
+    private static ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
+    private static ObservableList<Appointment> sameCustApptList = FXCollections.observableArrayList();
+
+    public static ObservableList<Customer> getCustomerList() {
+        return DBCustomers.getAllCustomers();
+    }
+    public static ObservableList<Appointment> getAppointmentList() {
+        return DBAppointments.getAllAppointments();
+    }
+
+    public static ObservableList<Contact> getContactList() {
+        return DBContacts.getAllContacts();
+    }
+
+    public static ObservableList<Country> getCountryList() {
+        return DBCountries.getAllCountries();
+    }
+
+    public static ObservableList<FirstLevelDivision> getDivisionList() {
+        return DBDivisions.getAllDivisions();
+    }
+
+    public static ObservableList<User> getUserList() {
+        return DBUsers.getAllUsers();
+    }
+
+    public static ObservableList<LocalTime> getStartTimeList() {
+        return startTimeList;
+    }
+
+    public static ObservableList<LocalTime> getEndTimeList() {
+        return endTimeList;
+    }
+
+    public static ObservableList<Appointment> getSameCustApptList() {
+        return sameCustApptList;
+    }
+
+    public static void setStartTimeList(LocalTime start) {
+        startTimeList.add(start);
+    }
+
+    public static void setEndTimeList(LocalTime end) {
+        endTimeList.add(end);
+    }
+
+    public static void setSameCustApptList(Appointment sameCustAppt) {
+        sameCustApptList.add(sameCustAppt);
+    }
+
+    public static void clearEndTimeList() {
+        endTimeList.clear();
+    }
 }
