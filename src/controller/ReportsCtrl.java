@@ -66,7 +66,7 @@ public class ReportsCtrl implements Initializable {
      *  Additionally, at the end of the method it uses a forEach method and a LAMBDA expression to
      *  print out all of the objects in the appointmentList.  It is advantageous to use a LAMBDA here
      *  because we can print the entire ObservableList without actually writing a for each loop to
-     *  do it.  We have saved some lines of code doing it this way.
+     *  do it.  We have saved some lines of code doing it this way. LAMBDA #1
      */
     public void onActionCustApptRBtn() {
         System.out.println("Customer Radio button selected.");
@@ -130,9 +130,9 @@ public class ReportsCtrl implements Initializable {
      *  At the end of the method I used two more LAMBDA expressions, I converted the ObservableList
      *  to an array, the array into a stream, and then sorted the stream with a Comparator object
      *  using the LAMBDA expression 'Contact::getEmail', I used another LAMBDA expression,
-     *  'c + "'s Email: " + c.getEmail()' to print out the stream wiht a for each method.
+     *  'c + "'s Email: " + c.getEmail()' to print out the stream with a for each method.
      *  The first LAMBDA expression was useful to use the Comparator method 'comparing' in a very concise
-     *  and easy-to-read way.
+     *  and easy-to-read way. LAMBDA #2
      */
     public void onActionContactRBtn() {
         System.out.println("Contact Radio button selected.");
