@@ -14,63 +14,63 @@ public class StaticObservableLists {
     private static ObservableList<Appointment> sameCustApptList = FXCollections.observableArrayList();
 
     /**
-     * @return ObservableList<Customer> via DBCustomers.getAllCustomers()
+     * @return ObservableList via DBCustomers.getAllCustomers()
      */
     public static ObservableList<Customer> getCustomerList() {
         return DBCustomers.getAllCustomers();
     }
 
     /**
-     * @return ObservableList<Appointment> via DBAppointments.getAllAppointments()
+     * @return ObservableList via DBAppointments.getAllAppointments()
      */
     public static ObservableList<Appointment> getAppointmentList() {
         return DBAppointments.getAllAppointments();
     }
 
     /**
-     * @return ObservableList<Appointment> via DBContacts.getAllContacts()
+     * @return ObservableList via DBContacts.getAllContacts()
      */
     public static ObservableList<Contact> getContactList() {
         return DBContacts.getAllContacts();
     }
 
     /**
-     * @return ObservableList<Country> via DBCountries.getAllCountries()
+     * @return ObservableList via DBCountries.getAllCountries()
      */
     public static ObservableList<Country> getCountryList() {
         return DBCountries.getAllCountries();
     }
 
     /**
-     * @return ObservableList<FirstLevelDivision> via DBDivisions.getAllDivisions()
+     * @return ObservableList via DBDivisions.getAllDivisions()
      */
     public static ObservableList<FirstLevelDivision> getDivisionList() {
         return DBDivisions.getAllDivisions();
     }
 
     /**
-     * @return ObservableList<User> via DBUsers.getAllUsers()
+     * @return ObservableList via DBUsers.getAllUsers()
      */
     public static ObservableList<User> getUserList() {
         return DBUsers.getAllUsers();
     }
 
     /**
-     * @return ObservableList<LocalTime> via startTimeList
+     * @return ObservableList via startTimeList
      */
     public static ObservableList<LocalTime> getStartTimeList() {
         return startTimeList;
     }
 
     /**
-     * @return ObservableList<LocalTime> via endTimeList
+     * @return ObservableList via endTimeList
      */
     public static ObservableList<LocalTime> getEndTimeList() {
         return endTimeList;
     }
 
     /**
-     * @return ObservableList<Appointment> via sameCustApptList
+     * @return ObservableList via sameCustApptList
      */
     public static ObservableList<Appointment> getSameCustApptList() {
         return sameCustApptList;
