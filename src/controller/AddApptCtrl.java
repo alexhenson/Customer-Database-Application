@@ -66,7 +66,7 @@ public class AddApptCtrl implements Initializable {
         LocalTime end = getETLocalClosingHours().toLocalTime();
 
         while (start.isBefore(end.minusMinutes(15).plusSeconds(1))) {
-            setStartTimeList(start);
+            addStartTimeList(start);
             start = start.plusMinutes(15);
         }
         startTimeCombo.setItems(getStartTimeList());
@@ -148,6 +148,7 @@ public class AddApptCtrl implements Initializable {
         }
          */
 
+        clearSameCustApptList();
         for (Appointment a : getAppointmentList()) {
             if (a.getCustomerId() == custId) {
                 setSameCustApptList(a);
@@ -195,7 +196,7 @@ public class AddApptCtrl implements Initializable {
         LocalTime end = getETLocalClosingHours().toLocalTime();
 
         while (start.isBefore(end.plusSeconds(1))) {
-            setEndTimeList(start);
+            addEndTimeList(start);
             start = start.plusMinutes(15);
         }
         endTimeCombo.setItems(getEndTimeList());
