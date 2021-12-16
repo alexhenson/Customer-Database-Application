@@ -93,7 +93,7 @@ public class LoginCtrl implements Initializable {
                         if (timeDifference >= 0 && timeDifference <= 15) {
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
                             ZonedDateTime startZDT = a.getStart().atZone(ZoneId.systemDefault());
-                            AlertEvent.infoBox("Appointment Soon!", "User #" + u.getUserId() + " has an appointment starting in about " + timeDifference + " minutes!  The appointment is on " + startZDT.format(formatter) + ".");
+                            AlertEvent.infoBox("Appointment Soon!", "User #" + u.getUserId() + " has an appointment #" + a.getAppointmentId() + " starting in about " + timeDifference + " minutes!  The appointment is on " + startZDT.format(formatter) + ".");
                             foundAppt = true;
                         }
                     }

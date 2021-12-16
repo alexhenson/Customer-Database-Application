@@ -74,3 +74,4 @@ Username Entered: test, Password Entered: test, Date and Time: 2021-12-13 13:31 
 Username Entered: test, Password Entered: test, Date and Time: 2021-12-13 13:44 CST, Login Successful: true
 Username Entered: test, Password Entered: test, Date and Time: 2021-12-13 13:54 CST, Login Successful: true
 Username Entered: test, Password Entered: test, Date and Time: 2021-12-13 20:15 CST, Login Successful: true
+Username Entered: test, Password Entered: test, Date and Time: 2021-12-15 21:00 CST, Login Successful: true
