@@ -7,7 +7,7 @@
 ## Author & Contact Information
 >Alex Henson | <https://www.linkedin.com/in/hensonalex/>
 
-## Student Application Version & Date
+## Application Version & Date
 >Application Version: 1.0  
 >Application Date: December 6, 2021
 > 
