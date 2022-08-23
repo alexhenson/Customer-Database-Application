@@ -2,7 +2,7 @@
 >Customer Scheduling Application w/ MySQL Database
 
 ## Purpose
->A GUI-based application that utilizes MySQL dbConnection and file server applications, lambda expressions, localization/ date/time APIs, and advanced exception control mechanisms with data-access-object (DAO) design
+>A GUI-based application that utilizes MySQL dbConnection and file server applications, lambda expressions, localization/ date/time APIs, and advanced exception control mechanisms with data-access-object (DAO) design to help manage a database of customer and products and the relationship between them.
 
 ## Author & Contact Information
 >Alex Henson | <https://www.linkedin.com/in/hensonalex/>
